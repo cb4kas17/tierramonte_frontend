@@ -1,0 +1,17 @@
+.adminPageContainer {
+      border: red 1px solid;
+      max-width: 180rem;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 35rem auto;
+      height: calc(100vh - 15.8rem);
+}
+
+.navbarContainer {
+      border: red 1px solid;
+      height: 90rem;
+}
+
+.displayFieldContainer {
+      border: red 1px solid;
+}

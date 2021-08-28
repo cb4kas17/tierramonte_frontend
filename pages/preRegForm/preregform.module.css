@@ -1,23 +1,22 @@
 .container {
-      max-width: 168rem;
+      max-width: 100rem;
       margin: auto;
 }
 .formHeader {
-      font-size: 6.5rem;
-
-      margin: 7.5rem 0;
+      font-size: 3.5rem;
+      margin: 5.5rem 0;
 }
 .formContainer {
       border: 0.5px solid rgba(128, 128, 128, 0.13);
       background: #d9d9d928;
-      font-size: 2.5rem;
-      padding: 5rem 4rem;
+      font-size: 1.5rem;
+      padding: 4rem 3.5rem;
       color: rgba(0, 0, 0, 0.794);
 }
 
 .formContainer > div > div > input {
-      width: 31.5rem;
-      height: 6rem;
+      width: 20rem;
+      height: 3.5rem;
       font-size: inherit;
       border: rgba(92, 91, 91, 0.287) 1px solid;
       background: rgba(0, 0, 0, 0.034);
@@ -31,7 +30,7 @@
 }
 
 .formContainer > div > div > label {
-      font-size: 2.5rem;
+      font-size: 2rem;
       margin-right: 2.5rem;
 }
 
@@ -47,14 +46,14 @@
 }
 .yearSection > div:first-child > input {
       background: rgba(0, 0, 0, 0.034);
-      width: 6rem;
-      height: 6rem;
+      width: 4rem;
+      height: 4rem;
       display: block;
       margin: 1rem auto;
 }
 
 .typeHeader {
-      font-size: 5rem;
+      font-size: 3.5rem;
       margin: 6rem 0 4rem 0;
 }
 
@@ -76,12 +75,12 @@
 }
 .studentSection > div:nth-child(11) > input,
 .studentSection > div:nth-child(12) > input {
-      width: 93.5%;
+      width: 96.1%;
 }
 
 .studentSection > div:nth-child(8) > input {
-      width: 6rem;
-      height: 6rem;
+      width: 4rem;
+      height: 4rem;
       background: rgba(0, 0, 0, 0.034);
 }
 .studentSection > div:nth-child(8) > input:focus {
@@ -113,7 +112,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: 2rem;
-      margin-bottom: 15rem;
+      margin-bottom: 10rem;
 }
 
 .forStudentsContainer > div {
@@ -123,19 +122,19 @@
 }
 .forStudentsContainer > div:last-child {
       grid-column: 1 / span 2;
-      grid-template-columns: 2fr 6.1fr;
+      grid-template-columns: 2fr 6.2fr;
 }
 
 .forStudentsContainer > div:last-child > input {
-      width: 93.5%;
+      width: 96.1%;
 }
 
 .radioInput {
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      font-size: 3rem;
-      width: 31.5rem;
+      font-size: 2rem;
+      width: 21.5rem;
 }
 
 .radioInput > div {
@@ -143,8 +142,8 @@
 }
 
 .radioInput > div > input[type='radio'] {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 2rem;
+      height: 2rem;
       margin-right: 1rem;
 }
 
@@ -157,6 +156,7 @@
       justify-content: center;
       align-items: flex-start;
       padding-left: 20rem;
+      margin-bottom: 4rem;
 }
 .radioContainer {
       position: relative;

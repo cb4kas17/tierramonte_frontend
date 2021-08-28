@@ -98,9 +98,9 @@ function LoginForm(props) {
                                     onBlur={passwordBlurHandler}
                               />
                         </div>
-                        <div>
+                        <div  className={styles.forgotPw}>
                               <Link href="/forgotPassword">
-                                    <a className={styles.forgotPw}>
+                                    <a>
                                           Forgot Password?
                                     </a>
                               </Link>

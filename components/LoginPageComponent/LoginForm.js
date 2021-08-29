@@ -38,11 +38,18 @@ function LoginForm(props) {
             try {
                   const response = await axios.post(
                         'http://localhost:4000/api/',
-                        loginDetails
+                        loginDetails,
+                        {
+                              withCredentials: true,
+                              credentials: 'include',
+                        }
                   );
 
                   const data = response.data;
                   console.log(data);
+                  if (data.role === 0) {
+                        // router.push('/admin');
+                  }
             } catch (error) {
                   console.log(error);
             }
@@ -98,11 +105,9 @@ function LoginForm(props) {
                                     onBlur={passwordBlurHandler}
                               />
                         </div>
-                        <div  className={styles.forgotPw}>
+                        <div className={styles.forgotPw}>
                               <Link href="/forgotPassword">
-                                    <a>
-                                          Forgot Password?
-                                    </a>
+                                    <a>Forgot Password?</a>
                               </Link>
                         </div>
                         <Button

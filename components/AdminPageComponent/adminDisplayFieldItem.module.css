@@ -1,0 +1,9 @@
+.itemContainer {
+      font-size: 2rem;
+      text-align: start;
+      padding: 1rem 5rem;
+      font-weight: 300;
+      border-bottom: 1px solid #000;
+      display: flex;
+      justify-content: space-between;
+}

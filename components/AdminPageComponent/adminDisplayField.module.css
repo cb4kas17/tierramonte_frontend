@@ -1,0 +1,49 @@
+.container {
+      padding: 10rem 6rem;
+      height: 110rem;
+}
+.headerContainer {
+      display: flex;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+}
+.header {
+      font-size: 4.5rem;
+}
+
+.header {
+      flex: 2;
+      justify-self: end;
+}
+.input {
+      position: absolute;
+      right: 0;
+      flex: 1;
+      padding: 0.5rem 1rem;
+}
+
+.columnName {
+      margin-top: 4rem;
+      background: #2196f3;
+      font-size: 2rem;
+      padding: 1rem 4rem;
+      text-align: start;
+      color: #fff;
+      font-weight: 400;
+}
+
+.listContainer {
+      height: 100%;
+      overflow-y: scroll;
+      border-left: 1px solid #000;
+      border-bottom: 1px solid #000;
+}
+
+.name {
+      font-size: 2rem;
+      text-align: start;
+      padding: 1rem 5rem;
+      font-weight: 300;
+      border-bottom: 1px solid #000;
+}

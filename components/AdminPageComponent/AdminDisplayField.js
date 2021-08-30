@@ -20,13 +20,16 @@ function AdminDisplayField(props) {
                   <div className={styles.columnName}>Students</div>
                   <ul className={styles.listContainer}>
                         <h4 className={styles.name}>Name</h4>
-                        {/* {props.data.map((item) => (
+                        {props.data.map((item) => (
                               <AdminDisplayFieldItem
-                                    key={item.name}
-                                    name={item.name}
+                                    key={item._id}
+                                    fname={item.firstName}
+                                    mname={item.middleName}
+                                    lname={item.lastName}
+                                    email={item.email}
                                     role={item.role}
                               />
-                        ))} */}
+                        ))}
                   </ul>
             </div>
       );

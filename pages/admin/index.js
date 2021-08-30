@@ -13,10 +13,11 @@ function AdminPage(props) {
       const getAllUsers = async () => {
             try {
                   const response = await axios.get(
-                        'http://localhost:4000/api/admin/users'
+                        'http://localhost:4000/api/admin/users',
+                        { withCredentials: true }
                   );
-                  setAllUsers(response.data);
-                  console.log(response.data);
+                  setAllUsers(response.data.users);
+                  console.log(response.data.users);
             } catch (error) {
                   console.log(error);
             }
@@ -31,12 +32,5 @@ function AdminPage(props) {
             </div>
       );
 }
-// export const getStaticProps = async () => {
-//       const response = await axios.get('http://localhost:4000/api/admin/users');
-//       const data = response.data;
 
-//       return {
-//             props: data,
-//       };
-// };
 export default AdminPage;

@@ -5,7 +5,7 @@ import SideNavBarItems from './SideNavBarItems';
 function SideNavBar(props) {
 
     
-console.log(props.highlighted)
+
       return (
             <div className={props.className}>
                   <ul className={`${styles.navContainer} ${styles[props.highlighted]}`}>
@@ -22,4 +22,4 @@ console.log(props.highlighted)
       );
 }
 
-export default SideNavBar;
+export default React.memo(SideNavBar);

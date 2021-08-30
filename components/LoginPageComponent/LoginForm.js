@@ -48,7 +48,7 @@ function LoginForm(props) {
                   const data = response.data;
                   console.log(data);
                   if (data.role === 0) {
-                        // router.push('/admin');
+                        router.push('/admin');
                   }
             } catch (error) {
                   console.log(error);

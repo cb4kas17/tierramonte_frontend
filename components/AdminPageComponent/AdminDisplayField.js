@@ -3,7 +3,7 @@ import styles from './adminDisplayField.module.css';
 
 import AdminDisplayFieldItem from './AdminDisplayFieldItem';
 function AdminDisplayField(props) {
-      console.log(props.data);
+    
       return (
             <div className={styles.container}>
                   <div className={styles.headerContainer}>

@@ -10,7 +10,7 @@ function AdminPageContainer(props) {
   const [selectedID, setSelectedID] = useState();
   const focus = "third";
   const navBarItems = [
-    { id: 1, title: "Profiles", push: "/admin" },
+    { id: 1, title: "Profile", push: "/admin" },
     { id: 2, title: "Create", push: "/admin/AdminCreateUser" },
     { id: 3, title: "List of user", push: `/admin/` },
   ];

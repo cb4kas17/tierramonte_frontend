@@ -5,6 +5,7 @@
   grid-template-columns: 25rem auto;
   height: calc(100vh - 15.8rem);
   padding: 1rem 0;
+  overflow: hidden;
 }
 
 .navbarContainer {

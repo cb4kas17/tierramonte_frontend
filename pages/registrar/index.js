@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ProfilePageContainer from "../../components/AdminPageComponent/ProfilePageContainer";
-function AdminPage(props) {
+import ProfilePageContainer from "../../components/RegistrarPageComponent/ProfilePageContainer";
+function RegistrarPage() {
    const [profile, setProfile] = useState([]);
-
    const getProfile = async () => {
       try {
-         const response = await axios.get("http://localhost:4000/api/admin", {
-            withCredentials: true,
-         });
+         const response = await axios.get(
+            "http://localhost:4000/api/registrar",
+            {
+               withCredentials: true,
+            }
+         );
          setProfile(response.data.user);
          console.log(response.data.user);
       } catch (error) {
          console.log(error);
       }
    };
-
    useEffect(() => {
       getProfile();
    }, []);
@@ -26,4 +27,4 @@ function AdminPage(props) {
    );
 }
 
-export default AdminPage;
+export default RegistrarPage;

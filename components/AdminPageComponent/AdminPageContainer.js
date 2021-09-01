@@ -2,12 +2,8 @@ import React, { useState } from "react";
 
 import SideNavBar from "../Layout/SideNavBar";
 import AdminDisplayField from "./AdminDisplayField";
-
-import { useRouter } from "next/router";
 import styles from "./adminPageContainer.module.css";
 function AdminPageContainer(props) {
-   const router = useRouter();
-   const [selectedID, setSelectedID] = useState();
    const focus = "third";
    const navBarItems = [
       { id: 1, title: "Profile", push: "/admin" },

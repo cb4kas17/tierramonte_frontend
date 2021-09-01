@@ -49,6 +49,18 @@ function LoginForm(props) {
          console.log(data);
          if (data.role === 0) {
             router.push("/admin");
+         } else if (data.role === 1) {
+            router.push("/principal");
+         } else if (data.role === 2) {
+            router.push("/accountant");
+         } else if (data.role === 3) {
+            router.push("/registrar");
+         } else if (data.role === 4) {
+            router.push("/teacher");
+         } else if (data.role === 5) {
+            router.push("/parent");
+         } else if (data.role === 6) {
+            router.push("/student");
          }
       } catch (error) {
          console.log(error);

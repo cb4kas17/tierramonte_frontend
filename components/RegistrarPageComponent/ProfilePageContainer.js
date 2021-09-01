@@ -1,15 +1,15 @@
-import styles from "./profilePageContainer.module.css";
+import styles from "../AdminPageComponent/profilePageContainer.module.css";
 import React, { useState } from "react";
 import SideNavBar from "../Layout/SideNavBar";
 
-import ProfilePage from "./ProfilePage";
+import ProfilePage from "../AdminPageComponent/ProfilePage";
 
 function ProfilePageContainer(props) {
    const focus = "first";
    const navBarItems = [
-      { id: 1, title: "Profile", push: "/admin" },
-      { id: 2, title: "Create", push: "/admin/AdminCreateUser" },
-      { id: 3, title: "List of users", push: `/admin/AdminViewUser` },
+      { id: 1, title: "Profile", push: "/registrar" },
+      { id: 2, title: "Pre-Registration", push: "/registrar/PreRegistration" },
+      { id: 3, title: "Students", push: `/registrar/Students` },
    ];
    let convertedRole = "";
    if (props.data.role === 0) {

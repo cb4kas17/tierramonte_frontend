@@ -11,6 +11,12 @@ function AdminEditUser(props) {
    const [errorMes, setErrorMes] = useState(false);
    const [valid, setValid] = useState(false);
 
+   const [fnameIsTouched, setfnameIsTouched] = useState(false);
+   const [mnameIsTouched, setmnameIsTouched] = useState(false);
+   const [lnameIsTouched, setlnameIsTouched] = useState(false);
+   const [emailIsTouched, setemailIsTouched] = useState(false);
+   const [numberIsTouched, setnumberIsTouched] = useState(false);
+
    const {
       value: enteredFname,
       isValid: enteredFnameIsValid,
@@ -70,34 +76,50 @@ function AdminEditUser(props) {
          lastName: enteredLname,
          email: enteredEmail,
          phoneNum: enteredNumber,
-         role: role,
       };
 
-      const postData = async () => {
-         try {
-            const response = await axios.post(
-               "http://localhost:4000/api/admin/createuser",
-               userData,
-               { withCredentials: true }
-            );
-
-            if (response.data.success) {
-               setValid(true);
-            } else if (response.data === "student email") {
-               setErrorMes(true);
-            } else if (response.data === "parent email") {
-               setErrorMes(true);
-            } else if (response.data === "users email") {
-               setErrorMes(true);
-            } else {
-               setErrorMes(false);
-            }
-         } catch (error) {
-            console.log(error);
-         }
-      };
+      if (!fnameIsTouched) {
+         userData.firstName = props.fname;
+      }
+      if (!mnameIsTouched) {
+         userData.middleName = props.mname;
+      }
+      if (!lnameIsTouched) {
+         userData.lastName = props.lname;
+      }
+      if (!emailIsTouched) {
+         userData.email = props.email;
+      }
+      if (!numberIsTouched) {
+         userData.phoneNum = props.number;
+      }
       console.log(userData);
-      postData();
+
+      // const postData = async () => {
+      //    try {
+      //       const response = await axios.post(
+      //          "http://localhost:4000/api/admin/createuser",
+      //          userData,
+      //          { withCredentials: true }
+      //       );
+
+      //       if (response.data.success) {
+      //          setValid(true);
+      //       } else if (response.data === "student email") {
+      //          setErrorMes(true);
+      //       } else if (response.data === "parent email") {
+      //          setErrorMes(true);
+      //       } else if (response.data === "users email") {
+      //          setErrorMes(true);
+      //       } else {
+      //          setErrorMes(false);
+      //       }
+      //    } catch (error)
+      //       console.log(error);
+      //    }
+      // };
+      // console.log(userData);
+      // postData();
    };
 
    return (
@@ -121,12 +143,13 @@ function AdminEditUser(props) {
                   <div className={styles.inputContainer}>
                      <input
                         type="text"
-                        required={true}
                         id="fname"
                         className={styles.input}
                         value={enteredFname}
                         onChange={fnameChangeHandler}
-                        onBlur={fnameBlurHandler}
+                        onBlur={() => {
+                           setfnameIsTouched(true);
+                        }}
                         placeholder={props.fname}
                      />
                   </div>
@@ -147,12 +170,13 @@ function AdminEditUser(props) {
                   <div className={styles.inputContainer}>
                      <input
                         type="email"
-                        required={true}
                         id="email"
                         className={styles.input}
                         value={enteredEmail}
                         onChange={emailChangeHandler}
-                        onBlur={emailBlurHandler}
+                        onBlur={() => {
+                           setemailIsTouched(true);
+                        }}
                         placeholder={props.email}
                      />
                      {errorMes && (
@@ -176,12 +200,13 @@ function AdminEditUser(props) {
                   <div className={styles.inputContainer}>
                      <input
                         type="text"
-                        required={true}
                         id="lname"
                         className={styles.input}
                         value={enteredLname}
                         onChange={lnameChangeHandler}
-                        onBlur={lnameBlurHandler}
+                        onBlur={() => {
+                           setlnameIsTouched(true);
+                        }}
                         placeholder={props.lname}
                      />
                   </div>
@@ -202,12 +227,13 @@ function AdminEditUser(props) {
                   <div className={styles.inputContainer}>
                      <input
                         type="number"
-                        required={true}
                         id="number"
                         className={styles.input}
                         value={enteredNumber}
                         onChange={numberChangeHandler}
-                        onBlur={numberBlurHandler}
+                        onBlur={() => {
+                           setnumberIsTouched(true);
+                        }}
                         placeholder={props.number}
                      />
                   </div>
@@ -228,12 +254,13 @@ function AdminEditUser(props) {
                   <div className={styles.inputContainer}>
                      <input
                         type="text"
-                        required={true}
                         id="mname"
                         className={styles.input}
                         value={enteredMname}
                         onChange={mnameChangeHandler}
-                        onBlur={mnameBlurHandler}
+                        onBlur={() => {
+                           setmnameIsTouched(true);
+                        }}
                         placeholder={props.mname}
                      />
                   </div>

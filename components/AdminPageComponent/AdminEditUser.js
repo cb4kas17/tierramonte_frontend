@@ -93,6 +93,21 @@ function AdminEditUser(props) {
       if (!numberIsTouched) {
          userData.phoneNum = props.number;
       }
+
+      if (fnameIsTouched && enteredFname === "") {
+         userData.firstName = props.fname;
+      }
+      if (mnameIsTouched && enteredMname === "") {
+         userData.middleName = props.mname;
+      }
+      if (lnameIsTouched && enteredLname === "") {
+         userData.lastName = props.lname;
+      }
+
+      if (numberIsTouched && enteredNumber === "") {
+         userData.phoneNum = props.number;
+      }
+
       console.log(userData);
 
       // const postData = async () => {
@@ -177,6 +192,7 @@ function AdminEditUser(props) {
                         onBlur={() => {
                            setemailIsTouched(true);
                         }}
+                        disabled={true}
                         placeholder={props.email}
                      />
                      {errorMes && (

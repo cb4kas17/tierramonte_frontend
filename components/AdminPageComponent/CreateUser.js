@@ -271,7 +271,7 @@ function CreateUser() {
                      <Button
                         className={styles.modalButton}
                         onClick={() => {
-                           router.push("/admin");
+                           router.push("/admin/AdminViewUser");
                         }}
                      >
                         Go back to home page

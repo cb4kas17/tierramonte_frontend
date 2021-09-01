@@ -10,6 +10,9 @@ function AdminEditUser(props) {
    const router = useRouter();
    const [errorMes, setErrorMes] = useState(false);
    const [valid, setValid] = useState(false);
+   const [updated, setUpdated] = useState(false);
+   const [archive, setArchive] = useState(false);
+   const [confirmation, setConfirmation] = useState(false);
 
    const [fnameIsTouched, setfnameIsTouched] = useState(false);
    const [mnameIsTouched, setmnameIsTouched] = useState(false);
@@ -56,17 +59,6 @@ function AdminEditUser(props) {
       inputBlurHandler: numberBlurHandler,
    } = useInput((value) => value.trim() !== "");
 
-   let formIsValid = false;
-   if (
-      enteredEmailIsValid &&
-      enteredFnameIsValid &&
-      enteredLnameIsValid &&
-      enteredMnameIsValid &&
-      enteredNumberIsValid
-   ) {
-      formIsValid = true;
-   }
-
    const onSubmitHandler = (event) => {
       event.preventDefault();
 
@@ -74,7 +66,6 @@ function AdminEditUser(props) {
          firstName: enteredFname,
          middleName: enteredMname,
          lastName: enteredLname,
-         email: enteredEmail,
          phoneNum: enteredNumber,
       };
 
@@ -108,33 +99,82 @@ function AdminEditUser(props) {
          userData.phoneNum = props.number;
       }
 
-      console.log(userData);
+      const postData = async () => {
+         try {
+            const response = await axios.put(
+               `http://localhost:4000/api/admin/users/${props.id}`,
+               userData,
+               { withCredentials: true }
+            );
+            console.log(response);
+            if (response.data.success) {
+               setUpdated(true);
+            } else {
+               setUpdated(false);
+            }
+         } catch (error) {
+            console.log(error);
+         }
+      };
+      postData();
+   };
 
-      // const postData = async () => {
-      //    try {
-      //       const response = await axios.post(
-      //          "http://localhost:4000/api/admin/createuser",
-      //          userData,
-      //          { withCredentials: true }
-      //       );
+   const archiveUser = async () => {
+      const userData = {
+         firstName: enteredFname,
+         middleName: enteredMname,
+         lastName: enteredLname,
+         phoneNum: enteredNumber,
+      };
 
-      //       if (response.data.success) {
-      //          setValid(true);
-      //       } else if (response.data === "student email") {
-      //          setErrorMes(true);
-      //       } else if (response.data === "parent email") {
-      //          setErrorMes(true);
-      //       } else if (response.data === "users email") {
-      //          setErrorMes(true);
-      //       } else {
-      //          setErrorMes(false);
-      //       }
-      //    } catch (error)
-      //       console.log(error);
-      //    }
-      // };
-      // console.log(userData);
-      // postData();
+      if (!fnameIsTouched) {
+         userData.firstName = props.fname;
+      }
+      if (!mnameIsTouched) {
+         userData.middleName = props.mname;
+      }
+      if (!lnameIsTouched) {
+         userData.lastName = props.lname;
+      }
+      if (!emailIsTouched) {
+         userData.email = props.email;
+      }
+      if (!numberIsTouched) {
+         userData.phoneNum = props.number;
+      }
+
+      if (fnameIsTouched && enteredFname === "") {
+         userData.firstName = props.fname;
+      }
+      if (mnameIsTouched && enteredMname === "") {
+         userData.middleName = props.mname;
+      }
+      if (lnameIsTouched && enteredLname === "") {
+         userData.lastName = props.lname;
+      }
+
+      if (numberIsTouched && enteredNumber === "") {
+         userData.phoneNum = props.number;
+      }
+
+      try {
+         const response = await axios.delete(
+            `http://localhost:4000/api/admin/archive/${props.id}`,
+            {
+               withCredentials: true,
+               credentials: "include",
+            }
+         );
+         console.log(response);
+         if (response.data.success) {
+            setArchive(true);
+            setConfirmation(false);
+         } else {
+            setArchive(false);
+         }
+      } catch (error) {
+         console.log(error);
+      }
    };
 
    return (
@@ -286,25 +326,78 @@ function AdminEditUser(props) {
                <Button className={styles.buttonUpdate} type={"submit"}>
                   Update
                </Button>
-               <Button className={styles.buttonArchive}>Archive</Button>
+               <Button
+                  className={styles.buttonArchive}
+                  onClick={() => {
+                     setConfirmation(true);
+                  }}
+               >
+                  Archive
+               </Button>
             </div>
 
-            {valid && (
+            {updated && (
                <Modal className={styles.modalDesign}>
                   <div className={styles.messageContainer}>
-                     <h2 className={styles.messageHeader}>Account Created</h2>
+                     <h2 className={styles.messageHeader}>Account Updated</h2>
                      <h4 className={styles.messageBody}>
-                        Please check in the List of Users Tab
+                        Please check in the updated user to the List of Users
+                        Tab
                      </h4>
                      <h4 className={styles.messageFooter}>Thank you.</h4>
                      <Button
                         className={styles.modalButton}
                         onClick={() => {
-                           router.push("/admin");
+                           router.push("/admin/AdminViewUser");
                         }}
                      >
                         Go back to home page
                      </Button>
+                  </div>
+               </Modal>
+            )}
+            {archive && (
+               <Modal className={styles.modalDesign}>
+                  <div className={styles.messageContainer}>
+                     <h2 className={styles.messageHeader}>
+                        Account Successfully Deleted
+                     </h2>
+                     <h4 className={styles.messageBody}></h4>
+                     <h4 className={styles.messageFooter}>Thank you.</h4>
+                     <Button
+                        className={styles.modalButton}
+                        onClick={() => {
+                           router.push("/admin/AdminViewUser");
+                        }}
+                     >
+                        Go back to home page
+                     </Button>
+                  </div>
+               </Modal>
+            )}
+            {confirmation && (
+               <Modal className={styles.modalDesign}>
+                  <div className={styles.messageContainer}>
+                     <h2 className={styles.messageHeader}>
+                        Are you sure you want to delete the user?
+                     </h2>
+                     <h4 className={styles.messageFooter}></h4>
+                     <div className={styles.buttonConfirmationContainer}>
+                        <Button
+                           className={styles.modalButtonYes}
+                           onClick={archiveUser}
+                        >
+                           Yes
+                        </Button>
+                        <Button
+                           className={styles.modalButtonNo}
+                           onClick={() => {
+                              setConfirmation(false);
+                           }}
+                        >
+                           No
+                        </Button>
+                     </div>
                   </div>
                </Modal>
             )}

@@ -92,7 +92,7 @@
 }
 
 .messageHeader {
-   font-size: 7rem;
+   font-size: 3rem;
    color: #3c6075;
 }
 
@@ -114,4 +114,14 @@
 
 .inputContainer input::placeholder {
    color: black;
+}
+
+.buttonConfirmationContainer {
+   display: flex;
+   gap: 2rem;
+}
+
+.buttonConfirmationContainer > * {
+   font-size: 2rem;
+   padding: 1rem 5rem;
 }

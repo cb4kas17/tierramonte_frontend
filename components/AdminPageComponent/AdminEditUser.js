@@ -10,7 +10,6 @@ function AdminEditUser(props) {
    const router = useRouter();
    const [errorMes, setErrorMes] = useState(false);
    const [valid, setValid] = useState(false);
-   const [fname, setfname] = useState(props.fname);
 
    const {
       value: enteredFname,

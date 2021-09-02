@@ -1,38 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useRouter } from 'next/router';
-import AdminEditUserContainer from '../../../components/AdminPageComponent/AdminEditUserContainer.';
-function EditUser(props) {
-      const router = useRouter();
-      const id = router.query.editUser;
-      console.log(id);
-      const [userData, setUserData] = useState([]);
+import axios from 'axios';
+import PreRegistrationForm from '../../../components/RegistrarPageComponent/PreRegistrationForm';
 
+function SelectedPreReg(props) {
+      const router = useRouter();
+      const id = router.query.id;
+      console.log(id);
+      const [preRegData, setPreRegData] = useState([]);
       const getData = async () => {
             try {
                   const response = await axios.get(
-                        `http://localhost:4000/api/admin/users/${id}`,
+                        `http://localhost:4000/api/registrar/preregs/${id}`,
                         {
                               withCredentials: true,
                         }
                   );
-                  const data = await response.data.user;
+                  const data = await response.data.prereg;
                   console.log(data);
-                  setUserData(data);
+                  setPreRegData(data);
             } catch (error) {
                   console.log(error);
             }
       };
-
       useEffect(() => {
             getData();
       }, []);
-
       return (
             <div>
-                  <AdminEditUserContainer data={userData} />
+                  <PreRegistrationForm data={preRegData} />
             </div>
       );
 }
 
-export default EditUser;
+export default SelectedPreReg;

@@ -804,7 +804,7 @@ function PreRegForm(props) {
                                     <span className={styles.checkmark}></span>
                               </label>
                         </div>
-                        <Button type={'submit'} > Submit</Button>
+                        <Button type={'submit'}> Submit</Button>
                   </div>
             </form>
       );

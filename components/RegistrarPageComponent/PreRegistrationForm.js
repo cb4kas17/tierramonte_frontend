@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './preRegistrationForm.module.css';
 import axios from 'axios';
 import Button from '../UI/Button';
 import { data } from 'browserslist';
 
 function PreRegistrationForm(props) {
+      const [updateState, setUpdateState] = useState(false);
+      const [updated, setUpdated] = useState(false);
+      const onUpdateClick = (event) => {
+            setUpdateState(true);
+      };
+
+      const updateData = async () => {
+            const data = props.data;
+            const response = await axios.post(
+                  `http://localhost:4000/api/registrar/preregs/${props.id}`,
+                  { withCredentials: true }
+            );
+            console.log(response);
+            if (response.data.success) {
+                  setUpdated(true);
+            } else {
+                  setUpdated(false);
+            }
+      };
       return (
             <div className={styles.container}>
                   <h1 className={styles.formHeader}>Pre-Registration Form</h1>
@@ -14,14 +33,11 @@ function PreRegistrationForm(props) {
                                     <label htmlFor="returningStud">
                                           Returning Student?
                                     </label>
-                                    <input
-                                          type="checkbox"
-                                          name="returningStud"
-                                          id="returningStud"
-                                          className={styles.returningcheckbox}
-                                          checked={props.data.returning}
-                                          disabled={true}
-                                    />
+                                    {props.data.returning ? (
+                                          <h1>&#10004;</h1>
+                                    ) : (
+                                          <h1>&#10006;</h1>
+                                    )}
                               </div>
                               <div>
                                     <label htmlFor="yearfrom">Year From</label>
@@ -98,9 +114,13 @@ function PreRegistrationForm(props) {
                                     <label htmlFor="isIndig">
                                           Belong in indigenous community?
                                     </label>
-                                    <div className={styles.input}>
-                                          {props.data.indig}
-                                    </div>
+                                    {props.data.indig ? (
+                                          <h1 className={styles.indig}>
+                                                &#10004;
+                                          </h1>
+                                    ) : (
+                                          <h1>&#10006;</h1>
+                                    )}
                               </div>
                               <div>
                                     <label htmlFor="mtounge">
@@ -136,7 +156,7 @@ function PreRegistrationForm(props) {
                                           {props.data.zipCode}
                                     </div>
                               </div>
-                              <div className={errorMes ? styles.invalid : ''}>
+                              <div>
                                     <label htmlFor="email">E-mail</label>
                                     <div className={styles.input}>
                                           {props.data.email}
@@ -231,59 +251,212 @@ function PreRegistrationForm(props) {
                                           {props.data.guardianFirstName}
                                     </div>
                               </div>
-                              //Stopped at this... no emergency
+
                               <div>
                                     <label htmlFor="emergencyname">Name</label>
                                     <div className={styles.input}>
-                                          {props.data.guardianFirstName}
+                                          {props.data.emergencyName}
                                     </div>
                               </div>
                               <div>
                                     <label htmlFor="guardianlname">
                                           Last Name
                                     </label>
-                                    <input
-                                          type="text"
-                                          id="guardianlname"
-                                          ref={guardianlnameRef}
-                                          required={true}
-                                    />
+                                    <div className={styles.input}>
+                                          {props.data.guardianLastName}
+                                    </div>
                               </div>
                               <div>
                                     <label htmlFor="emergencymobileno">
                                           Cellphone No.
                                     </label>
-                                    <input
-                                          type="number"
-                                          min="0"
-                                          id="emergencymobileno"
-                                          ref={emergencymobilenoRef}
-                                          required={true}
-                                    />
+                                    <div className={styles.input}>
+                                          {props.data.emergencyCellphone}
+                                    </div>
                               </div>
                               <div>
                                     <label htmlFor="guardianmidname">
                                           Middle Name
                                     </label>
-                                    <input
-                                          type="text"
-                                          id="guardianmidname"
-                                          ref={guardianmidnameRef}
-                                          required={true}
-                                    />
+                                    <div className={styles.input}>
+                                          {props.data.guardianMiddleName}
+                                    </div>
                               </div>
                               <div>
                                     <label htmlFor="emergencytelno">
                                           Telephone No.
                                     </label>
-                                    <input
-                                          type="number"
-                                          min="0"
-                                          id="emergencytelno"
-                                          ref={emergencytelnoRef}
-                                          required={true}
-                                    />
+                                    <div className={styles.input}>
+                                          {props.data.emergencyTelephone}
+                                    </div>
                               </div>
+                        </div>
+                        <div className={styles.forStudentsContainer}>
+                              <h2 className={styles.typeHeader}>
+                                    For returning Students
+                              </h2>
+                              <h2 className={styles.typeHeader}>
+                                    For SHS students
+                              </h2>
+                              <div>
+                                    <label htmlFor="lastgradelvl">
+                                          Last Grade Level Completed
+                                    </label>
+                                    <div className={styles.input}>
+                                          {props.data.lastGradeLevel}
+                                    </div>
+                              </div>
+                              <div>
+                                    <label>Semester</label>
+
+                                    <div className={styles.input}>
+                                          {props.data.semester}
+                                    </div>
+                              </div>
+                              <div>
+                                    <label htmlFor="lastschoolyrlvl">
+                                          Last School Year Completed
+                                    </label>
+                                    <div className={styles.input}>
+                                          {props.data.lastSchoolYear}
+                                    </div>
+                              </div>
+                              <div>
+                                    <label htmlFor="track">Track</label>
+                                    <div className={styles.input}>
+                                          {props.data.track}
+                                    </div>
+                              </div>
+
+                              <div>
+                                    <label htmlFor="strand">Strand</label>
+                                    <div className={styles.input}>
+                                          {props.data.strand}
+                                    </div>
+                              </div>
+                              <div>
+                                    <label htmlFor="schoolname">
+                                          School Name
+                                    </label>
+                                    <div className={styles.input}>
+                                          {props.data.schoolName}
+                                    </div>
+                              </div>
+                              <div>
+                                    <label htmlFor="schoolAdd">
+                                          School Address
+                                    </label>
+                                    <div className={styles.input}>
+                                          {props.data.schoolAddress}
+                                    </div>
+                              </div>
+                        </div>
+                        <h2 className={styles.typeHeader}>
+                              Preferred Distance Learning Methods
+                        </h2>
+                        <div className={styles.checkboxContainer}>
+                              <label
+                                    htmlFor="item1"
+                                    className={styles.radioContainer}
+                              >
+                                    Modular (Print)
+                                    {props.data.modularP ? (
+                                          <h1>&#10004;</h1>
+                                    ) : (
+                                          <h1>&#10006;</h1>
+                                    )}
+                              </label>
+                              <label
+                                    htmlFor="item2"
+                                    className={styles.radioContainer}
+                              >
+                                    Modular (Digital)
+                                    {props.data.modularD ? (
+                                          <h1>&#10004;</h1>
+                                    ) : (
+                                          <h1>&#10006;</h1>
+                                    )}
+                              </label>
+                              <label
+                                    htmlFor="item3"
+                                    className={styles.radioContainer}
+                              >
+                                    Online
+                                    {props.data.online ? (
+                                          <h1>&#10004;</h1>
+                                    ) : (
+                                          <h1>&#10006;</h1>
+                                    )}
+                              </label>
+                              <label
+                                    htmlFor="item4"
+                                    className={styles.radioContainer}
+                              >
+                                    Educational TV
+                                    {props.data.educTV ? (
+                                          <h1>&#10004;</h1>
+                                    ) : (
+                                          <h1>&#10006;</h1>
+                                    )}
+                              </label>
+                              <label
+                                    htmlFor="item5"
+                                    className={styles.radioContainer}
+                              >
+                                    Radio Based Instruction
+                                    {props.data.radioBased ? (
+                                          <h1>&#10004;</h1>
+                                    ) : (
+                                          <h1>&#10006;</h1>
+                                    )}
+                              </label>
+                              <label
+                                    htmlFor="item6"
+                                    className={styles.radioContainer}
+                              >
+                                    Homeschooling
+                                    {props.data.homeschool ? (
+                                          <h1>&#10004;</h1>
+                                    ) : (
+                                          <h1>&#10006;</h1>
+                                    )}
+                              </label>
+                              <label
+                                    htmlFor="item7"
+                                    className={styles.radioContainer}
+                              >
+                                    Blended
+                                    {props.data.blended ? (
+                                          <h1>&#10004;</h1>
+                                    ) : (
+                                          <h1>&#10006;</h1>
+                                    )}
+                              </label>
+                              <label
+                                    htmlFor="item8"
+                                    className={styles.radioContainer}
+                              >
+                                    Face to face
+                                    {props.data.facetoface ? (
+                                          <h1>&#10004;</h1>
+                                    ) : (
+                                          <h1>&#10006;</h1>
+                                    )}
+                              </label>
+                        </div>
+                        <div className={styles.buttonContainer}>
+                              <Button
+                                    type={'submit'}
+                                    className={styles.submitButton}
+                              >
+                                    Approve
+                              </Button>
+                              <Button
+                                    type={'submit'}
+                                    className={styles.submitButton}
+                              >
+                                    Reject
+                              </Button>
                         </div>
                   </div>
             </div>

@@ -35,6 +35,7 @@ function ForgotPassword(props) {
                   );
 
                   const data = response.data;
+                  console.log(data);
                   if (data === 'no user found!') {
                         setError(true);
                   } else {

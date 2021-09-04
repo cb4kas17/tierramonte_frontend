@@ -129,6 +129,14 @@
       width: 96.1%;
 }
 
+.forStudentsContainer > div:nth-child(8) {
+      grid-column: 1 / span 2;
+      grid-template-columns: 2fr 6.2fr;
+}
+.forStudentsContainer > div:nth-child(8) > input {
+      width: 96.1%;
+}
+
 .radioInput {
       display: flex;
       justify-content: flex-start;

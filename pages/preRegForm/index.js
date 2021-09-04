@@ -122,6 +122,9 @@ function PreRegForm(props) {
                   guardianFirstName: guardianfnameRef.current.value,
                   guardianMiddleName: guardianmidnameRef.current.value,
                   guardianLastName: guardianlnameRef.current.value,
+                  emergencyName: emergencynameRef.current.value,
+                  emergencyTelephone: emergencytelnoRef.current.value,
+                  emergencyCellphone: emergencymobilenoRef.current.value,
                   parentEmail: parentEmailRef.current.value,
                   parentPhoneNum: parentNumRef.current.value,
                   lastGradeLevel: lastgradelvlRef.current.value,
@@ -640,6 +643,15 @@ function PreRegForm(props) {
                                     />
                               </div>
                               <div>
+                                    <label htmlFor="strand">Strand</label>
+                                    <input
+                                          type="text"
+                                          id="strand"
+                                          required={true}
+                                          ref={strandRef}
+                                    />
+                              </div>
+                              <div>
                                     <label htmlFor="schoolname">
                                           School Name
                                     </label>
@@ -650,15 +662,7 @@ function PreRegForm(props) {
                                           ref={schoolnameRef}
                                     />
                               </div>
-                              <div>
-                                    <label htmlFor="strand">Strand</label>
-                                    <input
-                                          type="text"
-                                          id="strand"
-                                          required={true}
-                                          ref={strandRef}
-                                    />
-                              </div>
+
                               <div>
                                     <label htmlFor="schoolAdd">
                                           School Address

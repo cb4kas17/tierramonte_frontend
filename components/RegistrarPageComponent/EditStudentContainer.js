@@ -1,11 +1,9 @@
-import styles from '../AdminPageComponent/profilePageContainer.module.css';
 import React, { useState } from 'react';
 import SideNavBar from '../Layout/SideNavBar';
+import styles from './editStudentContainer.module.css';
+import EditStudent from './EditStudent';
 
-import ProfilePage from '../AdminPageComponent/ProfilePage';
-
-function ProfilePageContainer(props) {
-      const focus = 'first';
+function EditStudentContainer(props) {
       const navBarItems = [
             { id: 1, title: 'Profile', push: '/registrar' },
             {
@@ -31,24 +29,26 @@ function ProfilePageContainer(props) {
       } else if (props.data.role === 6) {
             convertedRole = 'Student';
       }
+
       return (
-            <div className={styles.profilePageContainer}>
+            <div className={styles.editUserContainer}>
                   <SideNavBar
                         className={styles.navbarContainer}
                         items={navBarItems}
-                        highlighted={focus}
                   />
-                  <ProfilePage
+                  <EditStudent
+                        className={styles.editUser}
+                        id={props.data._id}
                         fname={props.data.firstName}
                         mname={props.data.middleName}
                         lname={props.data.lastName}
                         email={props.data.email}
                         number={props.data.phoneNum}
                         role={convertedRole}
-                        isSelectedUser={false}
+                        isSelectedUser={true}
                   />
             </div>
       );
 }
 
-export default ProfilePageContainer;
+export default EditStudentContainer;

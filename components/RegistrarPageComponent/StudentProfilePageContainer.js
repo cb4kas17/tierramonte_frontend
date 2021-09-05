@@ -1,11 +1,10 @@
-import styles from '../AdminPageComponent/profilePageContainer.module.css';
+import styles from './studentProfilePageContainer.module.css';
 import React, { useState } from 'react';
 import SideNavBar from '../Layout/SideNavBar';
 
-import ProfilePage from '../AdminPageComponent/ProfilePage';
+import StudentProfilePage from './StudentProfilePage';
 
-function ProfilePageContainer(props) {
-      const focus = 'first';
+function StudentProfilePageContainer(props) {
       const navBarItems = [
             { id: 1, title: 'Profile', push: '/registrar' },
             {
@@ -36,19 +35,19 @@ function ProfilePageContainer(props) {
                   <SideNavBar
                         className={styles.navbarContainer}
                         items={navBarItems}
-                        highlighted={focus}
                   />
-                  <ProfilePage
+                  <StudentProfilePage
+                        id={props.data._id}
                         fname={props.data.firstName}
                         mname={props.data.middleName}
                         lname={props.data.lastName}
                         email={props.data.email}
                         number={props.data.phoneNum}
                         role={convertedRole}
-                        isSelectedUser={false}
+                        isSelectedUser={true}
                   />
             </div>
       );
 }
 
-export default ProfilePageContainer;
+export default StudentProfilePageContainer;

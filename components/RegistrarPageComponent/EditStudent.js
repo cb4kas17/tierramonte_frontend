@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import styles from './adminEditUser.module.css';
+import styles from './editStudent.module.css';
 import useInput from '../hooks/useInput';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Modal from '../../components/Layout/Modal.';
 import Button from '../UI/Button';
 
-function AdminEditUser(props) {
+function EditStudent(props) {
       const router = useRouter();
       const [errorMes, setErrorMes] = useState(false);
-      const [valid, setValid] = useState(false);
       const [updated, setUpdated] = useState(false);
       const [archive, setArchive] = useState(false);
       const [confirmation, setConfirmation] = useState(false);
@@ -78,9 +77,7 @@ function AdminEditUser(props) {
             if (!lnameIsTouched) {
                   userData.lastName = props.lname;
             }
-            if (!emailIsTouched) {
-                  userData.email = props.email;
-            }
+
             if (!numberIsTouched) {
                   userData.phoneNum = props.number;
             }
@@ -102,7 +99,7 @@ function AdminEditUser(props) {
             const postData = async () => {
                   try {
                         const response = await axios.put(
-                              `http://localhost:4000/api/admin/users/${props.id}`,
+                              `http://localhost:4000/api/registrar/students/${props.id}`,
                               userData,
                               { withCredentials: true }
                         );
@@ -122,7 +119,7 @@ function AdminEditUser(props) {
       const archiveUser = async () => {
             try {
                   const response = await axios.delete(
-                        `http://localhost:4000/api/admin/archive/${props.id}`,
+                        `http://localhost:4000/api/registrar/students/${props.id}`,
                         {
                               withCredentials: true,
                               credentials: 'include',
@@ -142,7 +139,7 @@ function AdminEditUser(props) {
 
       return (
             <form className={styles.container} onSubmit={onSubmitHandler}>
-                  <h1 className={styles.header}>Edit/Archive User</h1>
+                  <h1 className={styles.header}>Edit/Archive Student</h1>
                   <div className={styles.formWrapper}>
                         <div className={styles.formContainer}>
                               <div
@@ -323,11 +320,12 @@ function AdminEditUser(props) {
                               <Modal className={styles.modalDesign}>
                                     <div className={styles.messageContainer}>
                                           <h2 className={styles.messageHeader}>
-                                                Account Updated
+                                                Student Updated
                                           </h2>
                                           <h4 className={styles.messageBody}>
-                                                Please check in the updated user
-                                                to the List of Users Tab
+                                                Please check in the updated
+                                                student to the List of Student
+                                                Tab
                                           </h4>
                                           <h4 className={styles.messageFooter}>
                                                 Thank you.
@@ -336,11 +334,11 @@ function AdminEditUser(props) {
                                                 className={styles.modalButton}
                                                 onClick={() => {
                                                       router.push(
-                                                            '/admin/AdminViewUser'
+                                                            '/registrar/Students'
                                                       );
                                                 }}
                                           >
-                                                Go back to home page
+                                                Go back to student list
                                           </Button>
                                     </div>
                               </Modal>
@@ -349,7 +347,7 @@ function AdminEditUser(props) {
                               <Modal className={styles.modalDesign}>
                                     <div className={styles.messageContainer}>
                                           <h2 className={styles.messageHeader}>
-                                                Account Successfully Archived
+                                                Student Successfully Archived
                                           </h2>
                                           <h4
                                                 className={styles.messageBody}
@@ -361,11 +359,11 @@ function AdminEditUser(props) {
                                                 className={styles.modalButton}
                                                 onClick={() => {
                                                       router.push(
-                                                            '/admin/AdminViewUser'
+                                                            '/registrar/Students'
                                                       );
                                                 }}
                                           >
-                                                Go back to list page
+                                                Go back to student list
                                           </Button>
                                     </div>
                               </Modal>
@@ -375,7 +373,7 @@ function AdminEditUser(props) {
                                     <div className={styles.messageContainer}>
                                           <h2 className={styles.messageHeader}>
                                                 Are you sure you want to archive
-                                                the user?
+                                                the student?
                                           </h2>
                                           <h4
                                                 className={styles.messageFooter}
@@ -414,4 +412,4 @@ function AdminEditUser(props) {
       );
 }
 
-export default AdminEditUser;
+export default EditStudent;

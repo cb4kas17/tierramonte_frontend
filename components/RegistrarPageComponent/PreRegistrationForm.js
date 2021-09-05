@@ -16,6 +16,7 @@ function PreRegistrationForm(props) {
    const updateData = async () => {
       //use try catch here
       try {
+         axios.defaults.withCredentials = true;
          const response = await axios.post(
             `http://localhost:4000/api/registrar/preregs/${props.data._id}`,
             {
@@ -341,7 +342,7 @@ function PreRegistrationForm(props) {
                      <h4 className={styles.messageBody}>
                         Please check to the List of Users Tab
                      </h4>
-                     <h4 className={styles.messageFooter}>Thank you.</h4>
+
                      <Button
                         className={styles.modalButton}
                         onClick={() => {

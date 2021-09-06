@@ -9,12 +9,13 @@
       margin-bottom: 2rem;
 }
 
+/* START HERE */
 .filterContainer {
       display: flex;
       justify-content: flex-end;
-      gap: 2rem;
       margin-bottom: 1rem;
       align-items: center;
+      gap: 2rem;
 }
 .input {
       padding: 0.5rem;
@@ -22,9 +23,19 @@
 }
 
 .select {
-      padding: 0.5rem;
-      width: 7rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
 }
+
+.select > select {
+      padding: 0.5rem;
+}
+.dropdownName {
+      font-size: 1.8rem;
+}
+/* End here */
 
 .columnName {
       background: #2196f3;

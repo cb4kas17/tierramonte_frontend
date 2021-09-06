@@ -34,20 +34,23 @@ function StudentsList(props) {
             <div className={styles.container}>
                   <h1 className={styles.header}>Students</h1>
                   <div className={styles.filterContainer}>
-                        <select
-                              name="yearlevel"
-                              id="yearlevel"
-                              onChange={yearLevelHandler}
-                              className={styles.select}
-                        >
-                              <option value="all">All</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">9</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                        </select>
+                        <div className={styles.select}>
+                              <p className={styles.dropdownName}> Grade:</p>
+                              <select
+                                    name="yearlevel"
+                                    id="yearlevel"
+                                    onChange={yearLevelHandler}
+                              >
+                                    <option value="all">All</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                              </select>
+                        </div>
+
                         <input
                               className={styles.input}
                               type="search"

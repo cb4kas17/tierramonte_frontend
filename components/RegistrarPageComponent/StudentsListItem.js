@@ -13,7 +13,7 @@ function StudentsListItem(props) {
                               {props.data.middleName}
                         </a>
                         <p className={styles.returning}>
-                              {props.data.studentNumber}
+                              {props.data.yearLevel}
                         </p>
                   </li>
             </Link>

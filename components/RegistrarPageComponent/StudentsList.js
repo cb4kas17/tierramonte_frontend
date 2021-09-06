@@ -5,9 +5,15 @@ import StudentsListItem from './StudentsListItem';
 
 function StudentsList(props) {
       const [search, setSearch] = useState('');
+
       const searchBarHandler = (event) => {
             setSearch(event.target.value);
-            props.searchValueProps(search);
+      };
+
+      const filter = (list) => {
+            return list.filter(
+                  (data) => data.lastName.toLowerCase().indexOf(search) > -1
+            );
       };
       console.log(search);
       return (
@@ -21,12 +27,13 @@ function StudentsList(props) {
                               id="searchbar"
                               placeholder="Search lastname"
                               onChange={searchBarHandler}
+                              value={props.searchBind}
                         />
                   </div>
                   <div className={styles.columnName}>Students</div>
                   <ul className={styles.listContainer}>
                         <h4 className={styles.name}>Name</h4>
-                        {props.data.map((item) => (
+                        {filter(props.data).map((item) => (
                               <StudentsListItem key={item._id} data={item} />
                         ))}
                   </ul>

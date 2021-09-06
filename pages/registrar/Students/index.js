@@ -3,7 +3,6 @@ import axios from 'axios';
 import StudentsListContainer from '../../../components/RegistrarPageComponent/StudentsListContainer';
 function Students(props) {
       const [allStudents, setAllStudents] = useState([]);
-      const [searchValue, setSearchValue] = useState('');
 
       const getAllStudents = async () => {
             try {
@@ -21,21 +20,9 @@ function Students(props) {
             getAllStudents();
       }, []);
 
-      const search = (data) => {
-            setSearchValue(data);
-      };
-      const filter = (list) => {
-            return list.filter(
-                  (data) =>
-                        data.lastName.toLowerCase().indexOf(searchValue) > -1
-            );
-      };
       return (
             <div>
-                  <StudentsListContainer
-                        data={filter(allStudents)}
-                        searchValueProps={search}
-                  />
+                  <StudentsListContainer data={allStudents} />
             </div>
       );
 }

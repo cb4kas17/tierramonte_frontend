@@ -24,7 +24,6 @@ function StudentsListContainer(props) {
                   <StudentsList
                         className={styles.displayFieldContainer}
                         data={props.data}
-                        searchValueProps={props.searchValueProps}
                   />
             </div>
       );

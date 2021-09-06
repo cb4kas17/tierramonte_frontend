@@ -9,10 +9,11 @@ function StudentsListItem(props) {
             <Link href={`/registrar/Students/${props.data._id}`}>
                   <li className={styles.itemContainer}>
                         <a className={styles.userName}>
-                              {props.data.lastName}, {props.data.firstName}
+                              {props.data.lastName}, {props.data.firstName}{' '}
                               {props.data.middleName}
                         </a>
                         <p className={styles.returning}>
+                              Grade&nbsp;
                               {props.data.yearLevel}
                         </p>
                   </li>

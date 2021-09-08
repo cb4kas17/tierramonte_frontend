@@ -6,6 +6,8 @@
       border-bottom: 1px solid #000;
       display: grid;
       grid-template-columns: 7fr 1fr;
+      align-items: center;
+      justify-content: center;
 }
 
 .returning {
@@ -14,6 +16,6 @@
       background-color: rgba(83, 206, 34, 0.678);
       width: 11rem;
       padding: 0.5rem 0;
-
       font-size: 1.2rem;
+      max-height: 2.5rem;
 }

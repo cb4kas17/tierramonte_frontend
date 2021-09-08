@@ -203,8 +203,8 @@ function EditAnnouncement(props) {
                                                       }
                                                 >
                                                       Please check in the
-                                                      updated user to the List
-                                                      of Users Tab
+                                                      updated announcement to
+                                                      the List of Announcement.
                                                 </h4>
                                                 <h4
                                                       className={
@@ -223,7 +223,8 @@ function EditAnnouncement(props) {
                                                             );
                                                       }}
                                                 >
-                                                      Go back to home page
+                                                      Go back to announcement
+                                                      list
                                                 </Button>
                                           </div>
                                     </Modal>
@@ -240,7 +241,7 @@ function EditAnnouncement(props) {
                                                             styles.messageHeader
                                                       }
                                                 >
-                                                      Account Successfully
+                                                      Announcement Successfully
                                                       Archived
                                                 </h2>
                                                 <h4
@@ -265,7 +266,8 @@ function EditAnnouncement(props) {
                                                             );
                                                       }}
                                                 >
-                                                      Go back to list page
+                                                      Go back to announcement
+                                                      list
                                                 </Button>
                                           </div>
                                     </Modal>
@@ -283,7 +285,7 @@ function EditAnnouncement(props) {
                                                       }
                                                 >
                                                       Are you sure you want to
-                                                      archive the user?
+                                                      archive this announcement?
                                                 </h2>
                                                 <h4
                                                       className={

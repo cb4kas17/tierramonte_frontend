@@ -213,7 +213,7 @@ function CreateAnnouncement() {
                                                             styles.messageHeader
                                                       }
                                                 >
-                                                      Account Created
+                                                      Announcement Created
                                                 </h2>
                                                 <h4
                                                       className={
@@ -221,7 +221,7 @@ function CreateAnnouncement() {
                                                       }
                                                 >
                                                       Please check in the List
-                                                      of Users Tab
+                                                      of Announcement tab
                                                 </h4>
                                                 <h4
                                                       className={

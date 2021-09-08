@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ProfilePageContainer from '../../components/AdminPageComponent/ProfilePageContainer';
-function AdminPage(props) {
-      const [profile, setProfile] = useState([]);
+import ProfilePageContainer from '../../components/PrincipalPageComponent/ProfilePageContainer';
 
+function PrincipalPage(props) {
+      const [profile, setProfile] = useState([]);
       const getProfile = async () => {
             try {
                   const response = await axios.get(
-                        'http://localhost:4000/api/admin',
+                        'http://localhost:4000/api/principal',
                         {
                               withCredentials: true,
                         }
@@ -18,15 +18,16 @@ function AdminPage(props) {
                   console.log(error);
             }
       };
-
       useEffect(() => {
             getProfile();
       }, []);
       return (
             <div>
-                  <ProfilePageContainer data={profile} />
+                  <div>
+                        <ProfilePageContainer data={profile} />
+                  </div>
             </div>
       );
 }
 
-export default AdminPage;
+export default PrincipalPage;

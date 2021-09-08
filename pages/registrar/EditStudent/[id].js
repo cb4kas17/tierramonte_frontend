@@ -8,6 +8,7 @@ function EditStudent(props) {
       const id = router.query.id;
       console.log(id);
       const [userData, setUserData] = useState([]);
+      const [userInfo, setUserInfo] = useState([]);
 
       const getData = async () => {
             try {
@@ -18,8 +19,11 @@ function EditStudent(props) {
                         }
                   );
                   const data = await response.data.user;
+                  const extraData = await response.data.userInfo;
                   console.log(data);
                   setUserData(data);
+                  console.log(extraData);
+                  setUserInfo(extraData);
             } catch (error) {
                   console.log(error);
             }
@@ -31,7 +35,7 @@ function EditStudent(props) {
 
       return (
             <div>
-                  <EditStudentContainer data={userData} />
+                  <EditStudentContainer data={userData} userInfo={userInfo} />
             </div>
       );
 }

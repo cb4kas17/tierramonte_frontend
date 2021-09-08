@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SideNavBar from "../Layout/SideNavBar";
 
-import { useRouter } from "next/router";
 
 import styles from "./createUserContainer.module.css";
 

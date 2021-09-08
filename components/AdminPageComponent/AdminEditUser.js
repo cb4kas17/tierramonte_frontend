@@ -8,8 +8,7 @@ import Button from '../UI/Button';
 
 function AdminEditUser(props) {
       const router = useRouter();
-      const [errorMes, setErrorMes] = useState(false);
-      const [valid, setValid] = useState(false);
+
       const [updated, setUpdated] = useState(false);
       const [archive, setArchive] = useState(false);
       const [confirmation, setConfirmation] = useState(false);
@@ -204,11 +203,6 @@ function AdminEditUser(props) {
                                                 disabled={true}
                                                 placeholder={props.email}
                                           />
-                                          {errorMes && (
-                                                <p className={styles.errorMes}>
-                                                      Email already exist
-                                                </p>
-                                          )}
                                     </div>
                               </div>
                               <div

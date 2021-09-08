@@ -4,12 +4,6 @@ import Announcement_item from './Announcement_item';
 import styles from './announcements.module.css';
 
 function Announcements(props) {
-      let options = {
-            year: 'numeric',
-            month: 'long',
-            day: '2-digit',
-      };
-
       console.log(props.announcements);
 
       return (

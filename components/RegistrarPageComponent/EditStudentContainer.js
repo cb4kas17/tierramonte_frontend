@@ -29,6 +29,7 @@ function EditStudentContainer(props) {
       } else if (props.data.role === 6) {
             convertedRole = 'Student';
       }
+      console.log(props.userInfo);
 
       return (
             <div className={styles.editUserContainer}>
@@ -45,6 +46,8 @@ function EditStudentContainer(props) {
                         email={props.data.email}
                         number={props.data.phoneNum}
                         role={convertedRole}
+                        data={props.data}
+                        userInfo={props.userInfo}
                         isSelectedUser={true}
                   />
             </div>

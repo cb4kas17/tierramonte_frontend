@@ -44,8 +44,14 @@
       padding: 0.5rem;
 }
 
-.button {
-      padding: 0 2rem;
+.buttonContainer {
+      padding: 0 25rem;
+      display: flex;
+      gap: 1rem;
+}
+.buttonUpdate,
+.buttonArchive {
+      padding: 0 1rem;
       height: 5rem;
       width: 15rem;
       margin: auto;
@@ -86,7 +92,7 @@
 }
 
 .messageHeader {
-      font-size: 7rem;
+      font-size: 3rem;
       color: #3c6075;
 }
 
@@ -104,4 +110,18 @@
 .modalButton {
       padding: 1.5rem 2rem;
       font-size: 1.5rem;
+}
+
+.inputContainer input::placeholder {
+      color: black;
+}
+
+.buttonConfirmationContainer {
+      display: flex;
+      gap: 2rem;
+}
+
+.buttonConfirmationContainer > * {
+      font-size: 2rem;
+      padding: 1rem 5rem;
 }

@@ -43,7 +43,11 @@ function ResetPassword(props) {
             try {
                   const response = await axios.post(
                         `http://localhost:4000/api/reset/${token}`,
-                        newPasswordData
+                        newPasswordData,
+                        {
+                              withCredentials: true,
+                              credentials: 'include',
+                        }
                   );
                   setValid(true);
                   console.log(response.data);

@@ -3,10 +3,7 @@ import styles from './teacherItem.module.css';
 import Link from 'next/link';
 function TeacherItem(props) {
       console.log(props.data);
-      let role = '';
-      if (props.data.role === 4) {
-            role = 'Teacher';
-      }
+
       return (
             <div>
                   <Link href={`/principal/Teacher/${props.data._id}`}>
@@ -16,7 +13,9 @@ function TeacherItem(props) {
                                     {props.data.firstName}{' '}
                                     {props.data.middleName}
                               </a>
-                              <p className={styles.roleName}>{role}</p>
+                              <p className={styles.roleName}>
+                                    {props.data.department}
+                              </p>
                         </li>
                   </Link>
             </div>

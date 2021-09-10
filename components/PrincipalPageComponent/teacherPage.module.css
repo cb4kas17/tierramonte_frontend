@@ -27,6 +27,20 @@
       padding: 0.5rem;
       width: 25rem;
 }
+.select {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+}
+
+.select > select {
+      padding: 0.5rem;
+}
+.dropdownName {
+      font-size: 1.8rem;
+}
+
 .columnName {
       background: #2196f3;
       font-size: 2rem;

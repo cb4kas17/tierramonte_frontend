@@ -18,6 +18,7 @@ function EditTeacher(props) {
       const [lnameIsTouched, setlnameIsTouched] = useState(false);
       const [emailIsTouched, setemailIsTouched] = useState(false);
       const [numberIsTouched, setnumberIsTouched] = useState(false);
+      const [departmentIsTouched, setDepartmentIsTouched] = useState(false);
 
       const {
             value: enteredFname,
@@ -57,6 +58,13 @@ function EditTeacher(props) {
             valueChangeHandler: numberChangeHandler,
             inputBlurHandler: numberBlurHandler,
       } = useInput((value) => value.trim() !== '');
+      const {
+            value: enteredDepartment,
+            isValid: enteredDepartmentIsValid,
+            hasError: enteredDepartmentHasError,
+            valueChangeHandler: departmentChangeHandler,
+            inputBlurHandler: departmentBlurHandler,
+      } = useInput((value) => value.trim() !== '');
 
       const onSubmitHandler = (event) => {
             event.preventDefault();
@@ -66,6 +74,7 @@ function EditTeacher(props) {
                   middleName: enteredMname,
                   lastName: enteredLname,
                   phoneNum: enteredNumber,
+                  department: enteredDepartment,
             };
 
             if (!fnameIsTouched) {
@@ -83,6 +92,9 @@ function EditTeacher(props) {
             if (!numberIsTouched) {
                   userData.phoneNum = props.data.phoneNum;
             }
+            if (!departmentIsTouched) {
+                  userData.department = props.data.department;
+            }
 
             if (fnameIsTouched && enteredFname === '') {
                   userData.firstName = props.data.firstName;
@@ -96,6 +108,9 @@ function EditTeacher(props) {
 
             if (numberIsTouched && enteredNumber === '') {
                   userData.phoneNum = props.data.phoneNum;
+            }
+            if (departmentIsTouched && enteredDepartment === '') {
+                  userData.department = props.data.department;
             }
 
             const postData = async () => {
@@ -298,6 +313,42 @@ function EditTeacher(props) {
                                                 }}
                                                 placeholder={
                                                       props.data.middleName
+                                                }
+                                          />
+                                    </div>
+                              </div>
+                              <div
+                                    className={
+                                          !enteredDepartmentHasError
+                                                ? styles.formFields
+                                                : `${styles.formFields} 
+                              ${styles.invalid}`
+                                    }
+                              >
+                                    <div className={styles.labelContainer}>
+                                          <label
+                                                htmlFor="department"
+                                                className={styles.label}
+                                          >
+                                                Department
+                                          </label>
+                                    </div>
+                                    <div className={styles.inputContainer}>
+                                          <input
+                                                type="text"
+                                                id="department"
+                                                className={styles.input}
+                                                value={enteredDepartment}
+                                                onChange={
+                                                      departmentChangeHandler
+                                                }
+                                                onBlur={() => {
+                                                      setDepartmentIsTouched(
+                                                            true
+                                                      );
+                                                }}
+                                                placeholder={
+                                                      props.data.department
                                                 }
                                           />
                                     </div>

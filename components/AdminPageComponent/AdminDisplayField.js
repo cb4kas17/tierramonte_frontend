@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styles from './adminDisplayField.module.css';
-
+import Button from '../UI/Button';
 import AdminDisplayFieldItem from './AdminDisplayFieldItem';
+import { useRouter } from 'next/router';
 function AdminDisplayField(props) {
       console.log(props.data);
+      const router = useRouter();
       const [search, setSearch] = useState('');
       const [role, setRole] = useState('all');
 
@@ -34,6 +36,16 @@ function AdminDisplayField(props) {
       return (
             <div className={styles.container}>
                   <h1 className={styles.header}>Users</h1>
+                  <div className={styles.createButtonContainer}>
+                        <Button
+                              className={styles.createButton}
+                              onClick={() => {
+                                    router.push('/admin/AdminCreateUser');
+                              }}
+                        >
+                              &#65291; Create User
+                        </Button>
+                  </div>
                   <div className={styles.filterContainer}>
                         <div className={styles.select}>
                               <p className={styles.dropdownName}> Role:</p>

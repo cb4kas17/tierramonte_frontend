@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SideNavBar from '../Layout/SideNavBar';
 import styles from './editStudentContainer.module.css';
-import EditStudent from './EditStudent';
+import EditStudentX from './EditStudentX';
 
 function EditStudentContainer(props) {
       const navBarItems = [
@@ -37,7 +37,7 @@ function EditStudentContainer(props) {
                         className={styles.navbarContainer}
                         items={navBarItems}
                   />
-                  <EditStudent
+                  <EditStudentX
                         className={styles.editUser}
                         id={props.data._id}
                         fname={props.data.firstName}

@@ -153,14 +153,10 @@ function PreRegForm(props) {
                         console.log(response.data);
                         if (response.data === 'prereg created!') {
                               router.push('/');
-                        } else if (
-                              response.data === 'student email is in use!'
-                        ) {
+                        } else if (response.data === 'student email exists!') {
                               setErrorMes(true);
                               setErrorMesParent(false);
-                        } else if (
-                              response.data === 'parent email is in use!'
-                        ) {
+                        } else if (response.data === 'parent email exists!') {
                               setErrorMes(false);
                               setErrorMesParent(true);
                         }

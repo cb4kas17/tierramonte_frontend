@@ -7,25 +7,24 @@ import Modal from '../../components/Layout/Modal.';
 import axios from 'axios';
 import Button from '../UI/Button';
 function PreRegFormEdit(props) {
-      // FOR MODAL
-      // const [updated, setUpdated] = useState(false);
-      // const [archive, setArchive] = useState(false);
-      // const [confirmation, setConfirmation] = useState(false);
+      const [updated, setUpdated] = useState(false);
+      const [archive, setArchive] = useState(false);
+      const [confirmation, setConfirmation] = useState(false);
       const rounter = useRouter();
       const x = rounter.query.id;
-      console.log(x);
+
       // FOR CHECKBOXES AND RADIO
-      const [isIndig, setIsIndig] = useState(props.userInfo.indig);
+      const [isIndig, setIsIndig] = useState(false);
       const [firstSemester, setfirstSemester] = useState(false);
       const [secondSemester, setsecondSemester] = useState(false);
-      const [firstItem, setFirstItem] = useState(props.userInfo.modularP);
-      const [secondItem, setSecondItem] = useState(props.userInfo.modularD);
-      const [thirdItem, setThirdItem] = useState(props.userInfo.modularD);
-      const [fourthItem, setFourthItem] = useState(props.userInfo.educTV);
-      const [fifthItem, setFifthItem] = useState(props.userInfo.radioBased);
-      const [sixthItem, setSixthItem] = useState(props.userInfo.homeschool);
-      const [seventhItem, setSeventhItem] = useState(props.userInfo.blended);
-      const [eighthItem, setEighthItem] = useState(props.userInfo.facetoface);
+      const [firstItem, setFirstItem] = useState(false);
+      const [secondItem, setSecondItem] = useState(false);
+      const [thirdItem, setThirdItem] = useState(false);
+      const [fourthItem, setFourthItem] = useState(false);
+      const [fifthItem, setFifthItem] = useState(false);
+      const [sixthItem, setSixthItem] = useState(false);
+      const [seventhItem, setSeventhItem] = useState(false);
+      const [eighthItem, setEighthItem] = useState(false);
 
       const [errorMes, setErrorMes] = useState(false);
       const [errorMesParent, setErrorMesParent] = useState(false);
@@ -77,38 +76,6 @@ function PreRegFormEdit(props) {
       const strandRef = useRef();
       const schoolAddRef = useRef();
 
-      useEffect(() => {
-            async () => {
-                  console.log('trigger');
-                  // if (props.userInfo.semester === '1st') {
-                  //       setfirstSemester(true);
-                  // } else if (props.userInfo.semester === '2nd') {
-                  //       setsecondSemester(true);
-                  // }
-                  getData();
-                  console.log();
-            };
-      }, []);
-      const getData = async () => {
-            console.log('success');
-            try {
-                  const response = await axios.get(
-                        `http://localhost:4000/api/registrar/students/${x}`,
-                        {
-                              withCredentials: true,
-                        }
-                  );
-                  const data = await response.data.user;
-                  const extraData = await response.data.userInfo;
-
-                  console.log(data);
-                  setUserData(data);
-                  console.log(extraData);
-                  setUserInfo(extraData);
-            } catch (error) {
-                  console.log(error);
-            }
-      };
       const onSubmitHandler = (event) => {
             event.preventDefault();
             if (lrnRef.current.value > 0) {
@@ -780,7 +747,7 @@ function PreRegFormEdit(props) {
                                           type="checkbox"
                                           name="item3"
                                           id="item3"
-                                          checked={thirdItem}
+                                          checked={props.userInfo.online}
                                           onChange={() =>
                                                 setThirdItem(!thirdItem)
                                           }

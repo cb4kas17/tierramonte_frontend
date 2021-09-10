@@ -50,53 +50,63 @@ function CreateTeacher() {
             valueChangeHandler: numberChangeHandler,
             inputBlurHandler: numberBlurHandler,
       } = useInput((value) => value.trim() !== '');
+      const {
+            value: enteredDepartment,
+            isValid: enteredDepartmentIsValid,
+            hasError: enteredDepartmentHasError,
+            valueChangeHandler: departmentChangeHandler,
+            inputBlurHandler: departmentBlurHandler,
+      } = useInput((value) => value.trim() !== '');
       let formIsValid = false;
       if (
             enteredEmailIsValid &&
             enteredFnameIsValid &&
             enteredLnameIsValid &&
             enteredMnameIsValid &&
-            enteredNumberIsValid
+            enteredNumberIsValid &&
+            enteredDepartmentIsValid
       ) {
             formIsValid = true;
       }
       const onSubmitHandler = (event) => {
             event.preventDefault();
+            if (formIsValid) {
+                  const userData = {
+                        firstName: enteredFname,
+                        middleName: enteredMname,
+                        lastName: enteredLname,
+                        email: enteredEmail,
+                        phoneNum: enteredNumber,
+                        department: enteredDepartment,
+                  };
 
-            const userData = {
-                  firstName: enteredFname,
-                  middleName: enteredMname,
-                  lastName: enteredLname,
-                  email: enteredEmail,
-                  phoneNum: enteredNumber,
-            };
+                  const postData = async () => {
+                        try {
+                              const response = await axios.post(
+                                    'http://localhost:4000/api/principal/createteacher',
+                                    userData,
+                                    { withCredentials: true }
+                              );
 
-            const postData = async () => {
-                  try {
-                        const response = await axios.post(
-                              'http://localhost:4000/api/principal/createteacher',
-                              userData,
-                              { withCredentials: true }
-                        );
-
-                        console.log(response.data);
-                        if (response.data.success) {
-                              setValid(true);
-                        } else if (response.data === 'student email') {
-                              setErrorMes(true);
-                        } else if (response.data === 'parent email') {
-                              setErrorMes(true);
-                        } else if (response.data === 'users email') {
-                              setErrorMes(true);
-                        } else {
-                              setErrorMes(false);
+                              console.log(response.data);
+                              if (response.data.success) {
+                                    setValid(true);
+                              } else if (response.data === 'student email') {
+                                    setErrorMes(true);
+                              } else if (response.data === 'parent email') {
+                                    setErrorMes(true);
+                              } else if (response.data === 'users email') {
+                                    setErrorMes(true);
+                              } else {
+                                    setErrorMes(false);
+                              }
+                        } catch (error) {
+                              console.log(error);
                         }
-                  } catch (error) {
-                        console.log(error);
-                  }
-            };
-            console.log(userData);
-            postData();
+                  };
+                  console.log(userData);
+                  postData();
+            }
       };
       return (
             <form className={styles.container} onSubmit={onSubmitHandler}>
@@ -245,6 +255,36 @@ function CreateTeacher() {
                                                 value={enteredMname}
                                                 onChange={mnameChangeHandler}
                                                 onBlur={mnameBlurHandler}
+                                          />
+                                    </div>
+                              </div>
+                              <div
+                                    className={
+                                          !enteredDepartmentHasError
+                                                ? styles.formFields
+                                                : `${styles.formFields} 
+                              ${styles.invalid}`
+                                    }
+                              >
+                                    <div className={styles.labelContainer}>
+                                          <label
+                                                htmlFor="department"
+                                                className={styles.label}
+                                          >
+                                                Department
+                                          </label>
+                                    </div>
+                                    <div className={styles.inputContainer}>
+                                          <input
+                                                type="text"
+                                                required={true}
+                                                id="department"
+                                                className={styles.input}
+                                                value={enteredDepartment}
+                                                onChange={
+                                                      departmentChangeHandler
+                                                }
+                                                onBlur={departmentBlurHandler}
                                           />
                                     </div>
                               </div>

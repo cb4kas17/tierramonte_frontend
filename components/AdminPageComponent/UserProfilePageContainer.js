@@ -6,7 +6,7 @@ import ProfilePage from './ProfilePage';
 function UserProfilePageContainer(props) {
       const navBarItems = [
             { id: 1, title: 'Profile', push: '/admin' },
-            { id: 2, title: 'Create', push: '/admin/AdminCreateUser' },
+
             { id: 3, title: 'List of users', push: `/admin/AdminViewUser` },
       ];
       let convertedRole = '';

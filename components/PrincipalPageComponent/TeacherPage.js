@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 function TeacherPage(props) {
       const router = useRouter();
       const [search, setSearch] = useState('');
+      const [role, setRole] = useState('all');
 
       const searchBarHandler = (event) => {
             setSearch(event.target.value);

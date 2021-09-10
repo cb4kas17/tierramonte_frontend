@@ -48,7 +48,7 @@ function LoginForm(props) {
                   const data = response.data;
                   console.log(data);
                   if (data.firstLogin) {
-                        router.push(`/resetPassword/${data.token}`);
+                        router.push(`/resetPassword/${data.resetToken}`);
                   } else {
                         if (data.role === 0) {
                               router.push('/admin');

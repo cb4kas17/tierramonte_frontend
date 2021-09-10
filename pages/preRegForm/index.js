@@ -23,6 +23,10 @@ function PreRegForm(props) {
 
       const [errorMes, setErrorMes] = useState(false);
 
+      const [grade, setGrade] = useState('');
+      const gradeHandler = (event) => {
+            setGrade(event.target.value);
+      };
       const [errorMesParent, setErrorMesParent] = useState(false);
 
       let hasLRN = false;
@@ -72,14 +76,6 @@ function PreRegForm(props) {
       const schoolnameRef = useRef();
       const strandRef = useRef();
       const schoolAddRef = useRef();
-      const item1Ref = useRef(false);
-      const item2Ref = useRef(false);
-      const item3Ref = useRef(false);
-      const item4Ref = useRef(false);
-      const item5Ref = useRef(false);
-      const item6Ref = useRef(false);
-      const item7Ref = useRef(false);
-      const item8Ref = useRef(false);
 
       const onSubmitHandler = (event) => {
             event.preventDefault();
@@ -95,7 +91,7 @@ function PreRegForm(props) {
             const preRegData = {
                   schoolYearFrom: yearFromRef.current.value,
                   schoolYearTo: yeartoRef.current.value,
-                  levelEnroll: gradeRef.current.value,
+                  levelEnroll: grade,
                   hasLRN: hasLRN,
                   returning: onReturningStudent,
                   PSANo: birthCertRef.current.value,
@@ -210,7 +206,25 @@ function PreRegForm(props) {
                                           ref={yeartoRef}
                                     />
                               </div>
-                              <div>
+                              <div className={styles.dropdown}>
+                                    <label className={styles.dropdownName}>
+                                          Grade Level
+                                    </label>
+                                    <select
+                                          name="gradeLevel"
+                                          id="gradeLevel"
+                                          onChange={gradeHandler}
+                                          value={grade}
+                                    >
+                                          <option value="7">7</option>
+                                          <option value="8">8</option>
+                                          <option value="9">9</option>
+                                          <option value="10">10</option>
+                                          <option value="11">11</option>
+                                          <option value="12">12</option>
+                                    </select>
+                              </div>
+                              {/* <div>
                                     <label htmlFor="grade">
                                           Grade to enroll
                                     </label>
@@ -221,7 +235,7 @@ function PreRegForm(props) {
                                           required={true}
                                           ref={gradeRef}
                                     />
-                              </div>
+                              </div> */}
                         </div>
                         <h2 className={styles.typeHeader}>Student</h2>
                         <div className={styles.studentSection}>

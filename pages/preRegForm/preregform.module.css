@@ -22,6 +22,7 @@
       background: rgba(0, 0, 0, 0.034);
       padding: 1rem;
 }
+
 .formContainer > div > div > input:focus {
       font-size: inherit;
       border: none;
@@ -38,9 +39,30 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+
 .yearSection > div > input {
       margin-top: 1rem;
 }
+.dropdown {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: inherit;
+}
+.dropdown > label {
+}
+.dropdown > select {
+      margin-top: 1rem;
+      width: 20rem;
+      height: 3.5rem;
+      font-size: inherit;
+      border: rgba(92, 91, 91, 0.287) 1px solid;
+      background: rgba(0, 0, 0, 0.034);
+}
+.dropdown > select > option {
+      text-align: center;
+}
+
 .yearSection > div:first-child > input:focus {
       outline: none;
 }

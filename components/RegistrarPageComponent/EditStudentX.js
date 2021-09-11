@@ -10,8 +10,10 @@ function PreRegFormEdit(props) {
       const [updated, setUpdated] = useState(false);
       const [archive, setArchive] = useState(false);
       const [confirmation, setConfirmation] = useState(false);
-      const rounter = useRouter();
-      const x = rounter.query.id;
+      const router = useRouter();
+      const id = router.query.id;
+
+      //from fetch
 
       // FOR CHECKBOXES AND RADIO
       const [isIndig, setIsIndig] = useState(false);
@@ -25,21 +27,21 @@ function PreRegFormEdit(props) {
       const [sixthItem, setSixthItem] = useState(false);
       const [seventhItem, setSeventhItem] = useState(false);
       const [eighthItem, setEighthItem] = useState(false);
-
-      const [errorMes, setErrorMes] = useState(false);
-      const [errorMesParent, setErrorMesParent] = useState(false);
-
-      let hasLRN = false;
-      let semester = '';
+      const [grade, setGrade] = useState('');
+      const [birthDate, setBirthDate] = useState();
+      const gradeHandler = (event) => {
+            setGrade(event.target.value);
+      };
+      const birthDateHandler = (event) => {
+            setBirthDate(event.target.value);
+      };
 
       // REFS
       const yearFromRef = useRef();
       const yeartoRef = useRef();
-      const gradeRef = useRef();
       const birthCertRef = useRef();
       const lrnRef = useRef();
       const fnameRef = useRef();
-      const birthdateRef = useRef(Date);
       const lnameRef = useRef();
       const genderRef = useRef();
       const mnameRef = useRef();
@@ -76,25 +78,111 @@ function PreRegFormEdit(props) {
       const strandRef = useRef();
       const schoolAddRef = useRef();
 
+      const [schoolYearFromIsTouched, setSchoolYearFromIsTouched] =
+            useState(false);
+      const [schoolYearToIsTouched, setSchoolYearToIsTouched] = useState(false);
+      const [PSANoIsTouched, setPSANoIsTouched] = useState(false);
+      const [LRNNoIsTouched, setLRNNoIsTouched] = useState(false);
+      const [fnameIsTouched, setfnameIsTouched] = useState(false);
+      const [mnameIsTouched, setmnameIsTouched] = useState(false);
+      const [lnameIsTouched, setlnameIsTouched] = useState(false);
+      const [genderIsTouched, setGenderIsTouched] = useState(false);
+      const [indigSpecIsTouched, setindigSpecIsTouched] = useState(false);
+      const [motherTongueIsTouched, setmotherTongueIsTouched] = useState(false);
+      const [address1IsTouched, setaddress1IsTouched] = useState(false);
+      const [address2IsTouched, setaddress2IsTouched] = useState(false);
+      const [zipCodeIsTouched, setzipCodeIsTouched] = useState(false);
+      const [phoneNumIsTouched, setphoneNumIsTouched] = useState(false);
+      const [motherFirstNameIsTouched, setmotherFirstNameIsTouched] =
+            useState(false);
+      const [motherMiddleNameIsTouched, setmotherMiddleNameIsTouched] =
+            useState(false);
+      const [motherLastNameIsTouched, setmotherLastNameIsTouched] =
+            useState(false);
+      const [fatherFirstNameIsTouched, setfatherFirstNameIsTouched] =
+            useState(false);
+      const [fatherMiddleNameIsTouched, setfatherMiddleNameIsTouched] =
+            useState(false);
+      const [fatherLastNameIsTouched, setfatherLastNameIsTouched] =
+            useState(false);
+      const [guardianFirstNameIsTouched, setguardianFirstNameIsTouched] =
+            useState(false);
+      const [guardianMiddleNameIsTouched, setguardianMiddleNameIsTouched] =
+            useState(false);
+      const [guardianLastNameIsTouched, setguardianLastNameIsTouched] =
+            useState(false);
+      const [emergencyNameIsTouched, setemergencyNameIsTouched] =
+            useState(false);
+      const [emergencyTelephoneIsTouched, setemergencyTelephoneIsTouched] =
+            useState(false);
+      const [emergencyCellphoneIsTouched, setemergencyCellphoneIsTouched] =
+            useState(false);
+      const [parentPhoneNumIsTouched, setparentPhoneNumIsTouched] =
+            useState(false);
+      const [lastGradeLevelIsTouched, setlastGradeLevelIsTouched] =
+            useState(false);
+      const [lastSchoolYearIsTouched, setlastSchoolYearIsTouched] =
+            useState(false);
+      const [schoolNameIsTouched, setschoolNameIsTouched] = useState(false);
+      const [schoolAddressIsTouched, setschoolAddressIsTouched] =
+            useState(false);
+
+      const [trackIsTouched, settrackIsTouched] = useState(false);
+      const [strandIsTouched, setstrandIsTouched] = useState(false);
+
+      let semester = '';
+
+      useEffect(async () => {
+            try {
+                  const response = await axios.get(
+                        `http://localhost:4000/api/registrar/students/${id}`,
+                        {
+                              withCredentials: true,
+                        }
+                  );
+                  const data = await response.data.user;
+                  const extraData = await response.data.userInfo;
+                  setFirstItem(extraData.modularP);
+                  setSecondItem(extraData.modularD);
+                  setThirdItem(extraData.online);
+                  setFourthItem(extraData.educTV);
+                  setFifthItem(extraData.radioBased);
+                  setSixthItem(extraData.homeschool);
+                  setSeventhItem(extraData.blended);
+                  setEighthItem(extraData.facetoface);
+                  setBirthDate(extraData.birthDate);
+                  setGrade(data.yearLevel);
+                  setIsIndig(extraData.indig);
+
+                  if (extraData.semester === '1st') {
+                        setfirstSemester(true);
+                  } else if (extraData.semester === '2nd') {
+                        setsecondSemester(true);
+                  }
+            } catch (error) {
+                  console.log(error);
+            }
+      }, []);
+
       const onSubmitHandler = (event) => {
             event.preventDefault();
-            if (lrnRef.current.value > 0) {
-                  hasLRN = true;
-            }
             if (firstSemester) {
                   semester = '1st';
-            } else if (secondSemester) {
+            } else {
                   semester = '2nd';
             }
-
-            const preRegData = {
-                  hasLRN: hasLRN,
+            console.log(semester);
+            const updatedStudentData = {
+                  hasLRN: props.userInfo.hasLRN,
+                  schoolYearFrom: yearFromRef.current.value,
+                  schoolYearTo: yeartoRef.current.value,
+                  levelEnroll: grade,
                   PSANo: birthCertRef.current.value,
                   LRNNo: lrnRef.current.value,
-                  studentFirstName: fnameRef.current.value,
-                  studentMiddleName: mnameRef.current.value,
-                  studentLastName: lnameRef.current.value,
-                  birthDate: birthdateRef.current.value,
+                  firstName: fnameRef.current.value,
+                  middleName: mnameRef.current.value,
+                  lastName: lnameRef.current.value,
+                  birthDate: birthDate,
                   gender: genderRef.current.value,
                   indig: isIndig,
                   indigSpec: indigenousRef.current.value,
@@ -102,7 +190,6 @@ function PreRegFormEdit(props) {
                   address1: add1Ref.current.value,
                   address2: add2Ref.current.value,
                   zipCode: zipRef.current.value,
-                  email: emailRef.current.value,
                   phoneNum: mobilenoRef.current.value,
                   motherFirstName: motherfnameRef.current.value,
                   motherMiddleName: mothermidnameRef.current.value,
@@ -116,7 +203,6 @@ function PreRegFormEdit(props) {
                   emergencyName: emergencynameRef.current.value,
                   emergencyTelephone: emergencytelnoRef.current.value,
                   emergencyCellphone: emergencymobilenoRef.current.value,
-                  parentEmail: parentEmailRef.current.value,
                   parentPhoneNum: parentNumRef.current.value,
                   lastGradeLevel: lastgradelvlRef.current.value,
                   lastSchoolYear: lastschoolyrlvlRef.current.value,
@@ -134,33 +220,168 @@ function PreRegFormEdit(props) {
                   blended: seventhItem,
                   facetoface: eighthItem,
             };
+            if (!schoolYearFromIsTouched) {
+                  updatedStudentData.schoolYearFrom =
+                        props.userInfo.schoolYearFrom;
+            }
+            if (!schoolYearToIsTouched) {
+                  updatedStudentData.schoolYearTo = props.userInfo.schoolYearTo;
+            }
+            if (!PSANoIsTouched) {
+                  updatedStudentData.PSANo = props.userInfo.PSANo;
+            }
+            if (!LRNNoIsTouched) {
+                  updatedStudentData.LRNNo = props.data.LRNNo;
+            }
+            if (!fnameIsTouched) {
+                  updatedStudentData.firstName = props.data.firstName;
+            }
+            if (!mnameIsTouched) {
+                  updatedStudentData.middleName = props.data.middleName;
+            }
+            if (!lnameIsTouched) {
+                  updatedStudentData.lastName = props.data.lastName;
+            }
+            if (!genderIsTouched) {
+                  updatedStudentData.gender = props.userInfo.gender;
+            }
+
+            if (!indigSpecIsTouched) {
+                  updatedStudentData.indigSpec = props.userInfo.indigSpec;
+            }
+            if (!motherTongueIsTouched) {
+                  updatedStudentData.motherTongue = props.userInfo.motherTongue;
+            }
+            if (!address1IsTouched) {
+                  updatedStudentData.address1 = props.userInfo.address1;
+            }
+            if (!address2IsTouched) {
+                  updatedStudentData.address2 = props.userInfo.address2;
+            }
+            if (!zipCodeIsTouched) {
+                  updatedStudentData.zipCode = props.userInfo.zipCode;
+            }
+            if (!phoneNumIsTouched) {
+                  updatedStudentData.phoneNum = props.data.phoneNum;
+            }
+            if (!motherFirstNameIsTouched) {
+                  updatedStudentData.motherFirstName =
+                        props.userInfo.motherFirstName;
+            }
+            if (!motherMiddleNameIsTouched) {
+                  updatedStudentData.motherMiddleName =
+                        props.userInfo.motherMiddleName;
+            }
+            if (!motherLastNameIsTouched) {
+                  updatedStudentData.motherLastName =
+                        props.userInfo.motherLastName;
+            }
+            if (!fatherFirstNameIsTouched) {
+                  updatedStudentData.fatherFirstName =
+                        props.userInfo.fatherFirstName;
+            }
+            if (!fatherMiddleNameIsTouched) {
+                  updatedStudentData.fatherMiddleName =
+                        props.userInfo.fatherMiddleName;
+            }
+            if (!fatherLastNameIsTouched) {
+                  updatedStudentData.fatherLastName =
+                        props.userInfo.fatherLastName;
+            }
+            if (!guardianFirstNameIsTouched) {
+                  updatedStudentData.guardianFirstName =
+                        props.userInfo.guardianFirstName;
+            }
+            if (!guardianMiddleNameIsTouched) {
+                  updatedStudentData.guardianMiddleName =
+                        props.userInfo.guardianMiddleName;
+            }
+            if (!guardianLastNameIsTouched) {
+                  updatedStudentData.guardianLastName =
+                        props.userInfo.guardianLastName;
+            }
+            if (!emergencyNameIsTouched) {
+                  updatedStudentData.emergencyName =
+                        props.userInfo.emergencyName;
+            }
+            if (!emergencyTelephoneIsTouched) {
+                  updatedStudentData.emergencyTelephone =
+                        props.userInfo.emergencyTelephone;
+            }
+            if (!emergencyCellphoneIsTouched) {
+                  updatedStudentData.emergencyCellphone =
+                        props.userInfo.emergencyCellphone;
+            }
+            if (!parentPhoneNumIsTouched) {
+                  updatedStudentData.parentPhoneNum =
+                        props.userInfo.parentPhoneNum;
+            }
+            if (!lastGradeLevelIsTouched) {
+                  updatedStudentData.lastGradeLevel =
+                        props.userInfo.lastGradeLevel;
+            }
+            if (!lastSchoolYearIsTouched) {
+                  updatedStudentData.lastSchoolYear =
+                        props.userInfo.lastSchoolYear;
+            }
+            if (!schoolNameIsTouched) {
+                  updatedStudentData.schoolName = props.userInfo.schoolName;
+            }
+            if (!schoolAddressIsTouched) {
+                  updatedStudentData.schoolAddress =
+                        props.userInfo.schoolAddress;
+            }
+            if (!trackIsTouched) {
+                  updatedStudentData.track = props.userInfo.track;
+            }
+            if (!strandIsTouched) {
+                  updatedStudentData.strand = props.userInfo.strand;
+            }
+
             const postData = async () => {
                   try {
-                        const response = await axios.post(
-                              'http://localhost:4000/api/prereg',
-                              preRegData
+                        const response = await axios.put(
+                              `http://localhost:4000/api/registrar/students/${props.id}`,
+                              updatedStudentData,
+                              {
+                                    withCredentials: true,
+                                    credentials: 'include',
+                              }
                         );
 
                         console.log(response.data);
-                        if (response.data === 'prereg created!') {
-                              router.push('/');
-                        } else if (
-                              response.data === 'student email is in use!'
-                        ) {
-                              setErrorMes(true);
-                              setErrorMesParent(false);
-                        } else if (
-                              response.data === 'parent email is in use!'
-                        ) {
-                              setErrorMes(false);
-                              setErrorMesParent(true);
+                        if (response.data.success) {
+                              setUpdated(true);
+                        } else {
+                              setUpdated(false);
                         }
                   } catch (error) {
                         console.log(error);
                   }
             };
-            console.log(preRegData);
+
             postData();
+            console.log(updatedStudentData);
+      };
+      const archiveStudent = async () => {
+            try {
+                  const response = await axios.delete(
+                        `http://localhost:4000/api/registrar/students/${props.id}`,
+                        {
+                              withCredentials: true,
+                              credentials: 'include',
+                        }
+                  );
+                  console.log(response);
+                  if (response.data.success) {
+                        setArchive(true);
+                        setConfirmation(false);
+                  } else {
+                        setArchive(false);
+                  }
+            } catch (error) {
+                  console.log(error);
+            }
       };
 
       return (
@@ -179,6 +400,11 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.schoolYearFrom
                                           }
+                                          onBlur={() => {
+                                                setSchoolYearFromIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
                               <div>
@@ -191,19 +417,28 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.schoolYearTo
                                           }
+                                          onBlur={() => {
+                                                setSchoolYearToIsTouched(true);
+                                          }}
                                     />
                               </div>
-                              <div>
-                                    <label htmlFor="grade">
-                                          Grade to enroll
+                              <div className={styles.dropdown}>
+                                    <label className={styles.dropdownName}>
+                                          Grade Level
                                     </label>
-                                    <input
-                                          type="number"
-                                          min="0"
-                                          id="grade"
-                                          ref={gradeRef}
-                                          placeholder={props.data.yearLevel}
-                                    />
+                                    <select
+                                          name="gradeLevel"
+                                          id="gradeLevel"
+                                          onChange={gradeHandler}
+                                          value={grade}
+                                    >
+                                          <option value="7">7</option>
+                                          <option value="8">8</option>
+                                          <option value="9">9</option>
+                                          <option value="10">10</option>
+                                          <option value="11">11</option>
+                                          <option value="12">12</option>
+                                    </select>
                               </div>
                         </div>
                         <div className={styles.studentSection}>
@@ -217,6 +452,9 @@ function PreRegFormEdit(props) {
                                           id="birthCert"
                                           ref={birthCertRef}
                                           placeholder={props.userInfo.PSANo}
+                                          onBlur={() => {
+                                                setPSANoIsTouched(true);
+                                          }}
                                     />
                               </div>
                               <div>
@@ -229,6 +467,9 @@ function PreRegFormEdit(props) {
                                           id="lrn"
                                           ref={lrnRef}
                                           placeholder={props.data.LRNNo}
+                                          onBlur={() => {
+                                                setLRNNoIsTouched(true);
+                                          }}
                                     />
                               </div>
                               <div>
@@ -238,13 +479,21 @@ function PreRegFormEdit(props) {
                                           id="fname"
                                           ref={fnameRef}
                                           placeholder={props.data.firstName}
+                                          onBlur={() => {
+                                                setfnameIsTouched(true);
+                                          }}
                                     />
                               </div>
                               <div>
                                     <label htmlFor="birthdate">
                                           Date of Birth
                                     </label>
-                                    <input type="date" id="birthdate" />
+                                    <input
+                                          type="date"
+                                          id="birthdate"
+                                          value={birthDate}
+                                          onChange={birthDateHandler}
+                                    />
                               </div>
                               <div>
                                     <label htmlFor="mname">Middle Name</label>
@@ -253,6 +502,9 @@ function PreRegFormEdit(props) {
                                           id="mname"
                                           ref={mnameRef}
                                           placeholder={props.data.middleName}
+                                          onBlur={() => {
+                                                setmnameIsTouched(true);
+                                          }}
                                     />
                               </div>
 
@@ -263,6 +515,9 @@ function PreRegFormEdit(props) {
                                           id="gender"
                                           ref={genderRef}
                                           placeholder={props.userInfo.gender}
+                                          onBlur={() => {
+                                                setGenderIsTouched(true);
+                                          }}
                                     />
                               </div>
                               <div>
@@ -272,6 +527,9 @@ function PreRegFormEdit(props) {
                                           id="lname"
                                           ref={lnameRef}
                                           placeholder={props.data.lastName}
+                                          onBlur={() => {
+                                                setlnameIsTouched(true);
+                                          }}
                                     />
                               </div>
                               <div>
@@ -298,6 +556,9 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.motherTongue
                                           }
+                                          onBlur={() => {
+                                                setmotherTongueIsTouched(true);
+                                          }}
                                     />
                               </div>
                               <div>
@@ -310,6 +571,9 @@ function PreRegFormEdit(props) {
                                           ref={indigenousRef}
                                           disabled={!isIndig}
                                           placeholder={props.userInfo.indigSpec}
+                                          onBlur={() => {
+                                                setindigSpecIsTouched(true);
+                                          }}
                                     />
                               </div>
                               <div>
@@ -319,6 +583,9 @@ function PreRegFormEdit(props) {
                                           id="add1"
                                           ref={add1Ref}
                                           placeholder={props.userInfo.address1}
+                                          onBlur={() => {
+                                                setaddress1IsTouched(true);
+                                          }}
                                     />
                               </div>
                               <div>
@@ -328,6 +595,9 @@ function PreRegFormEdit(props) {
                                           id="add2"
                                           ref={add2Ref}
                                           placeholder={props.userInfo.address2}
+                                          onBlur={() => {
+                                                setaddress2IsTouched(true);
+                                          }}
                                     />
                               </div>
                               <div>
@@ -338,21 +608,20 @@ function PreRegFormEdit(props) {
                                           id="zip"
                                           ref={zipRef}
                                           placeholder={props.userInfo.zipCode}
+                                          onBlur={() => {
+                                                setzipCodeIsTouched(true);
+                                          }}
                                     />
                               </div>
-                              <div className={errorMes ? styles.invalid : ''}>
+                              <div>
                                     <label htmlFor="email">E-mail</label>
                                     <input
                                           type="email"
                                           id="email"
                                           ref={emailRef}
                                           placeholder={props.data.email}
+                                          disabled={true}
                                     />
-                                    {errorMes && (
-                                          <p className={styles.errorMes}>
-                                                Email already exist
-                                          </p>
-                                    )}
                               </div>
                               <div>
                                     <label htmlFor="mobileno">
@@ -364,6 +633,9 @@ function PreRegFormEdit(props) {
                                           id="mobileno"
                                           ref={mobilenoRef}
                                           placeholder={props.data.phoneNum}
+                                          onBlur={() => {
+                                                setphoneNumIsTouched(true);
+                                          }}
                                     />
                               </div>
                         </div>
@@ -384,6 +656,11 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.motherFirstName
                                           }
+                                          onBlur={() => {
+                                                setmotherFirstNameIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
                               <div>
@@ -397,6 +674,11 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.fatherFirstName
                                           }
+                                          onBlur={() => {
+                                                setfatherFirstNameIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
                               <div>
@@ -410,6 +692,11 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.motherLastName
                                           }
+                                          onBlur={() => {
+                                                setmotherLastNameIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
                               <div>
@@ -423,6 +710,11 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.fatherLastName
                                           }
+                                          onBlur={() => {
+                                                setfatherLastNameIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
                               <div>
@@ -436,6 +728,11 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.motherMiddleName
                                           }
+                                          onBlur={() => {
+                                                setmotherMiddleNameIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
                               <div>
@@ -449,13 +746,14 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.fatherMiddleName
                                           }
+                                          onBlur={() => {
+                                                setfatherMiddleNameIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
-                              <div
-                                    className={
-                                          errorMesParent ? styles.invalid : ''
-                                    }
-                              >
+                              <div>
                                     <label htmlFor="parentEmail">
                                           Parent Email (Any)
                                     </label>
@@ -463,15 +761,11 @@ function PreRegFormEdit(props) {
                                           type="email"
                                           id="parentEmail"
                                           ref={parentEmailRef}
+                                          disabled={true}
                                           placeholder={
                                                 props.userInfo.parentEmail
                                           }
                                     />
-                                    {errorMesParent && (
-                                          <p className={styles.errorMes}>
-                                                Email already exist
-                                          </p>
-                                    )}
                               </div>
                               <div>
                                     <label htmlFor="parentNum">
@@ -484,6 +778,11 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.parentPhoneNum
                                           }
+                                          onBlur={() => {
+                                                setparentPhoneNumIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
                               <h4 className={styles.typeSubHeader}>Guardian</h4>
@@ -501,6 +800,11 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.guardianFirstName
                                           }
+                                          onBlur={() => {
+                                                setguardianFirstNameIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
                               <div>
@@ -512,6 +816,9 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.emergencyName
                                           }
+                                          onBlur={() => {
+                                                setemergencyNameIsTouched(true);
+                                          }}
                                     />
                               </div>
                               <div>
@@ -525,6 +832,11 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.guardianLastName
                                           }
+                                          onBlur={() => {
+                                                setguardianLastNameIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
                               <div>
@@ -540,6 +852,11 @@ function PreRegFormEdit(props) {
                                                 props.userInfo
                                                       .emergencyCellphone
                                           }
+                                          onBlur={() => {
+                                                setemergencyCellphoneIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
                               <div>
@@ -554,6 +871,11 @@ function PreRegFormEdit(props) {
                                                 props.userInfo
                                                       .guardianMiddleName
                                           }
+                                          onBlur={() => {
+                                                setguardianMiddleNameIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
                               <div>
@@ -569,6 +891,11 @@ function PreRegFormEdit(props) {
                                                 props.userInfo
                                                       .emergencyTelephone
                                           }
+                                          onBlur={() => {
+                                                setemergencyTelephoneIsTouched(
+                                                      true
+                                                );
+                                          }}
                                     />
                               </div>
                         </div>
@@ -591,6 +918,11 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.lastGradeLevel
                                           }
+                                          onBlur={() => {
+                                                setlastGradeLevelIsTouched(
+                                                      true
+                                                );
+                                          }}
                                           //
                                     />
                               </div>
@@ -604,11 +936,11 @@ function PreRegFormEdit(props) {
                                                       name="semester"
                                                       id="1stsemester"
                                                       ref={semesterRef}
-                                                      //
                                                       checked={firstSemester}
                                                       onChange={() => {
                                                             setfirstSemester(
-                                                                  !firstSemester
+                                                                  (prev) =>
+                                                                        !prev
                                                             );
                                                       }}
                                                 />
@@ -622,11 +954,11 @@ function PreRegFormEdit(props) {
                                                       name="semester"
                                                       id="2ndsemester"
                                                       ref={semesterRef}
-                                                      //
                                                       checked={secondSemester}
                                                       onChange={() => {
                                                             setsecondSemester(
-                                                                  !secondSemester
+                                                                  (prev) =>
+                                                                        !prev
                                                             );
                                                       }}
                                                 />
@@ -648,6 +980,11 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.lastSchoolYear
                                           }
+                                          onBlur={() => {
+                                                setlastSchoolYearIsTouched(
+                                                      true
+                                                );
+                                          }}
                                           //
                                     />
                               </div>
@@ -658,6 +995,9 @@ function PreRegFormEdit(props) {
                                           id="track"
                                           ref={trackRef}
                                           placeholder={props.userInfo.track}
+                                          onBlur={() => {
+                                                settrackIsTouched(true);
+                                          }}
                                           //
                                     />
                               </div>
@@ -669,6 +1009,9 @@ function PreRegFormEdit(props) {
                                           //
                                           ref={strandRef}
                                           placeholder={props.userInfo.strand}
+                                          onBlur={() => {
+                                                setstrandIsTouched(true);
+                                          }}
                                     />
                               </div>
                               <div>
@@ -683,6 +1026,9 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.schoolName
                                           }
+                                          onBlur={() => {
+                                                setschoolNameIsTouched(true);
+                                          }}
                                     />
                               </div>
                               <div>
@@ -697,6 +1043,9 @@ function PreRegFormEdit(props) {
                                           placeholder={
                                                 props.userInfo.schoolAddress
                                           }
+                                          onBlur={() => {
+                                                setschoolAddressIsTouched(true);
+                                          }}
                                     />
                               </div>
                         </div>
@@ -747,7 +1096,7 @@ function PreRegFormEdit(props) {
                                           type="checkbox"
                                           name="item3"
                                           id="item3"
-                                          checked={props.userInfo.online}
+                                          checked={thirdItem}
                                           onChange={() =>
                                                 setThirdItem(!thirdItem)
                                           }
@@ -851,7 +1200,7 @@ function PreRegFormEdit(props) {
                                     Archive
                               </Button>
                         </div>
-                        {/* {updated && (
+                        {updated && (
                               <Modal className={styles.modalDesign}>
                                     <div className={styles.messageContainer}>
                                           <h2 className={styles.messageHeader}>
@@ -922,7 +1271,7 @@ function PreRegFormEdit(props) {
                                                       className={
                                                             styles.modalButtonYes
                                                       }
-                                                      onClick={archiveUser}
+                                                      onClick={archiveStudent}
                                                 >
                                                       Yes
                                                 </Button>
@@ -941,7 +1290,7 @@ function PreRegFormEdit(props) {
                                           </div>
                                     </div>
                               </Modal>
-                        )} */}
+                        )}
                   </div>
             </form>
       );

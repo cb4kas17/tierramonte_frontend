@@ -42,6 +42,7 @@
 
 .yearSection > div > input {
       margin-top: 1rem;
+      text-align: center;
 }
 .dropdown {
       display: flex;

@@ -6,6 +6,7 @@ function SelectStudentSection(props) {
       const router = useRouter();
       const [search, setSearch] = useState('');
       const [yearLevel, setYearLevel] = useState('all');
+
       const searchBarHandler = (event) => {
             setSearch(event.target.value);
       };
@@ -50,9 +51,17 @@ function SelectStudentSection(props) {
                   <div className={styles.columnName}>Students</div>
                   <ul className={styles.listContainer}>
                         <h4 className={styles.name}>Name</h4>
-                        {/* {filter(props.data).map((item, i) => (
-                              <SelectStudentItem key={i} data={item} />
-                        ))} */}
+                        {filter(props.data).map((item, i) => (
+                              <div>
+                                    <li className={styles.itemContainer}>
+                                          <a className={styles.userName}>
+                                                {props.data.lastName}, {props.data.firstName} {props.data.middleName}
+                                          </a>
+                                          <p className={styles.roleName}>{props.data.department}</p>
+                                          <input type="checkbox" />
+                                    </li>
+                              </div>
+                        ))}
                   </ul>
             </div>
       );

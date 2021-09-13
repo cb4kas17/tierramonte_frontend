@@ -10,7 +10,7 @@ function AddStudent(props) {
       const router = useRouter();
       const id = router.query.id;
       const [valid, setValid] = useState(false);
-      const [studentsPerYrLevel, setStudentsPerYrLevel] = useState([]);
+      const [studentsPerYrLevel, setStudentsPerYrLevel] = useState();
       const filter = (list) => {
             return list.sort((a, b) => a - b);
       };
@@ -105,13 +105,13 @@ function AddStudent(props) {
                         <h4 className={styles.studentListHeader}>Students in section</h4>
                         <div className={styles.studentListContainer}>
                               <ul className={styles.studentList}>
-                                    {filter(props.stud).map((item, i) => (
+                                    {props.stud.map((item, i) => (
                                           <div className={styles.studItem}>{item}</div>
                                     ))}
                               </ul>
                         </div>
                   </div>
-                  <SelectStudentSection data={studentsPerYrLevel} />
+                  {/* <SelectStudentSection data={studentsPerYrLevel} /> */}
             </form>
       );
 }

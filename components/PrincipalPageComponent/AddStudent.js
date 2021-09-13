@@ -15,6 +15,7 @@ function AddStudent(props) {
             return list.sort((a, b) => a - b);
       };
 
+      console.log(`http://localhost:4000/api/principal/sectionAdd/${props.data.yearLevel}`);
       useEffect(async () => {
             try {
                   const response = await axios.get(

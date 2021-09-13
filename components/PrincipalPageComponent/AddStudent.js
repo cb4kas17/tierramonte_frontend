@@ -26,7 +26,6 @@ function AddStudent(props) {
                   );
                   const data = response.data;
                   setStudentsPerYrLevel(data);
-                  console.log('initiated');
                   console.log(data);
             } catch (error) {
                   console.log(error);

@@ -14,8 +14,8 @@ function AddStudent(props) {
       const [yearLevel, setYearLevel] = useState('all');
       const [selected, setSelected] = useState({ bool: false, index: '' });
 
-      const [students, setStudents] = useState([]);
-      //filter students in section
+      const [stud, setStudents] = useState([]);
+      //filter stud in section
       const filterName = (list) => {
             return list.sort((a, b) => a - b);
       };
@@ -42,26 +42,26 @@ function AddStudent(props) {
       const checkBoxChange = (e, index) => {
             setSelected({ bool: !selected.bool, index: index });
             if (selected.bool) {
-                  const list = [...students];
+                  const list = [...stud];
                   list[index] = e;
                   setStudents(list);
             }
             if (!selected.bool) {
-                  const list = [...students];
+                  const list = [...stud];
                   list.splice(index, 1);
                   setStudents(list);
             }
       };
-      console.log(students);
+      console.log(stud);
 
       const onSubmitHandler = (event) => {
             event.preventDefault();
-            const studentData = [...students];
+            const students = [...stud];
             const postData = async () => {
                   try {
                         const response = await axios.post(
                               `http://localhost:4000/api/principal/sectionsStud/${id}`,
-                              studentData,
+                              stud,
                               { withCredentials: true }
                         );
 
@@ -73,7 +73,7 @@ function AddStudent(props) {
                         console.log(error);
                   }
             };
-            console.log(studentData);
+            console.log(students);
             postData();
       };
       return (

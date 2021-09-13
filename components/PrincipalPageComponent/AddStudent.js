@@ -52,11 +52,10 @@ function AddStudent(props) {
                   setStudents(list);
             }
       };
-      console.log(stud);
 
       const onSubmitHandler = (event) => {
             event.preventDefault();
-            const students = [...stud];
+            const students = { students: stud };
             const postData = async () => {
                   try {
                         const response = await axios.post(
@@ -76,6 +75,7 @@ function AddStudent(props) {
             console.log(students);
             postData();
       };
+
       return (
             <form className={styles.container} onSubmit={onSubmitHandler}>
                   <h1 className={styles.header}>Add Students</h1>

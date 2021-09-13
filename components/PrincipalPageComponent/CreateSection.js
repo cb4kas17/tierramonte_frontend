@@ -8,8 +8,6 @@ import Button from '../UI/Button';
 
 function CreateSection() {
       const router = useRouter();
-
-      const [errorMes, setErrorMes] = useState({ bool: false, index: 0 });
       const [valid, setValid] = useState(false);
 
       const {
@@ -132,7 +130,7 @@ function CreateSection() {
                   }
 
                   const sectionData = {
-                        schooYearFrom: enteredSchoolYearFrom,
+                        schoolYearFrom: enteredSchoolYearFrom,
                         schoolYearTo: enteredSchoolYearTo,
                         yearLevel: grade,
                         strand: enteredStrand,

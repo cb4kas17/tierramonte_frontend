@@ -1,21 +1,29 @@
 import React from 'react';
 import styles from './sectionItem.module.css';
-import Button from '../UI/Button';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 function SectionItem(props) {
+      const router = useRouter();
       return (
             <div>
                   <li className={styles.itemContainer}>
-                        <a className={styles.userName}>
-                              {props.data.sectionName}
-                        </a>
+                        <a className={styles.userName}>{props.data.sectionName}</a>
                         <div className={styles.roleName}>
-                              <Button className={styles.editButtonx}>
+                              <button
+                                    className={styles.editButton}
+                                    onClick={() => {
+                                          router.push('/principal/Section/EditSection');
+                                    }}
+                              >
                                     Edit Section
-                              </Button>
-                              <Button className={styles.editButtony}>
+                              </button>
+                              <button
+                                    className={styles.editButton}
+                                    onClick={() => {
+                                          router.push(`/principal/Section/AddStudent/${props.data._id}`);
+                                    }}
+                              >
                                     Add Students
-                              </Button>
+                              </button>
                         </div>
                   </li>
             </div>

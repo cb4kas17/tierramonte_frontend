@@ -14,15 +14,10 @@ function TeacherPage(props) {
 
       const filter = (list) => {
             if (department === 'all') {
-                  return list.filter(
-                        (data) =>
-                              data.lastName.toLowerCase().indexOf(search) > -1
-                  );
+                  return list.filter((data) => data.lastName.toLowerCase().indexOf(search) > -1);
             } else {
                   return list.filter(
-                        (data) =>
-                              data.department === department &&
-                              data.lastName.toLowerCase().indexOf(search) > -1
+                        (data) => data.department === department && data.lastName.toLowerCase().indexOf(search) > -1
                   );
             }
       };
@@ -38,9 +33,7 @@ function TeacherPage(props) {
                         <Button
                               className={styles.createButton}
                               onClick={() => {
-                                    router.push(
-                                          '/principal/Teacher/CreateTeacher'
-                                    );
+                                    router.push('/principal/Teacher/CreateTeacher');
                               }}
                         >
                               &#65291; Create Teacher
@@ -49,11 +42,7 @@ function TeacherPage(props) {
                   <div className={styles.filterContainer}>
                         <div className={styles.select}>
                               <p className={styles.dropdownName}>Department:</p>
-                              <select
-                                    name="department"
-                                    id="department"
-                                    onChange={departmentHandler}
-                              >
+                              <select name="department" id="department" onChange={departmentHandler}>
                                     <option value="all">All</option>
                                     <option value="Math">Math</option>
                                     <option value="Science">Science</option>

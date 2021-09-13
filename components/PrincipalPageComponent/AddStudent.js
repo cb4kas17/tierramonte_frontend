@@ -61,7 +61,7 @@ function AddStudent(props) {
                   try {
                         const response = await axios.post(
                               `http://localhost:4000/api/principal/sectionsStud/${id}`,
-                              stud,
+                              students,
                               { withCredentials: true }
                         );
 

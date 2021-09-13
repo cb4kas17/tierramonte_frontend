@@ -8,7 +8,6 @@ import Button from '../UI/Button';
 
 function CreateTeacher() {
       const router = useRouter();
-      const [role, setRole] = useState(0);
       const [errorMes, setErrorMes] = useState(false);
       const [valid, setValid] = useState(false);
 

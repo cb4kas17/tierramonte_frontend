@@ -50,8 +50,7 @@
       align-items: center;
       font-size: inherit;
 }
-.dropdown > label {
-}
+
 .dropdown > select {
       margin-top: 1rem;
       width: 20rem;

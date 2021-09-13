@@ -1,0 +1,26 @@
+.itemContainer {
+      font-size: 2rem;
+      text-align: start;
+      padding: 1rem 5rem;
+      font-weight: 300;
+      border-bottom: 1px solid #000;
+      display: grid;
+      grid-template-columns: 7fr 1fr;
+}
+
+.roleName {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+}
+.editButtonx {
+      padding: 1rem;
+      width: 9rem;
+      font-size: 0.1rem;
+      font-size: 1.1rem;
+}
+.editButtony {
+      padding: 1rem;
+      width: 9rem;
+      font-size: 1.1rem;
+}

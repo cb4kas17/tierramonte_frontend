@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import styles from './sectionPageContainer.module.css';
 import SideNavBar from '../Layout/SideNavBar';
-import styles from './createTeacherContainer.module.css';
-import CreateTeacher from './CreateTeacher';
-function CreateTeacherContainer() {
+import SectionPage from './SectionPage';
+
+function SectionPageContainer(props) {
+      const focus = 'third';
       const navBarItems = [
             { id: 1, title: 'Profile', push: '/principal' },
             {
@@ -14,14 +16,15 @@ function CreateTeacherContainer() {
             { id: 4, title: 'Teachers', push: '/principal/Teacher' },
       ];
       return (
-            <div className={styles.createTeacherContainer}>
+            <div className={styles.sectionPageContainer}>
                   <SideNavBar
                         className={styles.navbarContainer}
                         items={navBarItems}
+                        highlighted={focus}
                   />
-                  <CreateTeacher className={styles.createTeacher} />
+                  <SectionPage className={styles.section} data={props.data} />
             </div>
       );
 }
 
-export default CreateTeacherContainer;
+export default SectionPageContainer;

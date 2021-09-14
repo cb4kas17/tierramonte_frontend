@@ -11,7 +11,7 @@ function SectionItem(props) {
                               <button
                                     className={styles.editButton}
                                     onClick={() => {
-                                          router.push('/principal/Section/EditSection');
+                                          router.push(`/principal/Section/EditSection/${props.data._id}`);
                                     }}
                               >
                                     Edit Section

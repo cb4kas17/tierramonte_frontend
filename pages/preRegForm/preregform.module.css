@@ -105,6 +105,17 @@
       height: 4rem;
       background: rgba(0, 0, 0, 0.034);
 }
+
+.studentSection > div:nth-child(2) {
+      position: relative;
+}
+.errorMes {
+      position: absolute;
+      color: red;
+      grid-column: 2;
+      font-size: 1.5rem;
+      top: 4.5rem;
+}
 .studentSection > div:nth-child(8) > input:focus {
       outline: none;
 }
@@ -268,4 +279,37 @@
       color: red;
       grid-column: 2;
       align-self: flex-start;
+}
+
+.messageContainer {
+      position: relative;
+      width: 60%;
+      height: 45rem;
+      background: #c5e3f4;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+}
+
+.messageHeader {
+      font-size: 7rem;
+      color: #3c6075;
+}
+
+.messageBody {
+      margin-top: 3rem;
+      font-size: 2.5rem;
+      font-weight: 400;
+}
+.messageFooter {
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin-top: 1rem;
+      margin-bottom: 5rem;
+}
+.modalButton {
+      padding: 1.5rem 2rem;
+      font-size: 1.5rem;
 }

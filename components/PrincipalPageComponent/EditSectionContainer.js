@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import SideNavBar from '../Layout/SideNavBar';
-import styles from './editAnnouncementContainer.module.css';
-import EditAnnouncement from './EditAnnouncement';
+import styles from './editSectionContainer.module.css';
+import EditSection from './EditSection';
 
-function EditAnnouncementContainer(props) {
-      const focus = 'second';
+function EditSectionContainer() {
       const navBarItems = [
             { id: 1, title: 'Profile', push: '/principal' },
             {
@@ -16,11 +15,11 @@ function EditAnnouncementContainer(props) {
             { id: 4, title: 'Teachers', push: '/principal/Teacher' },
       ];
       return (
-            <div className={styles.editAnncContainer}>
-                  <SideNavBar className={styles.navbarContainer} items={navBarItems} highlighted={focus} />
-                  <EditAnnouncement data={props.data} />
+            <div className={styles.editSectionContainer}>
+                  <SideNavBar className={styles.navbarContainer} items={navBarItems} />
+                  <EditSection />
             </div>
       );
 }
 
-export default EditAnnouncementContainer;
+export default EditSectionContainer;

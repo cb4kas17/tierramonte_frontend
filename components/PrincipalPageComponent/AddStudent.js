@@ -43,7 +43,7 @@ function AddStudent(props) {
             setSelected({ bool: !selected.bool, index: index });
             if (selected.bool) {
                   const list = [...stud];
-                  list[index] = e;
+                  list.push(e);
                   setStudents(list);
             }
             if (!selected.bool) {

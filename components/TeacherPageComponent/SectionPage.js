@@ -12,8 +12,8 @@ function SectionPage(props) {
                   const response = await axios.get('http://localhost:4000/api/teacher/mysections', {
                         withCredentials: true,
                   });
-                  setData(response.data.sections);
-                  console.log(response.data.sections);
+                  setData(response.data.sections_list);
+                  console.log(response.data.sections_list);
             } catch (error) {
                   console.log(error);
             }

@@ -6,13 +6,9 @@ function SectionItem(props) {
       const router = useRouter();
       return (
             <li className={styles.itemContainer}>
-                  <div className={styles.userName}>{props.data.sectionName}</div>
+                  <div className={styles.userName}>{props.data.name}</div>
                   <div className={styles.userName}>{props.data.yearLevel}</div>
-                  <div className={styles.userName}>
-                        {props.data.subjects.map((item, i) => (
-                              <p>{item}</p>
-                        ))}
-                  </div>
+                  <div className={styles.userName}>{props.data.subject}</div>
                   <Button
                         className={styles.encodeButton}
                         onClick={() => {

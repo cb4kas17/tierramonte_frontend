@@ -12,7 +12,7 @@ function SectionItem(props) {
                   <Button
                         className={styles.encodeButton}
                         onClick={() => {
-                              router.push(`/teacher/Sections/${props.data._id}}`);
+                              router.push(`/teacher/Sections/${props.data.id}?subject=${props.data.subject}`);
                         }}
                   >
                         Encode Grade

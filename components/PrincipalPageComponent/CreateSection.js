@@ -9,6 +9,7 @@ import Button from '../UI/Button';
 function CreateSection() {
       const router = useRouter();
       const [valid, setValid] = useState(false);
+      const [disabled, setDisabled] = useState(true);
 
       const {
             value: enteredSchoolYearFrom,
@@ -106,6 +107,11 @@ function CreateSection() {
       const [grade, setGrade] = useState(7);
       const gradeHandler = (e) => {
             setGrade(e.target.value);
+            if (e.target.value === '7' || e.target.value === '8' || e.target.value === '9' || e.target.value === '10') {
+                  setDisabled(true);
+            } else if (e.target.value === '11' || e.target.value === '12') {
+                  setDisabled(false);
+            }
       };
       const [firstSemester, setfirstSemester] = useState(false);
       const [secondSemester, setsecondSemester] = useState(false);
@@ -270,6 +276,7 @@ function CreateSection() {
                                                 value={enteredStrand}
                                                 onChange={strandChangeHandler}
                                                 onBlur={strandBlurHandler}
+                                                disabled={disabled}
                                           />
                                     </div>
                               </div>
@@ -328,6 +335,7 @@ function CreateSection() {
                                                       onChange={() => {
                                                             setfirstSemester(!firstSemester);
                                                       }}
+                                                      disabled={disabled}
                                                 />
                                                 <label htmlFor="1stsemester">1st</label>
                                           </div>
@@ -341,6 +349,7 @@ function CreateSection() {
                                                       onChange={() => {
                                                             setsecondSemester(!secondSemester);
                                                       }}
+                                                      disabled={disabled}
                                                 />
                                                 <label htmlFor="2ndsemester">2nd</label>
                                           </div>

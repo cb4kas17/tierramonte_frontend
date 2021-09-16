@@ -13,16 +13,17 @@ function EncodeGrades(props) {
       const [valid, setValid] = useState(false);
 
       const [sectionData, setSectionData] = useState([]);
-      const [studentNameData, setstudentNameData] = useState([]);
-      const [dataPass, setDataPass] = useState([]);
-      const [lrnData, setLRNData] = useState([]);
+      const [studentData, setStudentData] = useState([]);
+      const [studentGrade, setStudentGrade] = useState([]);
       const [search, setSearch] = useState('');
+
+      //value of each q1
 
       const searchBarHandler = (event) => {
             setSearch(event.target.value);
       };
       const filter = (list) => {
-            return list.filter((data) => data.toLowerCase().indexOf(search) > -1);
+            return list.filter((data) => data.name.toLowerCase().indexOf(search) > -1);
       };
       console.log(id);
       useEffect(async () => {
@@ -35,18 +36,20 @@ function EncodeGrades(props) {
                   );
 
                   setSectionData(response.data.section);
-                  setstudentNameData(response.data.section.studentNames);
-                  console.log(response.data.section);
-                  console.log(response.data.section.studentNames);
-                  setLRNData(response.data.section.studentLRNs);
-                  const list = response.data.section.studentNames;
-                  const LRNList = response.data.section.studentLRNs;
-                  const studentList = [];
+                  setStudentData(response.data.students_list);
+                  console.log(response.data.students_list);
+                  const list = response.data.students_list;
+                  const grades = [];
                   for (let i = 0; i < list.length; i++) {
-                        studentList[i] = { name: list[i], LRNNo: LRNList[i], Q1: '', Q2: '', Q3: '', Q4: '' };
+                        grades[i] = {
+                              q1Grade: list[i].q1Grade,
+                              q2Grade: list[i].q2Grade,
+                              q3Grade: list[i].q3Grade,
+                              q4Grade: list[i].q4Grade,
+                        };
                   }
-                  setDataPass(studentList);
-
+                  console.log(grades);
+                  setStudentGrade(grades);
                   if (response.data.success) {
                         // setValid(true);
                   }
@@ -57,14 +60,15 @@ function EncodeGrades(props) {
 
       const handleInputChange = (e, index) => {
             const { name, value } = e.target;
-            const list = [...dataPass];
+            const list = [...studentData];
             list[index][name] = value;
-            setDataPass(list);
+            setStudentData(list);
       };
       const onSubmitHandler = async (event) => {
             event.preventDefault();
-            console.log(dataPass);
-            const gradeData = { students: dataPass };
+            console.log(studentData);
+            const gradeData = { students: studentData };
+            console.log(gradeData);
             try {
                   const response = await axios.post(
                         `http://localhost:4000/api/teacher/mysections/${id}?subject=${subject}`,
@@ -157,7 +161,7 @@ function EncodeGrades(props) {
                         </div>
                   </div>
                   <div className={styles.container}>
-                        <h1 className={styles.header}>List of Sections</h1>
+                        <h1 className={styles.header}>{subject + ' Grade'}</h1>
                         <div className={styles.filterContainer}>
                               <input
                                     className={styles.input}
@@ -179,35 +183,43 @@ function EncodeGrades(props) {
                                     <h4 className={styles.name}>Q4</h4>
                               </div>
 
-                              {filter(studentNameData).map((item, i) => (
+                              {filter(studentData).map((item, i) => (
                                     <li className={styles.itemContainer}>
-                                          <div className={styles.userName}>{item}</div>
+                                          <div className={styles.userName}>{item.name}</div>
                                           <div className={styles.quarterGrade}>
                                                 <input
                                                       type="number"
-                                                      name="Q1"
+                                                      name="q1Grade"
                                                       onChange={(e) => handleInputChange(e, i)}
+                                                      value={studentData[i].q1Grade}
+                                                      // placeholder={item.q1Grade}
                                                 />
                                           </div>
                                           <div className={styles.quarterGrade}>
                                                 <input
                                                       type="number"
-                                                      name="Q2"
+                                                      name="q2Grade"
                                                       onChange={(e) => handleInputChange(e, i)}
+                                                      value={studentData[i].q2Grade}
+                                                      // placeholder={item.q2Grade}
                                                 />
                                           </div>
                                           <div className={styles.quarterGrade}>
                                                 <input
                                                       type="number"
-                                                      name="Q3"
+                                                      name="q3Grade"
                                                       onChange={(e) => handleInputChange(e, i)}
+                                                      // placeholder={item.q3Grade}
+                                                      value={studentData[i].q3Grade}
                                                 />
                                           </div>
                                           <div className={styles.quarterGrade}>
                                                 <input
                                                       type="number"
-                                                      name="Q4"
+                                                      name="q4Grade"
                                                       onChange={(e) => handleInputChange(e, i)}
+                                                      value={studentData[i].q4Grade}
+                                                      // placeholder={item.q4Grade}
                                                 />
                                           </div>
                                     </li>

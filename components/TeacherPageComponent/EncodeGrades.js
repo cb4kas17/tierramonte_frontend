@@ -10,12 +10,14 @@ function EncodeGrades(props) {
       const router = useRouter();
       const id = router.query.id;
       const subject = router.query.subject;
+      const [valid, setValid] = useState(false);
 
       const [sectionData, setSectionData] = useState([]);
       const [studentNameData, setstudentNameData] = useState([]);
-
+      const [dataPass, setDataPass] = useState([]);
+      const [lrnData, setLRNData] = useState([]);
       const [search, setSearch] = useState('');
-      
+
       const searchBarHandler = (event) => {
             setSearch(event.target.value);
       };
@@ -36,14 +38,50 @@ function EncodeGrades(props) {
                   setstudentNameData(response.data.section.studentNames);
                   console.log(response.data.section);
                   console.log(response.data.section.studentNames);
+                  setLRNData(response.data.section.studentLRNs);
+                  const list = response.data.section.studentNames;
+                  const LRNList = response.data.section.studentLRNs;
+                  const studentList = [];
+                  for (let i = 0; i < list.length; i++) {
+                        studentList[i] = { name: list[i], LRNNo: LRNList[i], Q1: '', Q2: '', Q3: '', Q4: '' };
+                  }
+                  setDataPass(studentList);
+
+                  if (response.data.success) {
+                        // setValid(true);
+                  }
+            } catch (error) {
+                  console.log(error);
+            }
+      }, []);
+
+      const handleInputChange = (e, index) => {
+            const { name, value } = e.target;
+            const list = [...dataPass];
+            list[index][name] = value;
+            setDataPass(list);
+      };
+      const onSubmitHandler = async (event) => {
+            event.preventDefault();
+            console.log(dataPass);
+            const gradeData = { students: dataPass };
+            try {
+                  const response = await axios.post(
+                        `http://localhost:4000/api/teacher/mysections/${id}?subject=${subject}`,
+                        gradeData,
+                        {
+                              withCredentials: true,
+                        }
+                  );
+                  console.log(response.data);
                   if (response.data.success) {
                         setValid(true);
                   }
             } catch (error) {
                   console.log(error);
             }
-      }, []);
-      const onSubmitHandler = () => {};
+      };
+
       return (
             <form className={styles.container} onSubmit={onSubmitHandler}>
                   <h1 className={styles.header}>Section Info</h1>
@@ -145,21 +183,56 @@ function EncodeGrades(props) {
                                     <li className={styles.itemContainer}>
                                           <div className={styles.userName}>{item}</div>
                                           <div className={styles.quarterGrade}>
-                                                <input type="number" name="Q1" />
+                                                <input
+                                                      type="number"
+                                                      name="Q1"
+                                                      onChange={(e) => handleInputChange(e, i)}
+                                                />
                                           </div>
                                           <div className={styles.quarterGrade}>
-                                                <input type="number" name="Q2" />
+                                                <input
+                                                      type="number"
+                                                      name="Q2"
+                                                      onChange={(e) => handleInputChange(e, i)}
+                                                />
                                           </div>
                                           <div className={styles.quarterGrade}>
-                                                <input type="number" name="Q3" />
+                                                <input
+                                                      type="number"
+                                                      name="Q3"
+                                                      onChange={(e) => handleInputChange(e, i)}
+                                                />
                                           </div>
                                           <div className={styles.quarterGrade}>
-                                                <input type="number" name="Q4" />
+                                                <input
+                                                      type="number"
+                                                      name="Q4"
+                                                      onChange={(e) => handleInputChange(e, i)}
+                                                />
                                           </div>
                                     </li>
                               ))}
                         </ul>
+                        <Button type="submit" className={styles.submitButton}>
+                              Submit
+                        </Button>
                   </div>
+                  {valid && (
+                        <Modal className={styles.modalDesign}>
+                              <div className={styles.messageContainer}>
+                                    <h2 className={styles.messageHeader}>Grades Encoded</h2>
+                                    <h4 className={styles.messageFooter}>Thank you.</h4>
+                                    <Button
+                                          className={styles.modalButton}
+                                          onClick={() => {
+                                                router.push('/teacher/Sections');
+                                          }}
+                                    >
+                                          Go back to Teacher List
+                                    </Button>
+                              </div>
+                        </Modal>
+                  )}
             </form>
       );
 }

@@ -153,3 +153,40 @@
       font-weight: 500;
       border-bottom: 1px solid #000;
 }
+
+.submitButton {
+      margin-top: 3rem;
+}
+
+.messageContainer {
+      position: relative;
+      width: 60%;
+      height: 45rem;
+      background: #c5e3f4;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+}
+
+.messageHeader {
+      font-size: 7rem;
+      color: #3c6075;
+}
+
+.messageBody {
+      margin-top: 3rem;
+      font-size: 2.5rem;
+      font-weight: 400;
+}
+.messageFooter {
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin-top: 1rem;
+      margin-bottom: 5rem;
+}
+.modalButton {
+      padding: 1.5rem 2rem;
+      font-size: 1.5rem;
+}

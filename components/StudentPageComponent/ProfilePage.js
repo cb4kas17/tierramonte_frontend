@@ -1,9 +1,7 @@
 import React from 'react';
 import styles from './profilePage.module.css';
 
-import { useRouter } from 'next/router';
 function ProfilePage(props) {
-      const router = useRouter();
       return (
             <div className={styles.container}>
                   <h1 className={styles.header}>User Profile</h1>

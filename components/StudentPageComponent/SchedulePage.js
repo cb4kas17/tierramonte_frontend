@@ -9,11 +9,11 @@ function SchedulePage(props) {
 
       useEffect(async () => {
             try {
-                  const response = await axios.get('http://localhost:4000/api/teacher/myschedule', {
+                  const response = await axios.get('http://localhost:4000/api/student/schedule', {
                         withCredentials: true,
                   });
-                  setData(response.data.scheds);
-                  console.log(response.data.scheds);
+                  setData(response.data.schedule);
+                  console.log(response.data.schedule);
             } catch (error) {
                   console.log(error);
             }
@@ -27,7 +27,7 @@ function SchedulePage(props) {
                   <ul className={styles.listContainer}>
                         <div className={styles.columnTitlecontainer}>
                               <h4 className={styles.name}>Subject</h4>
-                              <h4 className={styles.name}>Section</h4>
+                              <h4 className={styles.name}>Teacher</h4>
                               <h4 className={styles.name}>Schedule</h4>
                         </div>
 

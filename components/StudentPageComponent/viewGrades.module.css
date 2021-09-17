@@ -109,27 +109,28 @@
 }
 
 /* prev grade */
-.prevGradeContainer {
-      margin-bottom: 2rem;
-}
-
-.prevGrade {
+.columnNamePrevGrade {
       background: #2196f3;
       font-size: 2.5rem;
-
+      padding: 1.5rem 4rem;
       text-align: start;
       color: #fff;
       font-weight: 400;
+      cursor: pointer;
       border-radius: 10px;
-      border: none;
-      margin: none;
 }
-.prevGrade > a {
-      display: block;
-      width: 100%;
+.columnNamePrevGradeClicked {
+      background: #2196f3;
+      font-size: 2.5rem;
       padding: 1.5rem 4rem;
+      text-align: start;
+      color: #fff;
+      font-weight: 400;
+      border: 1px solid #000;
+      border-bottom: none;
+      cursor: pointer;
+      border-radius: 0;
 }
-
 .submitButton {
       margin-top: 3rem;
 }

@@ -109,6 +109,9 @@
 }
 
 /* prev grade */
+.prevGradeContainer {
+      margin-bottom: 2rem;
+}
 .columnNamePrevGrade {
       background: #2196f3;
       font-size: 2.5rem;

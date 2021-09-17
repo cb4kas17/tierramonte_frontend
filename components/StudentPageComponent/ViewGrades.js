@@ -10,7 +10,7 @@ function ViewGrades() {
       const [prevGrade, setPrevGrade] = useState([]);
       const [studentGradeInfo, setStudentGradeInfo] = useState('');
       const [prevGradeInfo, setPrevGradeInfo] = useState([]);
-      const [showPrevGradeHandler, setShowPrevGradeHandler] = useState(false);
+      const [showPrevGradeHandler, setShowPrevGradeHandler] = useState([]);
       useEffect(async () => {
             try {
                   const response = await axios.get(`http://localhost:4000/api/student/grades`, {
@@ -31,6 +31,12 @@ function ViewGrades() {
             }
       }, []);
 
+      const setShowPrevGradeClickHandler = (e, index) => {
+            const list = [...showPrevGradeHandler];
+            list[index] = e;
+            setShowPrevGradeHandler(list);
+            console.log(list);
+      };
       return (
             <div className={styles.container}>
                   <h1 className={styles.header}>View Grades</h1>
@@ -56,7 +62,7 @@ function ViewGrades() {
                   </ul>
 
                   {prevGrade.map((item, i) => (
-                        <div key={i}>
+                        <div key={i} className={styles.prevGradeContainer}>
                               <div
                                     className={
                                           showPrevGradeHandler
@@ -64,12 +70,12 @@ function ViewGrades() {
                                                 : styles.columnNamePrevGrade
                                     }
                                     onClick={() => {
-                                          setShowPrevGradeHandler(!showPrevGradeHandler);
+                                          setShowPrevGradeClickHandler(!showPrevGradeHandler[i], i);
                                     }}
                               >
                                     {prevGradeInfo[i].sectionName}
                               </div>
-                              {showPrevGradeHandler && (
+                              {showPrevGradeHandler[i] && (
                                     <ul className={styles.listContainer}>
                                           <div className={styles.columnTitlecontainer}>
                                                 <h4 className={styles.name}>Subject</h4>

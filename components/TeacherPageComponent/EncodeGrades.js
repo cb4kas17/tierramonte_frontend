@@ -38,21 +38,18 @@ function EncodeGrades(props) {
                   setSectionData(response.data.section);
                   setStudentData(response.data.students_list);
                   console.log(response.data.students_list);
-                  const list = response.data.students_list;
-                  const grades = [];
-                  for (let i = 0; i < list.length; i++) {
-                        grades[i] = {
-                              q1Grade: list[i].q1Grade,
-                              q2Grade: list[i].q2Grade,
-                              q3Grade: list[i].q3Grade,
-                              q4Grade: list[i].q4Grade,
-                        };
-                  }
-                  console.log(grades);
-                  setStudentGrade(grades);
-                  if (response.data.success) {
-                        // setValid(true);
-                  }
+                  // const list = response.data.students_list;
+                  // const grades = [];
+                  // for (let i = 0; i < list.length; i++) {
+                  //       grades[i] = {
+                  //             q1Grade: list[i].q1Grade,
+                  //             q2Grade: list[i].q2Grade,
+                  //             q3Grade: list[i].q3Grade,
+                  //             q4Grade: list[i].q4Grade,
+                  //       };
+                  // }
+                  // console.log(grades);
+                  // setStudentGrade(grades);
             } catch (error) {
                   console.log(error);
             }

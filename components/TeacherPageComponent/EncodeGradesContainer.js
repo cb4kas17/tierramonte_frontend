@@ -5,8 +5,8 @@ import EncodeGrades from './EncodeGrades';
 function EncodeGradesContainer() {
       const navBarItems = [
             { id: 1, title: 'Profile', push: '/teacher' },
-            { id: 3, title: 'Schedule', push: '/teacher/Schedule' },
-            { id: 4, title: 'Sections', push: '/teacher/Sections' },
+            { id: 2, title: 'Schedule', push: '/teacher/Schedule' },
+            { id: 3, title: 'Encode Grade', push: '/teacher/Sections' },
       ];
       return (
             <div className={styles.sectionPageContainer}>

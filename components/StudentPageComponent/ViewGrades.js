@@ -65,7 +65,7 @@ function ViewGrades() {
                         <div key={i} className={styles.prevGradeContainer}>
                               <div
                                     className={
-                                          showPrevGradeHandler
+                                          showPrevGradeHandler[i]
                                                 ? styles.columnNamePrevGradeClicked
                                                 : styles.columnNamePrevGrade
                                     }
@@ -97,9 +97,6 @@ function ViewGrades() {
                                     </ul>
                               )}
                         </div>
-                        // <div className={styles.prevGradeContainer}>
-
-                        // </div>
                   ))}
             </div>
       );

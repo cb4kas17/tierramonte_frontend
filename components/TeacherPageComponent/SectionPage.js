@@ -20,7 +20,7 @@ function SectionPage(props) {
       }, []);
       return (
             <div className={styles.container}>
-                  <h1 className={styles.header}>List of Sections</h1>
+                  <h1 className={styles.header}>Encode Grades</h1>
 
                   <div className={styles.columnName}>Sections</div>
                   <ul className={styles.listContainer}>

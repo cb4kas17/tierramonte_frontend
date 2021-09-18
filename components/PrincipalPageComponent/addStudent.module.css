@@ -70,21 +70,51 @@
 }
 
 .studentListContainer {
-      padding: 2rem;
+      padding: 2rem 4rem;
+}
+.columnListName {
+      display: grid;
+      grid-template-columns: 1fr 10fr 8fr;
+      text-align: left;
+      border-bottom: 1px solid #000;
+}
+.columnListName > h4 {
+      padding: 1rem 0;
+      height: 100%;
+}
+.columnListName > h4:not(:last-child) {
+      border-right: 1px solid #000;
+}
+.columnListName > h4:not(:first-child) {
+      padding-left: 2rem;
+}
+.columnListName > h4:first-child {
+      text-align: center;
 }
 .studentList {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-radius: 10px;
-      padding: 0 7rem 2rem 7rem;
+      border: #000 1px solid;
+      border-bottom: none;
 }
 .studItem {
-      padding: 0.5rem 2rem 0.5rem 6rem;
       font-size: 2rem;
       border-radius: 10px;
-
-      margin: 0.5rem;
       text-align: left;
+      display: grid;
+      grid-template-columns: 1fr 10fr 8fr;
+}
+.studItem > div {
+      height: 100%;
+      padding: 1rem 0;
+      border-bottom: 1px solid #000;
+}
+.studItem > div:first-child {
+      text-align: center;
+}
+.studItem > div:not(:last-child) {
+      border-right: 1px solid #000;
+}
+.studItem > div:not(:first-child) {
+      padding-left: 2rem;
 }
 
 /* start here */

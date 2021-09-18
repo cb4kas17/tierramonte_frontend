@@ -75,6 +75,7 @@ function AddStudent(props) {
             console.log(students);
             postData();
       };
+      console.log(props.data);
 
       return (
             <form className={styles.container} onSubmit={onSubmitHandler}>
@@ -149,9 +150,16 @@ function AddStudent(props) {
                         <h4 className={styles.studentListHeader}>Students in section</h4>
                         <div className={styles.studentListContainer}>
                               <ul className={styles.studentList}>
+                                    <div className={styles.columnListName}>
+                                          <h4>No.</h4>
+                                          <h4>Name</h4>
+                                          <h4>Lrn</h4>
+                                    </div>
                                     {filterName(props.stud).map((item, i) => (
                                           <div className={styles.studItem} key={i}>
-                                                {item}
+                                                <div>{i + 1}</div>
+                                                <div>{item}</div>
+                                                <div>{props.data.studentLRNs[i]}</div>
                                           </div>
                                     ))}
                               </ul>

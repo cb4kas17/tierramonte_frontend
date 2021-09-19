@@ -9,14 +9,14 @@ function SectionItem(props) {
                   <div className={styles.userName}>{props.data.name}</div>
                   <div className={styles.userName}>{props.data.yearLevel}</div>
                   <div className={styles.userName}>{props.data.subject}</div>
-                  <Button
+                  <button
                         className={styles.encodeButton}
                         onClick={() => {
                               router.push(`/teacher/Sections/${props.data.id}?subject=${props.data.subject}`);
                         }}
                   >
                         Encode Grade
-                  </Button>
+                  </button>
             </li>
       );
 }

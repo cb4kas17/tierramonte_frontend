@@ -6,7 +6,7 @@ import styles from './layout.module.css';
 function Layout(props) {
       return (
             <div className={styles.layoutContainer}>
-                  <MainNavBar />
+                  <MainNavBar data={props.isLogin} />
                   <div>{props.children}</div>
             </div>
       );

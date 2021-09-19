@@ -14,7 +14,6 @@ function EncodeGrades(props) {
 
       const [sectionData, setSectionData] = useState([]);
       const [studentData, setStudentData] = useState([]);
-      const [studentGrade, setStudentGrade] = useState([]);
       const [search, setSearch] = useState('');
 
       //value of each q1
@@ -171,57 +170,92 @@ function EncodeGrades(props) {
                         </div>
 
                         <div className={styles.columnName}>Sections</div>
-                        <ul className={styles.listContainer}>
-                              <div className={styles.columnTitlecontainer}>
-                                    <h4 className={styles.name}>Student Name</h4>
-                                    <h4 className={styles.name}>Q1</h4>
-                                    <h4 className={styles.name}>Q2</h4>
-                                    <h4 className={styles.name}>Q3</h4>
-                                    <h4 className={styles.name}>Q4</h4>
-                              </div>
+                        {sectionData.yearLevel !== '12' && sectionData.yearLevel !== '11' ? (
+                              <ul className={styles.listContainer}>
+                                    <div className={styles.columnTitlecontainer}>
+                                          <h4 className={styles.name}>Student Name</h4>
+                                          <h4 className={styles.name}>Q1</h4>
+                                          <h4 className={styles.name}>Q2</h4>
+                                          <h4 className={styles.name}>Q3</h4>
+                                          <h4 className={styles.name}>Q4</h4>
+                                    </div>
 
-                              {filter(studentData).map((item, i) => (
-                                    <li className={styles.itemContainer}>
-                                          <div className={styles.userName}>{item.name}</div>
-                                          <div className={styles.quarterGrade}>
-                                                <input
-                                                      type="number"
-                                                      name="q1Grade"
-                                                      onChange={(e) => handleInputChange(e, i)}
-                                                      value={studentData[i].q1Grade}
-                                                      // placeholder={item.q1Grade}
-                                                />
-                                          </div>
-                                          <div className={styles.quarterGrade}>
-                                                <input
-                                                      type="number"
-                                                      name="q2Grade"
-                                                      onChange={(e) => handleInputChange(e, i)}
-                                                      value={studentData[i].q2Grade}
-                                                      // placeholder={item.q2Grade}
-                                                />
-                                          </div>
-                                          <div className={styles.quarterGrade}>
-                                                <input
-                                                      type="number"
-                                                      name="q3Grade"
-                                                      onChange={(e) => handleInputChange(e, i)}
-                                                      // placeholder={item.q3Grade}
-                                                      value={studentData[i].q3Grade}
-                                                />
-                                          </div>
-                                          <div className={styles.quarterGrade}>
-                                                <input
-                                                      type="number"
-                                                      name="q4Grade"
-                                                      onChange={(e) => handleInputChange(e, i)}
-                                                      value={studentData[i].q4Grade}
-                                                      // placeholder={item.q4Grade}
-                                                />
-                                          </div>
-                                    </li>
-                              ))}
-                        </ul>
+                                    {filter(studentData).map((item, i) => (
+                                          <li className={styles.itemContainer} key={i}>
+                                                <div className={styles.userName}>{item.name}</div>
+                                                <div className={styles.quarterGrade}>
+                                                      <input
+                                                            type="number"
+                                                            name="q1Grade"
+                                                            onChange={(e) => handleInputChange(e, i)}
+                                                            value={studentData[i].q1Grade}
+                                                            // placeholder={item.q1Grade}
+                                                      />
+                                                </div>
+                                                <div className={styles.quarterGrade}>
+                                                      <input
+                                                            type="number"
+                                                            name="q2Grade"
+                                                            onChange={(e) => handleInputChange(e, i)}
+                                                            value={studentData[i].q2Grade}
+                                                            // placeholder={item.q2Grade}
+                                                      />
+                                                </div>
+                                                <div className={styles.quarterGrade}>
+                                                      <input
+                                                            type="number"
+                                                            name="q3Grade"
+                                                            onChange={(e) => handleInputChange(e, i)}
+                                                            // placeholder={item.q3Grade}
+                                                            value={studentData[i].q3Grade}
+                                                      />
+                                                </div>
+                                                <div className={styles.quarterGrade}>
+                                                      <input
+                                                            type="number"
+                                                            name="q4Grade"
+                                                            onChange={(e) => handleInputChange(e, i)}
+                                                            value={studentData[i].q4Grade}
+                                                            // placeholder={item.q4Grade}
+                                                      />
+                                                </div>
+                                          </li>
+                                    ))}
+                              </ul>
+                        ) : (
+                              <ul className={styles.listContainer2}>
+                                    <div className={styles.columnTitlecontainer2}>
+                                          <h4 className={styles.name2}>Student Name</h4>
+                                          <h4 className={styles.name2}>1st Term</h4>
+                                          <h4 className={styles.name2}>2nd Term</h4>
+                                    </div>
+
+                                    {filter(studentData).map((item, i) => (
+                                          <li className={styles.itemContainer2} key={i}>
+                                                <div className={styles.userName2}>{item.name}</div>
+                                                <div className={styles.quarterGrade2}>
+                                                      <input
+                                                            type="number"
+                                                            name="q1Grade"
+                                                            onChange={(e) => handleInputChange(e, i)}
+                                                            value={studentData[i].q1Grade}
+                                                            // placeholder={item.q1Grade}
+                                                      />
+                                                </div>
+                                                <div className={styles.quarterGrade2}>
+                                                      <input
+                                                            type="number"
+                                                            name="q2Grade"
+                                                            onChange={(e) => handleInputChange(e, i)}
+                                                            value={studentData[i].q2Grade}
+                                                            // placeholder={item.q2Grade}
+                                                      />
+                                                </div>
+                                          </li>
+                                    ))}
+                              </ul>
+                        )}
+
                         <Button type="submit" className={styles.submitButton}>
                               Submit
                         </Button>

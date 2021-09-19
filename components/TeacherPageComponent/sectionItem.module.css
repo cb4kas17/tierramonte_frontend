@@ -34,3 +34,28 @@
       font-size: 1.3rem;
       height: 3rem;
 }
+.encodeButton {
+      font: inherit;
+      background: #2196f3;
+      color: white;
+      cursor: pointer;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 20%);
+      transition: all 0.5s ease;
+}
+.encodeButton:hover {
+      background: #14b6db;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 20%);
+}
+
+.encodeButton:active {
+      transform: translateY(1px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 20%);
+}
+
+.encodeButton:focus {
+      outline: none;
+}

@@ -36,14 +36,10 @@ function LoginForm(props) {
 
       const postData = async () => {
             try {
-                  const response = await axios.post(
-                        'http://localhost:4000/api/',
-                        loginDetails,
-                        {
-                              withCredentials: true,
-                              credentials: 'include',
-                        }
-                  );
+                  const response = await axios.post('http://localhost:4000/api/', loginDetails, {
+                        withCredentials: true,
+                        credentials: 'include',
+                  });
 
                   const data = response.data;
                   console.log(data);
@@ -126,16 +122,10 @@ function LoginForm(props) {
                                     <a>Forgot Password?</a>
                               </Link>
                         </div>
-                        <Button
-                              className={styles.loginButton}
-                              onClick={onLoginClickHandler}
-                        >
+                        <Button className={styles.loginButton} onClick={onLoginClickHandler}>
                               Login
                         </Button>
-                        <Button
-                              className={styles.preRegFormContainer}
-                              onClick={onPreRegClickHandler}
-                        >
+                        <Button className={styles.preRegFormContainer} onClick={onPreRegClickHandler}>
                               Pre-Registration Form for enrollment
                         </Button>
 

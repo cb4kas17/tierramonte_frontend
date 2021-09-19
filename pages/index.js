@@ -6,9 +6,7 @@ const HomePage = (props) => {
 
       const getAnnouncements = async () => {
             try {
-                  const response = await axios.get(
-                        'http://localhost:4000/api/'
-                  );
+                  const response = await axios.get('http://localhost:4000/api/');
                   setAnnouncements(response.data.anncs);
             } catch (error) {
                   console.log(error);

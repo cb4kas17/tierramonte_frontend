@@ -43,6 +43,9 @@ function LoginForm(props) {
 
                   const data = response.data;
                   console.log(data);
+                  if (data.success) {
+                        props.login();
+                  }
                   if (data.firstLogin) {
                         router.push(`/resetPassword/${data.resetToken}`);
                   } else {

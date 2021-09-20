@@ -8,11 +8,8 @@ import Announcements from './Announcements/Announcements';
 function LoginPage(props) {
       return (
             <div className={styles.loginPageContainer}>
-                  <LoginForm className={styles.loginForm} />
-                  <Announcements
-                        className={styles.announcements}
-                        announcements={props.anncs}
-                  />
+                  <LoginForm className={styles.loginForm} isLogin={props.isLogin} login={props.login} />
+                  <Announcements className={styles.announcements} announcements={props.anncs} />
             </div>
       );
 }

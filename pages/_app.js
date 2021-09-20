@@ -4,11 +4,13 @@ import Layout from '../components/Layout/Layout';
 function MyApp({ Component, pageProps }) {
       const [login, setLogin] = useState(false);
       const onLoginHandler = (data) => {
-            setLogin(data);
+            setLogin((prevLogin) => !prevLogin);
       };
+
+      console.log(login);
       return (
             <Layout login={onLoginHandler} isLogin={login}>
-                  <Component {...pageProps} data={onLoginHandler} />
+                  <Component {...pageProps} login={onLoginHandler} isLogin={login} />
             </Layout>
       );
 }

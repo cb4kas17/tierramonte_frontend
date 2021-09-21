@@ -109,7 +109,7 @@ function CreateTeacher() {
       };
       return (
             <form className={styles.container} onSubmit={onSubmitHandler}>
-                  <h1 className={styles.header}>Create User</h1>
+                  <h1 className={styles.header}>Create Teacher</h1>
                   <div className={styles.formWrapper}>
                         <div className={styles.formContainer}>
                               <div
@@ -121,10 +121,7 @@ function CreateTeacher() {
                                     }
                               >
                                     <div className={styles.labelContainer}>
-                                          <label
-                                                htmlFor="fname"
-                                                className={styles.label}
-                                          >
+                                          <label htmlFor="fname" className={styles.label}>
                                                 First Name
                                           </label>
                                     </div>
@@ -149,10 +146,7 @@ function CreateTeacher() {
                                     }
                               >
                                     <div className={styles.labelContainer}>
-                                          <label
-                                                htmlFor="email"
-                                                className={styles.label}
-                                          >
+                                          <label htmlFor="email" className={styles.label}>
                                                 Email
                                           </label>
                                     </div>
@@ -166,11 +160,7 @@ function CreateTeacher() {
                                                 onChange={emailChangeHandler}
                                                 onBlur={emailBlurHandler}
                                           />
-                                          {errorMes && (
-                                                <p className={styles.errorMes}>
-                                                      Email already exist
-                                                </p>
-                                          )}
+                                          {errorMes && <p className={styles.errorMes}>Email already exist</p>}
                                     </div>
                               </div>
                               <div
@@ -182,10 +172,7 @@ function CreateTeacher() {
                                     }
                               >
                                     <div className={styles.labelContainer}>
-                                          <label
-                                                htmlFor="lname"
-                                                className={styles.label}
-                                          >
+                                          <label htmlFor="lname" className={styles.label}>
                                                 Last Name
                                           </label>
                                     </div>
@@ -210,10 +197,7 @@ function CreateTeacher() {
                                     }
                               >
                                     <div className={styles.labelContainer}>
-                                          <label
-                                                htmlFor="number"
-                                                className={styles.label}
-                                          >
+                                          <label htmlFor="number" className={styles.label}>
                                                 Phone Number
                                           </label>
                                     </div>
@@ -238,10 +222,7 @@ function CreateTeacher() {
                                     }
                               >
                                     <div className={styles.labelContainer}>
-                                          <label
-                                                htmlFor="mname"
-                                                className={styles.label}
-                                          >
+                                          <label htmlFor="mname" className={styles.label}>
                                                 Middle Name
                                           </label>
                                     </div>
@@ -266,10 +247,7 @@ function CreateTeacher() {
                                     }
                               >
                                     <div className={styles.labelContainer}>
-                                          <label
-                                                htmlFor="department"
-                                                className={styles.label}
-                                          >
+                                          <label htmlFor="department" className={styles.label}>
                                                 Department
                                           </label>
                                     </div>
@@ -280,9 +258,7 @@ function CreateTeacher() {
                                                 id="department"
                                                 className={styles.input}
                                                 value={enteredDepartment}
-                                                onChange={
-                                                      departmentChangeHandler
-                                                }
+                                                onChange={departmentChangeHandler}
                                                 onBlur={departmentBlurHandler}
                                           />
                                     </div>
@@ -294,22 +270,13 @@ function CreateTeacher() {
                         {valid && (
                               <Modal className={styles.modalDesign}>
                                     <div className={styles.messageContainer}>
-                                          <h2 className={styles.messageHeader}>
-                                                Account Created
-                                          </h2>
-                                          <h4 className={styles.messageBody}>
-                                                Please check in the List of
-                                                Users Tab
-                                          </h4>
-                                          <h4 className={styles.messageFooter}>
-                                                Thank you.
-                                          </h4>
+                                          <h2 className={styles.messageHeader}>Account Created</h2>
+                                          <h4 className={styles.messageBody}>Please check in the List of Users Tab</h4>
+                                          <h4 className={styles.messageFooter}>Thank you.</h4>
                                           <Button
                                                 className={styles.modalButton}
                                                 onClick={() => {
-                                                      router.push(
-                                                            '/principal/Teacher'
-                                                      );
+                                                      router.push('/principal/Teacher');
                                                 }}
                                           >
                                                 Go back to Teacher List

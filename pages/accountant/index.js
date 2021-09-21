@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ProfilePageContainer from '../../components/TeacherPageComponent/ProfilePageContainer';
+import ProfilePageContainer from '../../components/AccountantPageComponent/ProfilePageContainer';
 
-function TeacherPage() {
+function AccountantPage() {
       const [profile, setProfile] = useState([]);
       const getProfile = async () => {
             try {
-                  const response = await axios.get('http://localhost:4000/api/teacher', {
+                  const response = await axios.get('http://localhost:4000/api/accountant', {
                         withCredentials: true,
                   });
                   setProfile(response.data.user);
@@ -25,4 +25,4 @@ function TeacherPage() {
       );
 }
 
-export default TeacherPage;
+export default AccountantPage;

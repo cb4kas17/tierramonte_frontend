@@ -8,7 +8,6 @@ import Button from '../UI/Button';
 
 function CreateBalance(props) {
       const router = useRouter();
-      const [errorMes, setErrorMes] = useState(false);
       const [valid, setValid] = useState(false);
       const [disabled, setDisabled] = useState(true);
       const [grade, setGrade] = useState(7);

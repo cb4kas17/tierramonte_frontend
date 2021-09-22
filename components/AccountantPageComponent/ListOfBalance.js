@@ -54,7 +54,9 @@ function ListOfBalance(props) {
                         <div className={styles.columnTitlecontainer}></div>
 
                         {props.balances &&
-                              filter(props.balances).map((item, i) => <ListOfBalanceItem key={i} data={item} />)}
+                              filter(props.balances).map((item, i) => (
+                                    <ListOfBalanceItem key={i} data={item} studId={props.user._id} />
+                              ))}
                   </ul>
             </div>
       );

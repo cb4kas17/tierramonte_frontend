@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from './editSection.module.css';
-import useInput from '../hooks/useInput';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Modal from '../../components/Layout/Modal.';
@@ -15,52 +14,6 @@ function EditSection() {
       const [updated, setUpdated] = useState(false);
       const [archive, setArchive] = useState(false);
       const [confirmation, setConfirmation] = useState(false);
-
-      const {
-            value: enteredSchoolYearFrom,
-            isValid: enteredSchoolYearFromIsValid,
-            hasError: enteredSchoolYearFromHasError,
-            valueChangeHandler: schoolYearFromChangeHandler,
-            inputBlurHandler: schoolYearFromBlurHandler,
-      } = useInput((value) => !isNaN(value));
-      const {
-            value: enteredSchoolYearTo,
-            isValid: enteredSchoolYearToIsValid,
-            hasError: enteredSchoolYearToHasError,
-            valueChangeHandler: schoolYearToChangeHandler,
-            inputBlurHandler: schoolYearToBlurHandler,
-      } = useInput((value) => !isNaN(value));
-
-      const {
-            value: enteredSectionName,
-            isValid: enteredSectionNameIsValid,
-            hasError: enteredSectionNameHasError,
-            valueChangeHandler: sectionNameChangeHandler,
-            inputBlurHandler: sectionNameBlurHandler,
-      } = useInput((value) => value.trim() !== '');
-
-      const {
-            value: enteredStrand,
-            isValid: enteredStrandIsValid,
-            hasError: enteredStrandHasError,
-            valueChangeHandler: strandChangeHandler,
-            inputBlurHandler: strandBlurHandler,
-      } = useInput((value) => value.trim() !== '');
-
-      const {
-            value: enteredYearLevel,
-            isValid: enteredYearLevelIsValid,
-            hasError: enteredYearLevelHasError,
-            valueChangeHandler: yearLevelChangeHandler,
-            inputBlurHandler: yearLevelBlurHandler,
-      } = useInput((value) => !isNaN(value));
-      const {
-            value: enteredSemester,
-            isValid: enteredSemesterIsValid,
-            hasError: enteredSemesterHasError,
-            valueChangeHandler: semesterChangeHandler,
-            inputBlurHandler: semesterBlurHandler,
-      } = useInput((value) => value.trim() !== '');
 
       useEffect(async () => {
             try {

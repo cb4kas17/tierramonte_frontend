@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 function ListOfBalanceItem(props) {
       const router = useRouter();
-      
+
       return (
             <li className={styles.itemContainer}>
                   <div className={styles.userName}>
@@ -14,7 +14,7 @@ function ListOfBalanceItem(props) {
                         <button
                               className={styles.button}
                               onClick={() => {
-                                    router.push(`/accountant/Students/${props.data._id}`);
+                                    router.push(`/accountant/SpecificBalance/${props.studId}/${props.data._id}`);
                               }}
                         >
                               Edit

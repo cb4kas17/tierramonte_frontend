@@ -8,10 +8,17 @@ import Button from '../UI/Button';
 function SpecificBalance(props) {
     const router = useRouter();
 
+    const [valid, setValid] = useState(false);
+
     const [balanceData, setBalanceData] = useState([]);
     const [userData, setUserData] = useState([]);
 
+    const [transactionDate, setTransactionDate] = useState([]);
+    const [runningBal, setRunningBal] = useState([]);
     const [dropDown, setDropDown] = useState('Debit');
+
+    const [sendEmail, setSendEmail] = useState(false);
+    const [sendSMS, setSendSMS] = useState(false);
 
     const dropDownHandler = (event) => {
         setDropDown(event.target.value);
@@ -35,21 +42,68 @@ function SpecificBalance(props) {
         hasError: enteredAmountHasError,
         valueChangeHandler: amountChangeHandler,
         inputBlurHandler: amountBlurHandler,
-    } = useInput((value) => !isNaN(value));
+    } = useInput((value) => !isNaN(value) && value.trim() !== '');
 
     useEffect(async () => {
         try {
             const response = await axios.get(`http://localhost:4000/api/accountant/students/${props.studID}/${props.balanceID}`, {
                 withCredentials: true,
             });
+            const data = await response.data.balance;
             setBalanceData(response.data.balance);
             setUserData(response.data.user);
+            setTransactionDate(response.data.balance.transactionDate);
             console.log(response.data.balance);
             console.log(response.data.user);
+
+            let bal = 0;
+            let runBalance = [];
+            for (let i = 0; i > data.transactionType.length; i++) {
+                bal = bal + data.debit[i] - data.credit[i];
+                runBalance.push(bal);
+            }
+            console.log(runBalance);
         } catch (error) {
             console.log(error);
         }
     }, []);
+
+    console.log(runningBal);
+    const addTransac = async () => {
+        let debitData = '';
+        let creditData = '';
+        if (dropDown === 'Debit') {
+            debitData = Number(enteredAmount);
+            creditData = 0;
+        } else if (dropDown === 'Credit') {
+            creditData = Number(enteredAmount);
+            debitData = 0;
+        }
+
+        let data = {
+            transactionType: enteredTransactionType,
+            debit: debitData,
+            credit: creditData,
+            asEmail: sendEmail,
+            asSMS: sendSMS,
+        };
+        try {
+            const response = await axios.post(`http://localhost:4000/api/accountant/students/${props.studID}/${props.balanceID}`, data, { withCredentials: true });
+            console.log(response.data);
+            if (response.data.success) {
+                setValid(true);
+            }
+            for (let i = 0; i < teacherArray.length; i++) {
+                if (response.data === `${teacherArray[i]} doesnt exist`) {
+                    addSubject[i]['error'] = true;
+                    setErrorMes({ bool: true, index: i });
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        console.log(data);
+    };
     return (
         <div>
             <form className={styles.container}>
@@ -119,19 +173,13 @@ function SpecificBalance(props) {
                                 <div className={styles.input}>{balanceData.modeOfPayment}</div>
                             </div>
                         </div>
-                        <Button
-                            onClick={() => {
-                                setAddTransacHandler(true);
-                            }}
-                        >
-                            Add Transaction
-                        </Button>
+
                         {addTransacHandler && (
-                            <Modal className={styles.modalDesign}>
+                            <Modal className={styles.modalDesignTransac}>
                                 <div className={styles.messageContainer}>
                                     <h2 className={styles.messageHeader}>Add transaction</h2>
                                     <div className={styles.modalFormField}>
-                                        <div className={styles.formFields}>
+                                        <div className={styles.formFieldsModal}>
                                             <div className={styles.labelContainer}>
                                                 <label htmlFor="schoolYearFrom" className={styles.label}>
                                                     Transaction Date
@@ -142,8 +190,8 @@ function SpecificBalance(props) {
                                         <div
                                             className={
                                                 !enteredTransactionTypeHasError
-                                                    ? styles.formFields
-                                                    : `${styles.formFields} 
+                                                    ? styles.formFieldsModal
+                                                    : `${styles.formFieldsModal} 
                   ${styles.invalid}`
                                             }
                                         >
@@ -164,7 +212,12 @@ function SpecificBalance(props) {
                                                 />
                                             </div>
                                         </div>
-                                        <div className={styles.formFields}>
+                                        <div className={styles.formFieldsModal}>
+                                            <div className={styles.labelContainer}>
+                                                <label htmlFor="dropdown" className={styles.label}>
+                                                    Debit/Credit
+                                                </label>
+                                            </div>
                                             <div className={styles.dropdown}>
                                                 <select name="dropdown" id="dropdown" onChange={dropDownHandler} value={dropDown}>
                                                     <option value="Debit">Debit</option>
@@ -175,8 +228,8 @@ function SpecificBalance(props) {
                                         <div
                                             className={
                                                 !enteredAmountHasError
-                                                    ? styles.formFields
-                                                    : `${styles.formFields} 
+                                                    ? styles.formFieldsModal
+                                                    : `${styles.formFieldsModal} 
                   ${styles.invalid}`
                                             }
                                         >
@@ -198,22 +251,82 @@ function SpecificBalance(props) {
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div className={styles.checkboxContainer}>
+                                        <label htmlFor="email" className={styles.radioContainer}>
+                                            Send Email?
+                                            <input type="checkbox" name="email" id="email" checked={sendEmail} onChange={(e) => setSendEmail(!sendEmail)} />
+                                            <span className={styles.checkmark}></span>
+                                        </label>
+                                        <label htmlFor="sms" className={styles.radioContainer}>
+                                            Send SMS?
+                                            <input type="checkbox" name="sms" id="sms" checked={sendSMS} onChange={() => setSendSMS(!sendSMS)} />
+                                            <span className={styles.checkmark}></span>
+                                        </label>
+                                    </div>
                                     <div className={styles.buttonConfirmationContainer}>
-                                        <Button className={styles.modalButtonYes}>Yes</Button>
+                                        <Button className={styles.modalButtonYes} onClick={addTransac}>
+                                            Add
+                                        </Button>
                                         <Button
                                             className={styles.modalButtonNo}
                                             onClick={() => {
                                                 setAddTransacHandler(false);
                                             }}
                                         >
-                                            No
+                                            Close
                                         </Button>
                                     </div>
                                 </div>
                             </Modal>
                         )}
+                        {valid && (
+                            <Modal className={styles.modalDesign}>
+                                <div className={styles.messageContainer}>
+                                    <h2 className={styles.messageHeader}>Transaction Created</h2>
+                                    <h4 className={styles.messageFooter}>Thank you.</h4>
+                                    <Button
+                                        className={styles.modalButton}
+                                        onClick={() => {
+                                            setValid(false);
+                                            setAddTransacHandler(false);
+                                        }}
+                                    >
+                                        Close
+                                    </Button>
+                                </div>
+                            </Modal>
+                        )}
                     </div>
+                    <div className={styles.createButtonContainer}>
+                        <Button
+                            onClick={() => {
+                                setAddTransacHandler(true);
+                            }}
+                            className={styles.createButton}
+                        >
+                            &#65291; Add Transaction
+                        </Button>
+                    </div>
+                    <div className={styles.columnName}>Transactions</div>
+                    <ul className={styles.listContainer}>
+                        <div className={styles.columnTitlecontainer}>
+                            <h4 className={styles.name}>Transaction Date</h4>
+                            <h4 className={styles.name}>Transaction Type</h4>
+                            <h4 className={styles.name}>Debit</h4>
+                            <h4 className={styles.name}>Credit</h4>
+                            <h4 className={styles.name}>Balance</h4>
+                        </div>
+
+                        {transactionDate.map((item, i) => (
+                            <li className={styles.itemContainer} key={i}>
+                                <div className={styles.userName}>{item}</div>
+                                <div className={styles.userName}>{balanceData.transactionType[i]}</div>
+                                <div className={styles.userName}>{balanceData.debit[i]}</div>
+                                <div className={styles.userName}>{balanceData.credit[i]}</div>
+                                <div className={styles.userName}>{balanceData.balance[i]}</div>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </form>
         </div>

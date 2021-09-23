@@ -323,7 +323,7 @@ function SpecificBalance(props) {
                                 <div className={styles.userName}>{balanceData.transactionType[i]}</div>
                                 <div className={styles.userName}>{balanceData.debit[i]}</div>
                                 <div className={styles.userName}>{balanceData.credit[i]}</div>
-                                <div className={styles.userName}>{balanceData.balance[i]}</div>
+                                <div className={styles.userName}>{balanceData.runBalance[i]}</div>
                             </li>
                         ))}
                     </ul>

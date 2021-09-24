@@ -134,10 +134,11 @@ function ViewBalances() {
                             <div
                                 className={showPrevBalanceHandler[i] ? styles.columnNamePrevBalanceClicked : styles.columnNamePrevBalance}
                                 onClick={() => {
-                                    setShowPrevBalanceHandler(!showPrevBalanceHandler[i], i);
+                                    setShowPrevBalanceClickHandler(!showPrevBalanceHandler[i], i);
                                 }}
                             >
-                                {item.schoolYearFrom} - {item.schoolYearTo}&nbsp; {item.semester && item.semester}
+                                Grade {item.yearLevel} - ( {item.schoolYearFrom} - {item.schoolYearTo}&nbsp; {item.semester && item.semester} &nbsp;Semester ) - {item.modeOfPayment} -{' '}
+                                {item.paymentTerms}
                             </div>
                             {showPrevBalanceHandler[i] && (
                                 <ul className={styles.listContainer}>
@@ -150,12 +151,12 @@ function ViewBalances() {
                                     </div>
 
                                     {item.transactionDate.map((x, y) => (
-                                        <li className={styles.itemContainer} key={i}>
+                                        <li className={styles.itemContainer} key={y}>
                                             <div className={styles.userName}>{x}</div>
                                             <div className={styles.quarterGrade}>{item.transactionType[y]}</div>
                                             <div className={styles.quarterGrade}>{item.debit[y]}</div>
                                             <div className={styles.quarterGrade}>{item.credit[y]}</div>
-                                            <div className={styles.quarterGrade}>{item.runBlance[y]}</div>
+                                            <div className={styles.quarterGrade}>{item.runBalance[y]}</div>
                                         </li>
                                     ))}
                                 </ul>

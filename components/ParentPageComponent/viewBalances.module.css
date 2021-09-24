@@ -58,6 +58,7 @@
     box-sizing: border-box;
 
     border: 1px solid #000;
+    margin-bottom: 4rem;
 }
 .columnTitlecontainer {
     display: grid;
@@ -113,7 +114,7 @@
 }
 .columnNamePrevBalance {
     background: #2196f3;
-    font-size: 2.5rem;
+    font-size: 2rem;
     padding: 1.5rem 4rem;
     text-align: start;
     color: #fff;
@@ -123,7 +124,7 @@
 }
 .columnNamePrevBalanceClicked {
     background: #2196f3;
-    font-size: 2.5rem;
+    font-size: 2rem;
     padding: 1.5rem 4rem;
     text-align: start;
     color: #fff;

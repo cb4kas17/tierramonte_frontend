@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './viewGradesContainer.module.css';
+import styles from './viewBalancesContainer.module.css';
 import SideNavBar from '../Layout/SideNavBar';
-import ViewGrades from './ViewGrades';
+import ViewBalances from './ViewBalances';
 
-function ViewGradesContainer() {
-    const focus = 'third';
+function ViewBalancesContainer() {
+    const focus = 'fourth';
     const navBarItems = [
         { id: 1, title: 'Profile', push: '/parent' },
         { id: 2, title: 'Schedule', push: '/parent/Schedule' },
@@ -12,11 +12,11 @@ function ViewGradesContainer() {
         { id: 4, title: 'View Balance', push: '/parent/ViewBalances' },
     ];
     return (
-        <div className={styles.viewGradesPageContainer}>
+        <div className={styles.viewBalancesPageContainer}>
             <SideNavBar className={styles.navbarContainer} items={navBarItems} highlighted={focus} />
-            <ViewGrades className={styles.viewGrades} />
+            <ViewBalances className={styles.viewGrades} />
         </div>
     );
 }
 
-export default ViewGradesContainer;
+export default ViewBalancesContainer;

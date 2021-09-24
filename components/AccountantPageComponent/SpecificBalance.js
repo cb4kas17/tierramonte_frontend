@@ -14,7 +14,7 @@ function SpecificBalance(props) {
     const [userData, setUserData] = useState([]);
 
     const [transactionDate, setTransactionDate] = useState([]);
-    const [runningBal, setRunningBal] = useState([]);
+
     const [dropDown, setDropDown] = useState('Debit');
 
     const [sendEmail, setSendEmail] = useState(false);
@@ -66,9 +66,8 @@ function SpecificBalance(props) {
         } catch (error) {
             console.log(error);
         }
-    }, []);
+    }, [valid]);
 
-    console.log(runningBal);
     const addTransac = async () => {
         let debitData = '';
         let creditData = '';
@@ -92,12 +91,6 @@ function SpecificBalance(props) {
             console.log(response.data);
             if (response.data.success) {
                 setValid(true);
-            }
-            for (let i = 0; i < teacherArray.length; i++) {
-                if (response.data === `${teacherArray[i]} doesnt exist`) {
-                    addSubject[i]['error'] = true;
-                    setErrorMes({ bool: true, index: i });
-                }
             }
         } catch (error) {
             console.log(error);
@@ -317,15 +310,21 @@ function SpecificBalance(props) {
                             <h4 className={styles.name}>Balance</h4>
                         </div>
 
-                        {transactionDate.map((item, i) => (
-                            <li className={styles.itemContainer} key={i}>
-                                <div className={styles.userName}>{item}</div>
-                                <div className={styles.userName}>{balanceData.transactionType[i]}</div>
-                                <div className={styles.userName}>{balanceData.debit[i]}</div>
-                                <div className={styles.userName}>{balanceData.credit[i]}</div>
-                                <div className={styles.userName}>{balanceData.runBalance[i]}</div>
-                            </li>
-                        ))}
+                        {balanceData ? (
+                            transactionDate.map((item, i) => (
+                                <li className={styles.itemContainer} key={i}>
+                                    <div className={styles.userName}>{item}</div>
+                                    <div className={styles.userName}>{balanceData.transactionType[i]}</div>
+                                    <div className={styles.userName}>{balanceData.debit[i].toLocaleString()}</div>
+                                    <div className={styles.userName}>{balanceData.credit[i].toLocaleString()}</div>
+                                    <div className={styles.userName}>{balanceData.runBalance[i].toLocaleString()}</div>
+                                </li>
+                            ))
+                        ) : (
+                            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={handleClose}>
+                                <CircularProgress color="inherit" />
+                            </Backdrop>
+                        )}
                     </ul>
                 </div>
             </form>

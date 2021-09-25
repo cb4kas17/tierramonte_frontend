@@ -10,6 +10,7 @@ function ViewBalancesContainer() {
         { id: 2, title: 'Schedule', push: '/parent/Schedule' },
         { id: 3, title: 'View Grades', push: '/parent/ViewGrades' },
         { id: 4, title: 'View Balance', push: '/parent/ViewBalances' },
+        { id: 5, title: 'Payment Info', push: '/parent/ViewPaymentInfo' },
     ];
     return (
         <div className={styles.viewBalancesPageContainer}>

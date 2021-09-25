@@ -1,21 +1,21 @@
-import React from 'react';
-import styles from './studentPageContainer.module.css';
+import React, { useState } from 'react';
 import SideNavBar from '../Layout/SideNavBar';
-import StudentPage from './StudentPage';
+import styles from './createPaymentInfoContainer.module.css';
+import CreatePaymentInfo from './CreatePaymentInfo';
 
-function StudentPageContainer() {
-    const focus = 'second';
+function CreatePaymentInfoContainer() {
+    const focus = 'third';
     const navBarItems = [
         { id: 1, title: 'Profile', push: '/accountant' },
         { id: 2, title: 'Encode Balance', push: '/accountant/Students' },
         { id: 3, title: 'Payment Information', push: '/accountant/PaymentInfo' },
     ];
     return (
-        <div className={styles.studentPageContainer}>
+        <div className={styles.createPaymentInfoContainer}>
             <SideNavBar className={styles.navbarContainer} items={navBarItems} highlighted={focus} />
-            <StudentPage className={styles.studentPage} />
+            <CreatePaymentInfo />
         </div>
     );
 }
 
-export default StudentPageContainer;
+export default CreatePaymentInfoContainer;

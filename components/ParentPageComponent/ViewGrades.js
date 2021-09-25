@@ -79,7 +79,7 @@ function ViewGrades() {
                             </div>
 
                             {item.map((x, y) => (
-                                <li className={styles.itemContainer} key={i}>
+                                <li className={styles.itemContainer} key={y}>
                                     <div className={styles.userName}>{x.subject}</div>
                                     <div className={styles.quarterGrade}>{x.q1Grade}</div>
                                     <div className={styles.quarterGrade}>{x.q2Grade}</div>

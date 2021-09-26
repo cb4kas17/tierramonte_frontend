@@ -75,7 +75,7 @@ function EditAnnouncement(props) {
 
     return (
         <form className={styles.container} onSubmit={onSubmitHandler}>
-            <h1 className={styles.header}>Edit/Archive Announcement</h1>
+            <h1 className={styles.header}>Edit/Delete Announcement</h1>
             <div className={styles.formWrapper}>
                 <div className={styles.formContainer}>
                     <div className={styles.formFields}>
@@ -125,7 +125,7 @@ function EditAnnouncement(props) {
                                 setConfirmation(true);
                             }}
                         >
-                            Archive
+                            Delete
                         </Button>
                     </div>
 
@@ -149,7 +149,7 @@ function EditAnnouncement(props) {
                     {archive && (
                         <Modal className={styles.modalDesign}>
                             <div className={styles.messageContainer}>
-                                <h2 className={styles.messageHeader}>Announcement Successfully Archived</h2>
+                                <h2 className={styles.messageHeader}>Announcement Successfully Deleted</h2>
                                 <h4 className={styles.messageBody}></h4>
                                 <h4 className={styles.messageFooter}>Thank you.</h4>
                                 <Button
@@ -166,7 +166,7 @@ function EditAnnouncement(props) {
                     {confirmation && (
                         <Modal className={styles.modalDesign}>
                             <div className={styles.messageContainer}>
-                                <h2 className={styles.messageHeader}>Are you sure you want to archive this announcement?</h2>
+                                <h2 className={styles.messageHeader}>Are you sure you want to Delete this announcement?</h2>
                                 <h4 className={styles.messageFooter}></h4>
                                 <div className={styles.buttonConfirmationContainer}>
                                     <Button className={styles.modalButtonYes} onClick={archiveAnnc}>

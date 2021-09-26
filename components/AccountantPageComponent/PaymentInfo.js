@@ -102,7 +102,7 @@ function PaymentInfo() {
             {confirmation && (
                 <Modal className={styles.modalDesign}>
                     <div className={styles.messageContainer}>
-                        <h2 className={styles.messageHeader}>Are you sure you want to archive this section?</h2>
+                        <h2 className={styles.messageHeader}>Are you sure you want to delete this payment info?</h2>
                         <h4 className={styles.messageFooter}></h4>
                         <div className={styles.buttonConfirmationContainer}>
                             <Button className={styles.modalButtonYes} onClick={deleteHandler}>

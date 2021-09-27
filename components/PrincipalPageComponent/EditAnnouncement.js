@@ -9,6 +9,7 @@ import Button from '../UI/Button';
 function EditAnnouncement(props) {
     const router = useRouter();
 
+    const [data, setData] = useState([]);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
@@ -28,6 +29,7 @@ function EditAnnouncement(props) {
             console.log(data);
             setTitle(data.title);
             setContent(data.content);
+            setData(data);
         } catch (error) {
             console.log(error);
         }
@@ -42,7 +44,7 @@ function EditAnnouncement(props) {
 
         const postData = async () => {
             try {
-                const response = await axios.put(`http://localhost:4000/api/principal/annc/${props.data._id}`, anncData, { withCredentials: true });
+                const response = await axios.put(`http://localhost:4000/api/principal/annc/${data._id}`, anncData, { withCredentials: true });
                 console.log(response);
                 if (response.data.success) {
                     setUpdated(true);
@@ -57,7 +59,7 @@ function EditAnnouncement(props) {
     };
     const archiveAnnc = async () => {
         try {
-            const response = await axios.delete(`http://localhost:4000/api/principal/annc/${props.data._id}`, {
+            const response = await axios.delete(`http://localhost:4000/api/principal/annc/${data._id}`, {
                 withCredentials: true,
                 credentials: 'include',
             });

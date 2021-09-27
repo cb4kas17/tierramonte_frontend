@@ -11,8 +11,6 @@ function AddStudent(props) {
     const id = router.query.id;
     const [valid, setValid] = useState(false);
     const [search, setSearch] = useState('');
-    const [yearLevel, setYearLevel] = useState('all');
-    const [selected, setSelected] = useState({ bool: false, index: '' });
 
     const [stud, setStudents] = useState([]);
     //filter stud in section
@@ -23,18 +21,11 @@ function AddStudent(props) {
     //filter search and dropdown of selecting student
 
     const filter = (list) => {
-        if (yearLevel === 'all') {
-            return list.filter((data) => data.lastName.toLowerCase().indexOf(search) > -1);
-        } else {
-            return list.filter((data) => data.yearLevel === yearLevel && data.lastName.toLowerCase().indexOf(search) > -1);
-        }
+        return list.filter((data) => data.lastName.toLowerCase().indexOf(search) > -1);
     };
 
     const searchBarHandler = (event) => {
         setSearch(event.target.value);
-    };
-    const yearLevelHandler = (event) => {
-        setYearLevel(event.target.value);
     };
 
     const checkBoxChange = (check, lrn, index) => {
@@ -165,18 +156,6 @@ function AddStudent(props) {
             <div className={styles.studentcontainer}>
                 <h1 className={styles.studentheader}>Students per year level</h1>
                 <div className={styles.filterContainer}>
-                    <div className={styles.select}>
-                        <p className={styles.dropdownName}>Year Level:</p>
-                        <select name="yearLevel" id="yearLevel" onChange={yearLevelHandler}>
-                            <option value="all">All</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select>
-                    </div>
                     <input className={styles.input} type="search" name="searchbar" id="searchbar" placeholder="Search Lastname" onChange={searchBarHandler} />
                 </div>
 

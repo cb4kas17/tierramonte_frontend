@@ -60,8 +60,8 @@ function ViewGrades() {
                 <ul className={styles.listContainer2}>
                     <div className={styles.columnTitlecontainer2}>
                         <h4 className={styles.name2}>Subject</h4>
-                        <h4 className={styles.name2}>Q1</h4>
-                        <h4 className={styles.name2}>Q2</h4>
+                        <h4 className={styles.name2}>1st Term</h4>
+                        <h4 className={styles.name2}>2nd Term</h4>
                     </div>
 
                     {studentGrade.map((item, i) => (

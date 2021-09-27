@@ -17,9 +17,6 @@ function EditAnnouncement(props) {
     const [archive, setArchive] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
 
-    const [titleIsTouched, settitleIsTouched] = useState(false);
-    const [contentIsTouched, setcontentIsTouched] = useState(false);
-
     useEffect(async () => {
         try {
             const response = await axios.get(`http://localhost:4000/api/principal/annc/${props.id}`, {

@@ -31,7 +31,7 @@ function AddStudent(props) {
     const checkBoxChange = (check, lrn, index) => {
         if (check) {
             const list = [...stud];
-            list[index] = lrn;
+            list.push(lrn);
             setStudents(list);
         }
         if (!check) {

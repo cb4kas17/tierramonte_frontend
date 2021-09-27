@@ -118,7 +118,6 @@ function CreateSection() {
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
-
         for (let i = 0; i < addSubject.length; i++) {
             subjectArray[i] = addSubject[i]['subject'];
             teacherArray[i] = addSubject[i]['teacher'].toLowerCase().toString();

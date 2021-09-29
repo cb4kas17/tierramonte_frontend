@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import useInput from '../hooks/useInput';
 import Modal from '../../components/Layout/Modal.';
+
 import Button from '../UI/Button';
 function SpecificBalance(props) {
     const router = useRouter();
@@ -14,8 +15,11 @@ function SpecificBalance(props) {
     const [userData, setUserData] = useState([]);
 
     const [transactionDate, setTransactionDate] = useState([]);
+    const [schedule, setSchedule] = useState([]);
 
     const [dropDown, setDropDown] = useState('Debit');
+    const [transactionType, setTransactionType] = useState('Payment');
+    const [specify, setSpecify] = useState(false);
 
     const [sendEmail, setSendEmail] = useState(false);
     const [sendSMS, setSendSMS] = useState(false);
@@ -24,24 +28,34 @@ function SpecificBalance(props) {
         setDropDown(event.target.value);
         console.log(event.target.value);
     };
+
+    const transactionTypeHandler = (event) => {
+        if (event.target.value === 'Specify') {
+            setTransactionType(event.target.value);
+            setSpecify(true);
+        } else {
+            setSpecify(false);
+            setTransactionType(event.target.value);
+        }
+    };
     //modal prompt
     const [addTransacHandler, setAddTransacHandler] = useState(false);
 
     const currentTime = new Date().toLocaleString();
 
     const {
-        value: enteredTransactionType,
-        isValid: enteredTransactionTypeIsValid,
-        hasError: enteredTransactionTypeHasError,
-        valueChangeHandler: transactionTypeChangeHandler,
-        inputBlurHandler: transactionTypeBlurHandler,
-    } = useInput((value) => value.trim() !== '');
-    const {
         value: enteredAmount,
         isValid: enteredAmountIsValid,
         hasError: enteredAmountHasError,
         valueChangeHandler: amountChangeHandler,
         inputBlurHandler: amountBlurHandler,
+    } = useInput((value) => !isNaN(value) && value.trim() !== '');
+    const {
+        value: enteredSpecific,
+        isValid: enteredSpecificIsValid,
+        hasError: enteredSpecificHasError,
+        valueChangeHandler: specificChangeHandler,
+        inputBlurHandler: specificBlurHandler,
     } = useInput((value) => !isNaN(value) && value.trim() !== '');
 
     useEffect(async () => {
@@ -53,6 +67,7 @@ function SpecificBalance(props) {
             setBalanceData(response.data.balance);
             setUserData(response.data.user);
             setTransactionDate(response.data.balance.transactionDate);
+            setSchedule(response.data.balance.schedulePeriod);
             console.log(response.data.balance);
             console.log(response.data.user);
 
@@ -78,9 +93,15 @@ function SpecificBalance(props) {
             creditData = Number(enteredAmount);
             debitData = 0;
         }
+        let transactionTypeData = '';
+        if (transactionType === 'Specify') {
+            transactionTypeData = enteredSpecific;
+        } else {
+            transactionTypeData = transactionType;
+        }
 
         let data = {
-            transactionType: enteredTransactionType,
+            transactionType: transactionTypeData,
             debit: debitData,
             credit: creditData,
             asEmail: sendEmail,
@@ -180,29 +201,31 @@ function SpecificBalance(props) {
                                             </div>
                                             <div className={styles.inputContainer}>{currentTime}</div>
                                         </div>
-                                        <div
-                                            className={
-                                                !enteredTransactionTypeHasError
-                                                    ? styles.formFieldsModal
-                                                    : `${styles.formFieldsModal} 
-                  ${styles.invalid}`
-                                            }
-                                        >
+
+                                        <div className={styles.formFieldsModal}>
                                             <div className={styles.labelContainer}>
                                                 <label htmlFor="transacType" className={styles.label}>
                                                     Transaction Type
                                                 </label>
                                             </div>
-                                            <div className={styles.inputContainer}>
-                                                <input
-                                                    type="text"
-                                                    required={true}
-                                                    id="transacType"
-                                                    className={styles.input}
-                                                    value={enteredTransactionType}
-                                                    onChange={transactionTypeChangeHandler}
-                                                    onBlur={transactionTypeBlurHandler}
-                                                />
+                                            <div className={styles.dropdown}>
+                                                <select name="transacType" id="transacType" onChange={transactionTypeHandler} value={transactionType}>
+                                                    <option value="Payment">Payment</option>
+                                                    <option value="Tuition">Tuition</option>
+                                                    <option value="Specify">Specifiy</option>
+                                                </select>
+                                                {specify && (
+                                                    <input
+                                                        type="text"
+                                                        className={styles.specify}
+                                                        placeholder="Enter transaction type"
+                                                        required={true}
+                                                        id="transactionType"
+                                                        value={enteredSpecific}
+                                                        onChange={specificChangeHandler}
+                                                        onBlur={specificBlurHandler}
+                                                    />
+                                                )}
                                             </div>
                                         </div>
                                         <div className={styles.formFieldsModal}>
@@ -310,7 +333,7 @@ function SpecificBalance(props) {
                             <h4 className={styles.name}>Balance</h4>
                         </div>
 
-                        {balanceData ? (
+                        {balanceData &&
                             transactionDate.map((item, i) => (
                                 <li className={styles.itemContainer} key={i}>
                                     <div className={styles.userName}>{item}</div>
@@ -319,13 +342,25 @@ function SpecificBalance(props) {
                                     <div className={styles.userName}>{balanceData.credit[i].toLocaleString()}</div>
                                     <div className={styles.userName}>{balanceData.runBalance[i].toLocaleString()}</div>
                                 </li>
-                            ))
-                        ) : (
-                            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={handleClose}>
-                                <CircularProgress color="inherit" />
-                            </Backdrop>
-                        )}
+                            ))}
                     </ul>
+                    {schedule.length !== 0 && (
+                        <div>
+                            <div className={styles.columnName2}>Period / Amount</div>
+                            <ul className={styles.listContainer2}>
+                                <div className={styles.columnTitlecontainer2}>
+                                    <h4 className={styles.name2}>Period</h4>
+                                    <h4 className={styles.name2}>Amount</h4>
+                                </div>
+                                {schedule.map((item, i) => (
+                                    <li className={styles.itemContainer2} key={i}>
+                                        <div className={styles.userName2}>{item}</div>
+                                        <div className={styles.userName2}>{balanceData.scheduleAmount[i]}</div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </form>
         </div>

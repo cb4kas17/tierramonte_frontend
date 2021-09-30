@@ -34,18 +34,6 @@ function EncodeGrades(props) {
             setSectionData(response.data.section);
             setStudentData(response.data.students_list);
             console.log(response.data.students_list);
-            // const list = response.data.students_list;
-            // const grades = [];
-            // for (let i = 0; i < list.length; i++) {
-            //       grades[i] = {
-            //             q1Grade: list[i].q1Grade,
-            //             q2Grade: list[i].q2Grade,
-            //             q3Grade: list[i].q3Grade,
-            //             q4Grade: list[i].q4Grade,
-            //       };
-            // }
-            // console.log(grades);
-            // setStudentGrade(grades);
         } catch (error) {
             console.log(error);
         }
@@ -56,6 +44,17 @@ function EncodeGrades(props) {
         const list = [...studentData];
         list[index][name] = value;
         setStudentData(list);
+    };
+
+    const computeGradeHandler = (e, index) => {
+        const { name, value } = e.target;
+        const list = [...studentData];
+        if (list[index]['q1Grade'] !== '' && list[index]['q2Grade'] !== '' && list[index]['q3Grade'] !== '' && list[index]['q4Grade'] !== '') {
+            list[index]['computedGrades'] = (Number(list[index]['q1Grade']) + Number(list[index]['q2Grade']) + Number(list[index]['q3Grade']) + Number(list[index]['q4Grade'])) / 4;
+            setStudentData(list);
+        } else {
+            list[index]['computedGrades'] = '';
+        }
     };
     const onSubmitHandler = async (event) => {
         event.preventDefault();
@@ -164,6 +163,8 @@ function EncodeGrades(props) {
                             <h4 className={styles.name}>Q2</h4>
                             <h4 className={styles.name}>Q3</h4>
                             <h4 className={styles.name}>Q4</h4>
+                            <h4 className={styles.name}>Final</h4>
+                            <h4 className={styles.name}>Mark</h4>
                         </div>
 
                         {filter(studentData).map((item, i) => (
@@ -173,7 +174,10 @@ function EncodeGrades(props) {
                                     <input
                                         type="number"
                                         name="q1Grade"
-                                        onChange={(e) => handleInputChange(e, i)}
+                                        onChange={(e) => {
+                                            handleInputChange(e, i);
+                                            computeGradeHandler(e, i);
+                                        }}
                                         value={studentData[i].q1Grade}
                                         // placeholder={item.q1Grade}
                                     />
@@ -182,7 +186,10 @@ function EncodeGrades(props) {
                                     <input
                                         type="number"
                                         name="q2Grade"
-                                        onChange={(e) => handleInputChange(e, i)}
+                                        onChange={(e) => {
+                                            handleInputChange(e, i);
+                                            computeGradeHandler(e, i);
+                                        }}
                                         value={studentData[i].q2Grade}
                                         // placeholder={item.q2Grade}
                                     />
@@ -191,7 +198,10 @@ function EncodeGrades(props) {
                                     <input
                                         type="number"
                                         name="q3Grade"
-                                        onChange={(e) => handleInputChange(e, i)}
+                                        onChange={(e) => {
+                                            handleInputChange(e, i);
+                                            computeGradeHandler(e, i);
+                                        }}
                                         // placeholder={item.q3Grade}
                                         value={studentData[i].q3Grade}
                                     />
@@ -200,8 +210,29 @@ function EncodeGrades(props) {
                                     <input
                                         type="number"
                                         name="q4Grade"
-                                        onChange={(e) => handleInputChange(e, i)}
+                                        onChange={(e) => {
+                                            handleInputChange(e, i);
+                                            computeGradeHandler(e, i);
+                                        }}
                                         value={studentData[i].q4Grade}
+                                        // placeholder={item.q4Grade}
+                                    />
+                                </div>
+                                <div className={styles.quarterGrade}>
+                                    <input
+                                        type="number"
+                                        name="computedGrades"
+                                        onChange={(e) => handleInputChange(e, i)}
+                                        value={studentData[i].computedGrades}
+                                        // placeholder={item.q4Grade}
+                                    />
+                                </div>
+                                <div className={styles.quarterGrade}>
+                                    <input
+                                        type="text"
+                                        name="remarks"
+                                        onChange={(e) => handleInputChange(e, i)}
+                                        value={studentData[i].remarks}
                                         // placeholder={item.q4Grade}
                                     />
                                 </div>
@@ -214,6 +245,8 @@ function EncodeGrades(props) {
                             <h4 className={styles.name2}>Student Name</h4>
                             <h4 className={styles.name2}>1st Term</h4>
                             <h4 className={styles.name2}>2nd Term</h4>
+                            <h4 className={styles.name2}>Final Grade</h4>
+                            <h4 className={styles.name2}>Remarks</h4>
                         </div>
 
                         {filter(studentData).map((item, i) => (
@@ -224,6 +257,24 @@ function EncodeGrades(props) {
                                 </div>
                                 <div className={styles.quarterGrade2}>
                                     <input type="number" name="q2Grade" onChange={(e) => handleInputChange(e, i)} value={studentData[i].q2Grade} />
+                                </div>
+                                <div className={styles.quarterGrade2}>
+                                    <input
+                                        type="number"
+                                        name="computedGrades"
+                                        onChange={(e) => handleInputChange(e, i)}
+                                        value={studentData[i].computedGrades}
+                                        // placeholder={item.q4Grade}
+                                    />
+                                </div>
+                                <div className={styles.quarterGrade2}>
+                                    <input
+                                        type="number"
+                                        name="remarks"
+                                        onChange={(e) => handleInputChange(e, i)}
+                                        value={studentData[i].remarks}
+                                        // placeholder={item.q4Grade}
+                                    />
                                 </div>
                             </li>
                         ))}
@@ -245,7 +296,7 @@ function EncodeGrades(props) {
                                 router.push('/teacher/Sections');
                             }}
                         >
-                            Go back to Teacher List
+                            Go back to List
                         </Button>
                     </div>
                 </Modal>

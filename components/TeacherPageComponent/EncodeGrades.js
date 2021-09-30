@@ -58,7 +58,6 @@ function EncodeGrades(props) {
     };
     const onSubmitHandler = async (event) => {
         event.preventDefault();
-        console.log(studentData);
         const gradeData = { students: studentData };
         console.log(gradeData);
         try {

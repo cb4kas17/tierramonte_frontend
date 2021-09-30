@@ -196,15 +196,23 @@
     padding: 0;
     font-weight: 700;
 }
+
+.columnTitlecontainer2 > h4 {
+}
 .columnTitlecontainer2 > h4:first-child {
     text-align: left;
     padding: 1rem 0rem 1rem 4rem;
     border-right: 1px solid #000;
+    display: flex;
+    align-items: center;
 }
 .columnTitlecontainer2 > h4:not(:first-child) {
     text-align: center;
     border-right: 1px solid #000;
     padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .columnTitlecontainer2 > h4:last-child {

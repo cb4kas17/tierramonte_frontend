@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './paymentInfo.module.css';
 import Button from '../UI/Button';
-import PaymentInfoItem from './PaymentInfoItem';
+
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Modal from '../../components/Layout/Modal.';
@@ -34,7 +34,7 @@ function PaymentInfo() {
 
     const deleteHandler = async () => {
         try {
-            const response = await axios.delete(`http://localhost:4000/api/accountant/payinfo/${id}`, {
+            const response = await axios.get(`http://localhost:4000/api/accountant/delete/${id}`, {
                 withCredentials: true,
                 credentials: 'include',
             });

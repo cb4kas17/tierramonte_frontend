@@ -82,6 +82,8 @@ function SpecificBalance(props) {
             console.log(error);
         }
     }, [valid]);
+    
+   
 
     const addTransac = async () => {
         let debitData = '';
@@ -102,8 +104,8 @@ function SpecificBalance(props) {
 
         let data = {
             transactionType: transactionTypeData,
-            debit: debitData,
-            credit: creditData,
+            debit: Number(debitData),
+            credit: Number(creditData),
             asEmail: sendEmail,
             asSMS: sendSMS,
         };
@@ -326,8 +328,8 @@ function SpecificBalance(props) {
                     <div className={styles.columnName}>Transactions</div>
                     <ul className={styles.listContainer}>
                         <div className={styles.columnTitlecontainer}>
-                            <h4 className={styles.name}>Transaction Date</h4>
-                            <h4 className={styles.name}>Transaction Type</h4>
+                            <h4 className={styles.name}>Date</h4>
+                            <h4 className={styles.name}>Type</h4>
                             <h4 className={styles.name}>Debit</h4>
                             <h4 className={styles.name}>Credit</h4>
                             <h4 className={styles.name}>Balance</h4>
@@ -338,11 +340,21 @@ function SpecificBalance(props) {
                                 <li className={styles.itemContainer} key={i}>
                                     <div className={styles.userName}>{item}</div>
                                     <div className={styles.userName}>{balanceData.transactionType[i]}</div>
-                                    <div className={styles.userName}>{balanceData.debit[i].toLocaleString()}</div>
-                                    <div className={styles.userName}>{balanceData.credit[i].toLocaleString()}</div>
-                                    <div className={styles.userName}>{balanceData.runBalance[i].toLocaleString()}</div>
+                                    <div className={styles.userName}>{balanceData.debit[i].toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })}</div>
+                                    <div className={styles.userName}>{balanceData.credit[i].toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })}</div>
+                                    {balanceData.runBalance[i] !== null && <div className={styles.userName}>{balanceData.runBalance[i].toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })}</div>  }
                                 </li>
                             ))}
+
                     </ul>
                     {schedule.length !== 0 && (
                         <div>

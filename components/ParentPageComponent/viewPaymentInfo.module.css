@@ -35,7 +35,6 @@
 .announcement {
     font-size: 2rem;
     padding: 3.5rem 2.5rem;
-    text-indent: 4rem;
     text-align: justify;
     overflow: auto;
 }

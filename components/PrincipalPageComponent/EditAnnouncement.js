@@ -131,8 +131,8 @@ function EditAnnouncement(props) {
                     {updated && (
                         <Modal className={styles.modalDesign}>
                             <div className={styles.messageContainer}>
-                                <h2 className={styles.messageHeader}>Account Updated</h2>
-                                <h4 className={styles.messageBody}>Please check in the updated announcement to the List of Announcement.</h4>
+                                <h2 className={styles.messageHeader}>Announcement Updated</h2>
+                                <h4 className={styles.messageBody}>Please check the updated announcement to the List of Announcement.</h4>
                                 <h4 className={styles.messageFooter}>Thank you.</h4>
                                 <Button
                                     className={styles.modalButton}

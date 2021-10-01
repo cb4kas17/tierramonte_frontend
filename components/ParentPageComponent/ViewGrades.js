@@ -44,6 +44,8 @@ function ViewGrades() {
                         <h4 className={styles.name}>Q2</h4>
                         <h4 className={styles.name}>Q3</h4>
                         <h4 className={styles.name}>Q4</h4>
+                        <h4 className={styles.name}>Final</h4>
+                        <h4 className={styles.name}>Mark</h4>
                     </div>
 
                     {studentGrade.map((item, i) => (
@@ -53,15 +55,19 @@ function ViewGrades() {
                             <div className={styles.quarterGrade}>{item.q2Grade}</div>
                             <div className={styles.quarterGrade}>{item.q3Grade}</div>
                             <div className={styles.quarterGrade}>{item.q4Grade}</div>
+                            <div className={styles.quarterGrade}>{item.computedGrade}</div>
+                            <div className={styles.quarterGrade}>{item.remark}</div>
                         </li>
                     ))}
                 </ul>
             ) : (
                 <ul className={styles.listContainer2}>
                     <div className={styles.columnTitlecontainer2}>
-                        <h4 className={styles.name2}>Subject</h4>
+                        <h4 className={styles.name2}>Student Name</h4>
                         <h4 className={styles.name2}>1st Term</h4>
                         <h4 className={styles.name2}>2nd Term</h4>
+                        <h4 className={styles.name2}>Final</h4>
+                        <h4 className={styles.name2}>Mark</h4>
                     </div>
 
                     {studentGrade.map((item, i) => (
@@ -69,6 +75,8 @@ function ViewGrades() {
                             <div className={styles.userName2}>{item.subject}</div>
                             <div className={styles.quarterGrade2}>{item.q1Grade}</div>
                             <div className={styles.quarterGrade2}>{item.q2Grade}</div>
+                            <div className={styles.quarterGrade}>{item.computedGrade}</div>
+                            <div className={styles.quarterGrade}>{item.remark}</div>
                         </li>
                     ))}
                 </ul>
@@ -93,6 +101,8 @@ function ViewGrades() {
                                       <h4 className={styles.name}>Q2</h4>
                                       <h4 className={styles.name}>Q3</h4>
                                       <h4 className={styles.name}>Q4</h4>
+                                      <h4 className={styles.name}>Final</h4>
+                                      <h4 className={styles.name}>Mark</h4>
                                   </div>
 
                                   {item.map((x, y) => (
@@ -102,6 +112,8 @@ function ViewGrades() {
                                           <div className={styles.quarterGrade}>{x.q2Grade}</div>
                                           <div className={styles.quarterGrade}>{x.q3Grade}</div>
                                           <div className={styles.quarterGrade}>{x.q4Grade}</div>
+                                          <div className={styles.quarterGrade}>{x.computedGrade}</div>
+                                          <div className={styles.quarterGrade}>{x.remark}</div>
                                       </li>
                                   ))}
                               </ul>
@@ -109,9 +121,11 @@ function ViewGrades() {
                         : showPrevGradeHandler[i] && (
                               <ul className={styles.listContainer2}>
                                   <div className={styles.columnTitlecontainer2}>
-                                      <h4 className={styles.name2}>Subject</h4>
+                                      <h4 className={styles.name2}>Student Name</h4>
                                       <h4 className={styles.name2}>1st Term</h4>
                                       <h4 className={styles.name2}>2nd Term</h4>
+                                      <h4 className={styles.name2}>Final</h4>
+                                      <h4 className={styles.name2}>Mark</h4>
                                   </div>
 
                                   {item.map((x, y) => (
@@ -119,6 +133,8 @@ function ViewGrades() {
                                           <div className={styles.userName2}>{x.subject}</div>
                                           <div className={styles.quarterGrade2}>{x.q1Grade}</div>
                                           <div className={styles.quarterGrade2}>{x.q2Grade}</div>
+                                          <div className={styles.quarterGrade}>{x.computedGrade}</div>
+                                          <div className={styles.quarterGrade}>{x.remark}</div>
                                       </li>
                                   ))}
                               </ul>

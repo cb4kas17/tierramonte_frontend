@@ -12,7 +12,7 @@ function SpecificBalanceContainer(props) {
     return (
         <div className={styles.specificBalancePageContainer}>
             <SideNavBar className={styles.navbarContainer} items={navBarItems} />
-            <SpecificBalance className={styles.studentPage} studID={props.studID} balanceID={props.balanceID} />
+            <SpecificBalance className={styles.specificBalance} studID={props.studID} balanceID={props.balanceID} />
         </div>
     );
 }

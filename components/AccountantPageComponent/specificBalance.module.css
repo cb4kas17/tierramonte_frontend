@@ -1,24 +1,24 @@
 .container {
    padding: 3rem 6rem;
-   height: 100%;
 }
 .header {
-   font-size: 4.5rem;
+   font-size: 3.5rem;
    margin-bottom: 2rem;
 }
 
 .formWrapper {
    height: 25rem;
    background: #fff;
-   padding: 1rem 4rem;
+   padding: 1rem 3rem;
    border-radius: 10px;
-   font-size: 1.7rem;
+   font-size: 1.5rem;
    font-weight: 300;
 }
 .formContainer {
    display: grid;
    grid-template-columns: 1fr 1fr;
-   padding: 3rem;
+   padding: 2rem 3rem;
+   gap: 1rem;
 }
 
 .formFields {
@@ -58,7 +58,7 @@
 
 .columnName {
    background: #2196f3;
-   font-size: 2rem;
+   font-size: 1.7rem;
    padding: 1.5rem 2rem;
    text-align: start;
    color: #fff;
@@ -66,7 +66,7 @@
 }
 .columnName2 {
    background: #2196f3;
-   font-size: 2rem;
+   font-size: 1.7rem;
    padding: 1.5rem 2rem;
    text-align: start;
    color: #fff;
@@ -75,10 +75,9 @@
 }
 .listContainer {
    box-sizing: border-box;
-   height: 40rem;
    overflow-y: scroll;
+   max-height: 37rem;
    border-left: 1px solid #000;
-   border-bottom: 1px solid #000;
 }
 .columnTitlecontainer {
    display: grid;
@@ -101,7 +100,7 @@
 }
 
 .itemContainer {
-   font-size: 2rem;
+   font-size: 1.7rem;
    text-align: start;
    font-weight: 300;
    border-bottom: 1px solid #000;
@@ -120,7 +119,7 @@
    border-right: none;
 }
 .name {
-   font-size: 2rem;
+   font-size: 1.7rem;
    text-align: start;
    font-weight: 500;
    border-bottom: 1px solid #000;
@@ -129,7 +128,7 @@
 /* schedule period */
 .listContainer2 {
    box-sizing: border-box;
-   max-height: 40rem;
+   max-height: 37rem;
    overflow-y: scroll;
    border-left: 1px solid #000;
 }
@@ -154,7 +153,7 @@
 }
 
 .itemContainer2 {
-   font-size: 2rem;
+   font-size: 1.7rem;
    text-align: start;
    font-weight: 300;
    border-bottom: 1px solid #000;
@@ -175,7 +174,7 @@
    border-right: none;
 }
 .name2 {
-   font-size: 2rem;
+   font-size: 1.7rem;
    text-align: start;
    font-weight: 500;
    border-bottom: 1px solid #000;
@@ -316,7 +315,7 @@
 }
 
 .buttonConfirmationContainer > * {
-   font-size: 2rem;
+   font-size: 1.7rem;
    padding: 1rem 5rem;
 }
 

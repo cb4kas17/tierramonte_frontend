@@ -18,10 +18,62 @@ function SectionPage(props) {
                   console.log(error);
             }
       }, []);
+      const [search, setSearch] = useState('');
+      const [yearLevel, setYearLevel] = useState('all');
+
+      const searchBarHandler = (event) => {
+            setSearch(event.target.value);
+      };
+
+      const filter = (list) => {
+            if (yearLevel === 'all') {
+                  return list.filter(
+                        (data) =>
+                              data.name.toLowerCase().indexOf(search) > -1
+                  );
+            } else {
+                  return list.filter(
+                        (data) =>
+                              data.yearLevel == yearLevel &&
+                              data.name.toLowerCase().indexOf(search) > -1
+                  );
+            }
+      };
+      console.log(search);
+      const yearLevelHandler = (event) => {
+            setYearLevel(event.target.value);
+      };
       return (
             <div className={styles.container}>
                   <h1 className={styles.header}>Encode Grades</h1>
+                  <div className={styles.filterContainer}>
+                        <div className={styles.select}>
+                              <p className={styles.dropdownName}> Grade:</p>
+                              <select
+                                    name="yearlevel"
+                                    id="yearlevel"
+                                    onChange={yearLevelHandler}
+                              >
+                                    <option value="all">All</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                              </select>
+                        </div>
 
+                        <input
+                              className={styles.input}
+                              type="search"
+                              name="searchbar"
+                              id="searchbar"
+                              placeholder="Search lastname"
+                              onChange={searchBarHandler}
+                              value={props.searchBind}
+                        />
+                  </div>
                   <div className={styles.columnName}>Sections</div>
                   <ul className={styles.listContainer}>
                         <div className={styles.columnTitlecontainer}>
@@ -30,7 +82,7 @@ function SectionPage(props) {
                               <h4 className={styles.name}>Subject</h4>
                         </div>
 
-                        {data.map((item, i) => (
+                        {filter(data).map((item, i) => (
                               <SectionItem key={i} data={item} />
                         ))}
                   </ul>

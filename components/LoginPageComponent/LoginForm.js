@@ -114,9 +114,9 @@ function LoginForm(props) {
                 <Button className={styles.loginButton} onClick={onLoginClickHandler}>
                     Login
                 </Button>
-                <Button className={styles.preRegFormContainer} onClick={onPreRegClickHandler}>
+                <button className={styles.preRegFormContainer} onClick={onPreRegClickHandler}>
                     Pre-Registration Form for enrollment
-                </Button>
+                </button>
 
                 {/* <div className={styles.preRegFormContainer}>
                               <Link href="/preRegForm">

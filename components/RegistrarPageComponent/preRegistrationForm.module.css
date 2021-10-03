@@ -18,7 +18,7 @@
    width: 20rem;
    overflow: hidden;
    height: 3.5rem;
-   font-size: inherit;
+   font-size: 1.7rem;
    border: rgba(36, 44, 44, 0.089) 1px solid;
 
    padding: 1rem;
@@ -27,7 +27,7 @@
 }
 
 .formContainer > div > div > label {
-   font-size: 2rem;
+   font-size: 1.7rem;
    margin-right: 2.5rem;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .typeHeader {
-   font-size: 3.5rem;
+   font-size: 3rem;
    margin: 6rem 0 4rem 0;
 }
 
@@ -98,7 +98,7 @@
    align-items: center;
 }
 .typeSubHeader {
-   font-size: 3.6rem;
+   font-size: 2.5rem;
    font-weight: 500;
    margin-top: 1rem;
 }

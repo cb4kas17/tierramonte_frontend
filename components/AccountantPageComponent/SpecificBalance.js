@@ -121,7 +121,7 @@ function SpecificBalance(props) {
         console.log(data);
     };
     return (
-        <div>
+     
             <form className={styles.container}>
                 <h1 className={styles.header}>Specific Balance</h1>
                 <div className={styles.formWrapper}>
@@ -375,7 +375,7 @@ function SpecificBalance(props) {
                     )}
                 </div>
             </form>
-        </div>
+       
     );
 }
 

@@ -4,28 +4,31 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 function ListOfBalance() {
-      const [user, setUser] = useState([]);
-      const [balances, setBalances] = useState([]);
-      const router = useRouter();
-      const id = router.query.id;
-      useEffect(async () => {
+    const [user, setUser] = useState([]);
+    const [balances, setBalances] = useState([]);
+    const router = useRouter();
+    const id = router.query.id;
+    useEffect(() => {
+        async function fetchData() {
             try {
-                  const response = await axios.get(`http://localhost:4000/api/accountant/students/${id}`, {
-                        withCredentials: true,
-                  });
-                  setUser(response.data.user);
-                  setBalances(response.data.balances);
-                  console.log(response.data.user);
-                  console.log(response.data.balances);
+                const response = await axios.get(`http://localhost:4000/api/accountant/students/${id}`, {
+                    withCredentials: true,
+                });
+                setUser(response.data.user);
+                setBalances(response.data.balances);
+                console.log(response.data.user);
+                console.log(response.data.balances);
             } catch (error) {
-                  console.log(error);
+                console.log(error);
             }
-      }, []);
-      return (
-            <div>
-                  <ListOfBalanceContainer user={user} balances={balances} />
-            </div>
-      );
+        }
+        fetchData();
+    }, [id]);
+    return (
+        <div>
+            <ListOfBalanceContainer user={user} balances={balances} />
+        </div>
+    );
 }
 
 export default ListOfBalance;

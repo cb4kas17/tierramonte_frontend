@@ -12,28 +12,31 @@ function AddStudentContainer() {
     const [studentArray, setStudentArray] = useState([]);
     const [studentList, setStudentList] = useState([]);
 
-    useEffect(async () => {
-        try {
-            const response = await axios.get(`http://localhost:4000/api/principal/sections/${id}`, {
-                withCredentials: true,
-            });
-            //   const datax = await response.data.section;
-            const res = await axios.get(`http://localhost:4000/api/principal/sectionAdd/${id}/${response.data.section.yearLevel}`, {
-                withCredentials: true,
-            });
-            setSectionInfo(response.data.section);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get(`http://localhost:4000/api/principal/sections/${id}`, {
+                    withCredentials: true,
+                });
+                //   const datax = await response.data.section;
+                const res = await axios.get(`http://localhost:4000/api/principal/sectionAdd/${id}/${response.data.section.yearLevel}`, {
+                    withCredentials: true,
+                });
+                setSectionInfo(response.data.section);
 
-            setStudentArray(response.data.section.studentNames);
+                setStudentArray(response.data.section.studentNames);
 
-            setStudentList(res.data.users);
-            // console.log(res.data.users);
-            // console.log(response.data.section);
-            // console.log(response.data.section.studentNames);
-            console.log(res.data);
-        } catch (error) {
-            console.log(error);
+                setStudentList(res.data.users);
+                // console.log(res.data.users);
+                // console.log(response.data.section);
+                // console.log(response.data.section.studentNames);
+                console.log(res.data);
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }, []);
+        fetchData();
+    }, [id]);
     const navBarItems = [
         { id: 1, title: 'Profile', push: '/principal' },
         {

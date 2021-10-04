@@ -5,18 +5,21 @@ import axios from 'axios';
 function ViewPaymentInfo() {
     const [data, setData] = useState([]);
     const [showPaymentHandler, setShowPaymentHandler] = useState([]);
-    useEffect(async () => {
-        try {
-            const response = await axios.get(`http://localhost:4000/api/parent/payinfo`, {
-                withCredentials: true,
-            });
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get(`http://localhost:4000/api/parent/payinfo`, {
+                    withCredentials: true,
+                });
 
-            console.log(response.data.payinfo);
-            setData(response.data.payinfo);
-            setShowPaymentHandler([true]);
-        } catch (error) {
-            console.log(error);
+                console.log(response.data.payinfo);
+                setData(response.data.payinfo);
+                setShowPaymentHandler([true]);
+            } catch (error) {
+                console.log(error);
+            }
         }
+        fetchData();
     }, []);
 
     const setShowPaymentClickHandler = (e, index) => {

@@ -11,19 +11,22 @@ function ViewGrades() {
     const [studentGradeInfo, setStudentGradeInfo] = useState('');
     const [prevGradeInfo, setPrevGradeInfo] = useState([]);
     const [showPrevGradeHandler, setShowPrevGradeHandler] = useState([]);
-    useEffect(async () => {
-        try {
-            const response = await axios.get(`http://localhost:4000/api/student/grades`, {
-                withCredentials: true,
-            });
-            console.log(response.data);
-            setPrevGradeInfo(response.data.gradesInfo);
-            setStudentGrade(response.data.gradeLatest);
-            setPrevGrade(response.data.grades);
-            setStudentGradeInfo(response.data.gradeLatestInfo);
-        } catch (error) {
-            console.log(error);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get(`http://localhost:4000/api/student/grades`, {
+                    withCredentials: true,
+                });
+                console.log(response.data);
+                setPrevGradeInfo(response.data.gradesInfo);
+                setStudentGrade(response.data.gradeLatest);
+                setPrevGrade(response.data.grades);
+                setStudentGradeInfo(response.data.gradeLatestInfo);
+            } catch (error) {
+                console.log(error);
+            }
         }
+        fetchData();
     }, []);
 
     const setShowPrevGradeClickHandler = (e, index) => {

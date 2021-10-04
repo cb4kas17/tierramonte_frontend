@@ -13,22 +13,25 @@ function ViewBalances() {
     const [prevBalance, setPrevBalance] = useState([]);
     const [showPrevBalanceHandler, setShowPrevBalanceHandler] = useState([]);
 
-    useEffect(async () => {
-        try {
-            const response = await axios.get(`http://localhost:4000/api/parent/balance`, {
-                withCredentials: true,
-            });
-            console.log(response.data);
-            setPrevBalance(response.data.allBalances);
-            setLatestBalance(response.data.latestBalance);
-            setTransactionDate(response.data.latestBalance.transactionDate);
-            setTransactionType(response.data.latestBalance.transactionType);
-            setCredit(response.data.latestBalance.credit);
-            setDebit(response.data.latestBalance.debit);
-            setRunningBal(response.data.latestBalance.runBalance);
-        } catch (error) {
-            console.log(error);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get(`http://localhost:4000/api/parent/balance`, {
+                    withCredentials: true,
+                });
+                console.log(response.data);
+                setPrevBalance(response.data.allBalances);
+                setLatestBalance(response.data.latestBalance);
+                setTransactionDate(response.data.latestBalance.transactionDate);
+                setTransactionType(response.data.latestBalance.transactionType);
+                setCredit(response.data.latestBalance.credit);
+                setDebit(response.data.latestBalance.debit);
+                setRunningBal(response.data.latestBalance.runBalance);
+            } catch (error) {
+                console.log(error);
+            }
         }
+        fetchData();
     }, []);
 
     const setShowPrevBalanceClickHandler = (e, index) => {

@@ -5,38 +5,41 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 function SchedulePage(props) {
-      const [data, setData] = useState([]);
+    const [data, setData] = useState([]);
 
-      useEffect(async () => {
+    useEffect(() => {
+        async function fetchData() {
             try {
-                  const response = await axios.get('http://localhost:4000/api/teacher/myschedule', {
-                        withCredentials: true,
-                  });
-                  setData(response.data.scheds);
-                  console.log(response.data.scheds);
+                const response = await axios.get('http://localhost:4000/api/teacher/myschedule', {
+                    withCredentials: true,
+                });
+                setData(response.data.scheds);
+                console.log(response.data.scheds);
             } catch (error) {
-                  console.log(error);
+                console.log(error);
             }
-      }, []);
+        }
+        fetchData();
+    }, []);
 
-      return (
-            <div className={styles.container}>
-                  <h1 className={styles.header}>Schedule</h1>
+    return (
+        <div className={styles.container}>
+            <h1 className={styles.header}>Schedule</h1>
 
-                  <div className={styles.columnName}>Schedule</div>
-                  <ul className={styles.listContainer}>
-                        <div className={styles.columnTitlecontainer}>
-                              <h4 className={styles.name}>Subject</h4>
-                              <h4 className={styles.name}>Section</h4>
-                              <h4 className={styles.name}>Schedule</h4>
-                        </div>
+            <div className={styles.columnName}>Schedule</div>
+            <ul className={styles.listContainer}>
+                <div className={styles.columnTitlecontainer}>
+                    <h4 className={styles.name}>Subject</h4>
+                    <h4 className={styles.name}>Section</h4>
+                    <h4 className={styles.name}>Schedule</h4>
+                </div>
 
-                        {data.map((item, i) => (
-                              <ScheduleItem key={i} data={item} />
-                        ))}
-                  </ul>
-            </div>
-      );
+                {data.map((item, i) => (
+                    <ScheduleItem key={i} data={item} />
+                ))}
+            </ul>
+        </div>
+    );
 }
 
 export default SchedulePage;

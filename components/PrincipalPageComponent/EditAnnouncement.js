@@ -17,20 +17,23 @@ function EditAnnouncement(props) {
     const [archive, setArchive] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
 
-    useEffect(async () => {
-        try {
-            const response = await axios.get(`http://localhost:4000/api/principal/annc/${props.id}`, {
-                withCredentials: true,
-            });
-            const data = await response.data.annc;
-            console.log(data);
-            setTitle(data.title);
-            setContent(data.content);
-            setData(data);
-        } catch (error) {
-            console.log(error);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get(`http://localhost:4000/api/principal/annc/${props.id}`, {
+                    withCredentials: true,
+                });
+                const data = await response.data.annc;
+                console.log(data);
+                setTitle(data.title);
+                setContent(data.content);
+                setData(data);
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }, []);
+        fetchData();
+    }, [props.id]);
 
     const onSubmitHandler = (event) => {
         event.preventDefault();

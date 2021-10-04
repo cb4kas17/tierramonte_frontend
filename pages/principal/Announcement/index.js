@@ -5,13 +5,16 @@ import AnnouncementPageContainer from '../../../components/PrincipalPageComponen
 function AnnouncementPage(props) {
     const [announcements, setAnnouncements] = useState([]);
 
-    useEffect(async () => {
-        try {
-            const response = await axios.get('http://localhost:4000/api/principal/annc', { withCredentials: true });
-            setAnnouncements(response.data.anncs);
-        } catch (error) {
-            console.log(error);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get('http://localhost:4000/api/principal/annc', { withCredentials: true });
+                setAnnouncements(response.data.anncs);
+            } catch (error) {
+                console.log(error);
+            }
         }
+        fetchData();
     }, []);
     return (
         <div>

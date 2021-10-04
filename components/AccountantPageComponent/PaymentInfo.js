@@ -12,16 +12,19 @@ function PaymentInfo() {
 
     const [archive, setArchive] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
-    useEffect(async () => {
-        try {
-            const response = await axios.get('http://localhost:4000/api/accountant/payinfo', {
-                withCredentials: true,
-            });
-            setData(response.data.payinfo);
-            console.log(response.data.payinfo);
-        } catch (error) {
-            console.log(error);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get('http://localhost:4000/api/accountant/payinfo', {
+                    withCredentials: true,
+                });
+                setData(response.data.payinfo);
+                console.log(response.data.payinfo);
+            } catch (error) {
+                console.log(error);
+            }
         }
+        fetchData();
     }, [archive]);
 
     const [search, setSearch] = useState('');

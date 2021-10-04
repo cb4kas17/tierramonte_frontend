@@ -25,38 +25,41 @@ function EncodeGrades(props) {
         return list.filter((data) => data.name.toLowerCase().indexOf(search) > -1);
     };
     console.log(id);
-    useEffect(async () => {
-        try {
-            const response = await axios.get(`http://localhost:4000/api/teacher/mysections/${id}?subject=${subject}`, {
-                withCredentials: true,
-            });
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get(`http://localhost:4000/api/teacher/mysections/${id}?subject=${subject}`, {
+                    withCredentials: true,
+                });
 
-            setSectionData(response.data.section);
-            setStudentData(response.data.students_list);
-            console.log(response.data.students_list);
-            for (let x = 0; x < response.data.students_list.length; x++) {
-                if (response.data.section.yearLevel !== '12' && response.data.section.yearLevel !== '11') {
-                    const list = [...response.data.students_list];
-                    if (list[x]['q1Grade'] !== '' && list[x]['q2Grade'] !== '' && list[x]['q3Grade'] !== '' && list[x]['q4Grade'] !== '') {
-                        list[x]['computedGrade'] = ((Number(list[x]['q1Grade']) + Number(list[x]['q2Grade']) + Number(list[x]['q3Grade']) + Number(list[x]['q4Grade'])) / 4).toString();
-                        setStudentData(list);
+                setSectionData(response.data.section);
+                setStudentData(response.data.students_list);
+                console.log(response.data.students_list);
+                for (let x = 0; x < response.data.students_list.length; x++) {
+                    if (response.data.section.yearLevel !== '12' && response.data.section.yearLevel !== '11') {
+                        const list = [...response.data.students_list];
+                        if (list[x]['q1Grade'] !== '' && list[x]['q2Grade'] !== '' && list[x]['q3Grade'] !== '' && list[x]['q4Grade'] !== '') {
+                            list[x]['computedGrade'] = ((Number(list[x]['q1Grade']) + Number(list[x]['q2Grade']) + Number(list[x]['q3Grade']) + Number(list[x]['q4Grade'])) / 4).toString();
+                            setStudentData(list);
+                        } else {
+                            list[x]['computedGrade'] = '';
+                        }
                     } else {
-                        list[x]['computedGrade'] = '';
-                    }
-                } else {
-                    const list = [...response.data.students_list];
-                    if (list[x]['q1Grade'] !== '' && list[x]['q2Grade'] !== '') {
-                        list[x]['computedGrade'] = ((Number(list[x]['q1Grade']) + Number(list[x]['q2Grade'])) / 2).toString();
-                        setStudentData(list);
-                    } else {
-                        list[x]['computedGrade'] = '';
+                        const list = [...response.data.students_list];
+                        if (list[x]['q1Grade'] !== '' && list[x]['q2Grade'] !== '') {
+                            list[x]['computedGrade'] = ((Number(list[x]['q1Grade']) + Number(list[x]['q2Grade'])) / 2).toString();
+                            setStudentData(list);
+                        } else {
+                            list[x]['computedGrade'] = '';
+                        }
                     }
                 }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
         }
-    }, []);
+        fetchData();
+    }, [id, subject]);
 
     const handleInputChange = (e, index) => {
         const { name, value } = e.target;

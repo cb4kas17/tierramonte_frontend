@@ -4,33 +4,30 @@ import axios from 'axios';
 import PreRegistrationForm from '../../../components/RegistrarPageComponent/PreRegistrationForm';
 
 function SelectedPreReg(props) {
-      const router = useRouter();
-      const id = router.query.id;
-      console.log(id);
-      const [preRegData, setPreRegData] = useState([]);
-      const getData = async () => {
+    const router = useRouter();
+    const id = router.query.id;
+    console.log(id);
+    const [preRegData, setPreRegData] = useState([]);
+    useEffect(() => {
+        async function fetchData() {
             try {
-                  const response = await axios.get(
-                        `http://localhost:4000/api/registrar/preregs/${id}`,
-                        {
-                              withCredentials: true,
-                        }
-                  );
-                  const data = await response.data.prereg;
-                  console.log(data);
-                  setPreRegData(data);
+                const response = await axios.get(`http://localhost:4000/api/registrar/preregs/${id}`, {
+                    withCredentials: true,
+                });
+                const data = await response.data.prereg;
+                console.log(data);
+                setPreRegData(data);
             } catch (error) {
-                  console.log(error);
+                console.log(error);
             }
-      };
-      useEffect(() => {
-            getData();
-      }, []);
-      return (
-            <div>
-                  <PreRegistrationForm data={preRegData} />
-            </div>
-      );
+        }
+        fetchData();
+    }, [id]);
+    return (
+        <div>
+            <PreRegistrationForm data={preRegData} />
+        </div>
+    );
 }
 
 export default SelectedPreReg;

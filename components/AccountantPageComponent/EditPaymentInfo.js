@@ -12,19 +12,22 @@ function EditPaymentInfo(props) {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    useEffect(async () => {
-        try {
-            const response = await axios.get(`http://localhost:4000/api/accountant/payinfo/${props.id}`, {
-                withCredentials: true,
-            });
-            setTitle(response.data.payinfo.title);
-            setContent(response.data.payinfo.content);
-            setData(response.data.payinfo);
-            console.log(response.data.payinfo);
-        } catch (error) {
-            console.log(error);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get(`http://localhost:4000/api/accountant/payinfo/${props.id}`, {
+                    withCredentials: true,
+                });
+                setTitle(response.data.payinfo.title);
+                setContent(response.data.payinfo.content);
+                setData(response.data.payinfo);
+                console.log(response.data.payinfo);
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }, []);
+        fetchData();
+    }, [props.id]);
 
     const onSubmitHandler = (event) => {
         event.preventDefault();

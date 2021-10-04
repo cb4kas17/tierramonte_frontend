@@ -130,7 +130,7 @@ function EditTeacher(props) {
     };
     const archiveUser = async () => {
         try {
-            const response = await axios.delete(`http://localhost:4000/api/principal/archiveteacher/${props.data._id}`, {
+            const response = await axios.delete(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/principal/archiveteacher/${props.data._id}`, {
                 withCredentials: true,
                 credentials: 'include',
             });

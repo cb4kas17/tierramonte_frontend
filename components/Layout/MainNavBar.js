@@ -7,7 +7,7 @@ function MainNavBar(props) {
     const router = useRouter();
     const logoutHandler = async () => {
         try {
-            const response = await axios.post(`http://localhost:4000/api/logout`, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/logout`, {
                 withCredentials: true,
             });
 

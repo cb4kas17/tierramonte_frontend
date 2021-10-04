@@ -12,7 +12,7 @@ function SelectedUser(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/api/admin/users/${id}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/admin/users/${id}`, {
                     withCredentials: true,
                 });
                 const data = await response.data.user;
@@ -32,35 +32,4 @@ function SelectedUser(props) {
     );
 }
 
-// export const getStaticPaths = async () => {
-//    const response = await axios.get("http://localhost:4000/api/admin/users", {
-//       withCredentials: true,
-//    });
-//    const data = response.data;
-//    console.log(data);
-
-//    const paths = data.map((user) => {
-//       return {
-//          params: { id: user.id.toString() },
-//       };
-//    });
-//    return {
-//       paths,
-//       fallback: false,
-//    };
-// };
-
-// export const getStaticProps = async (context) => {
-//    const id = context.params.id;
-//    const response = await axios.get(
-//       `http://localhost:4000/api/admin/users/${id}`,
-//       {
-//          withCredentials: true,
-//       }
-//    );
-//    const data = response.data;
-//    return {
-//       props: { data },
-//    };
-// };
 export default SelectedUser;

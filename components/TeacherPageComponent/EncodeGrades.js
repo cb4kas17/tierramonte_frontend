@@ -28,7 +28,7 @@ function EncodeGrades(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/api/teacher/mysections/${id}?subject=${subject}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/teacher/mysections/${id}?subject=${subject}`, {
                     withCredentials: true,
                 });
 
@@ -91,7 +91,7 @@ function EncodeGrades(props) {
         const gradeData = { students: studentData };
         console.log(gradeData);
         try {
-            const response = await axios.post(`http://localhost:4000/api/teacher/mysections/${id}?subject=${subject}`, gradeData, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/teacher/mysections/${id}?subject=${subject}`, gradeData, {
                 withCredentials: true,
             });
             console.log(response.data);

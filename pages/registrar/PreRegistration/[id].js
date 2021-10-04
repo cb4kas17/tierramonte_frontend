@@ -11,7 +11,7 @@ function SelectedPreReg(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/api/registrar/preregs/${id}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/registrar/preregs/${id}`, {
                     withCredentials: true,
                 });
                 const data = await response.data.prereg;

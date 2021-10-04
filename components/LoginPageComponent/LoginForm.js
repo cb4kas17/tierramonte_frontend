@@ -36,7 +36,7 @@ function LoginForm(props) {
 
     const postData = async () => {
         try {
-            const response = await axios.post('http://localhost:4000/api/', loginDetails, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/`, loginDetails, {
                 withCredentials: true,
                 credentials: 'include',
             });

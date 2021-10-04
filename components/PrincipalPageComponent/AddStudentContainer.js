@@ -15,11 +15,11 @@ function AddStudentContainer() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/api/principal/sections/${id}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/principal/sections/${id}`, {
                     withCredentials: true,
                 });
                 //   const datax = await response.data.section;
-                const res = await axios.get(`http://localhost:4000/api/principal/sectionAdd/${id}/${response.data.section.yearLevel}`, {
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/principal/sectionAdd/${id}/${response.data.section.yearLevel}`, {
                     withCredentials: true,
                 });
                 setSectionInfo(response.data.section);

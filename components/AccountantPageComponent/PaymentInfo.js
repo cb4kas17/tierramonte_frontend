@@ -15,7 +15,7 @@ function PaymentInfo() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://localhost:4000/api/accountant/payinfo', {
+                const response = await axios.get('${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/accountant/payinfo', {
                     withCredentials: true,
                 });
                 setData(response.data.payinfo);
@@ -37,7 +37,7 @@ function PaymentInfo() {
 
     const deleteHandler = async () => {
         try {
-            const response = await axios.get(`http://localhost:4000/api/accountant/delete/${id}`, {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/accountant/delete/${id}`, {
                 withCredentials: true,
                 credentials: 'include',
             });

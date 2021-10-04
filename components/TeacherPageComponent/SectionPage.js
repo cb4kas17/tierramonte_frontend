@@ -10,7 +10,7 @@ function SectionPage(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://localhost:4000/api/teacher/mysections', {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/teacher/mysections`, {
                     withCredentials: true,
                 });
                 setData(response.data.sections_list);

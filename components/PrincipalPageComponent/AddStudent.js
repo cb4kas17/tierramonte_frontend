@@ -49,7 +49,7 @@ function AddStudent(props) {
         const students = { students: stud };
         const postData = async () => {
             try {
-                const response = await axios.post(`http://localhost:4000/api/principal/sectionsStud/${id}`, students, { withCredentials: true });
+                const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/principal/sectionsStud/${id}`, students, { withCredentials: true });
 
                 console.log(response.data);
                 if (response.data.success) {

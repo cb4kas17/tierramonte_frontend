@@ -20,7 +20,7 @@ function EditAnnouncement(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/api/principal/annc/${props.id}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/principal/annc/${props.id}`, {
                     withCredentials: true,
                 });
                 const data = await response.data.annc;
@@ -44,7 +44,7 @@ function EditAnnouncement(props) {
 
         const postData = async () => {
             try {
-                const response = await axios.put(`http://localhost:4000/api/principal/annc/${data._id}`, anncData, { withCredentials: true });
+                const response = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/principal/annc/${data._id}`, anncData, { withCredentials: true });
                 console.log(response);
                 if (response.data.success) {
                     setUpdated(true);
@@ -59,7 +59,7 @@ function EditAnnouncement(props) {
     };
     const archiveAnnc = async () => {
         try {
-            const response = await axios.delete(`http://localhost:4000/api/principal/annc/${data._id}`, {
+            const response = await axios.delete(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/principal/annc/${data._id}`, {
                 withCredentials: true,
                 credentials: 'include',
             });

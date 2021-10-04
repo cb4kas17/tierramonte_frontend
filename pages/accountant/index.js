@@ -6,7 +6,7 @@ function AccountantPage() {
     const [profile, setProfile] = useState([]);
     const getProfile = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/api/accountant', {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/accountant`, {
                 withCredentials: true,
             });
             setProfile(response.data.user);

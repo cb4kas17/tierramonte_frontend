@@ -15,7 +15,7 @@ function EditStudent(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/api/registrar/students/${id}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/registrar/students/${id}`, {
                     withCredentials: true,
                 });
                 const data = await response.data.user;

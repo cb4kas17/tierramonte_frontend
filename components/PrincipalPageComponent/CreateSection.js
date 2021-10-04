@@ -145,7 +145,7 @@ function CreateSection() {
         const postData = async () => {
             console.log(addSubject);
             try {
-                const response = await axios.post('http://localhost:4000/api/principal/createsection', sectionData, { withCredentials: true });
+                const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/principal/createsection`, sectionData, { withCredentials: true });
                 console.log(response.data);
                 if (response.data.success) {
                     setValid(true);

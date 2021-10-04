@@ -26,7 +26,7 @@ function StudentPage() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://localhost:4000/api/accountant/students', {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/accountant/students`, {
                     withCredentials: true,
                 });
                 setData(response.data.users);

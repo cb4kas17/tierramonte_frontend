@@ -15,7 +15,7 @@ function EditPaymentInfo(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/api/accountant/payinfo/${props.id}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/accountant/payinfo/${props.id}`, {
                     withCredentials: true,
                 });
                 setTitle(response.data.payinfo.title);
@@ -38,7 +38,7 @@ function EditPaymentInfo(props) {
 
         const postData = async () => {
             try {
-                const response = await axios.put(`http://localhost:4000/api/accountant/payinfo/${props.id}`, paymentInfoData, { withCredentials: true });
+                const response = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/accountant/payinfo/${props.id}`, paymentInfoData, { withCredentials: true });
                 console.log(response);
                 if (response.data.success) {
                     setUpdated(true);

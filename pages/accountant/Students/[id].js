@@ -11,7 +11,7 @@ function ListOfBalance() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/api/accountant/students/${id}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/accountant/students/${id}`, {
                     withCredentials: true,
                 });
                 setUser(response.data.user);

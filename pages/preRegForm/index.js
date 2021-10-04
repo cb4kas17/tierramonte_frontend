@@ -160,7 +160,7 @@ function PreRegForm(props) {
             };
             const postData = async () => {
                 try {
-                    const response = await axios.post('http://localhost:4000/api/prereg', preRegData);
+                    const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/prereg`, preRegData);
 
                     console.log(response.data);
                     if (response.data === 'prereg created!') {

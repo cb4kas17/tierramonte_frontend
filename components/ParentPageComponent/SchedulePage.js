@@ -10,7 +10,7 @@ function SchedulePage(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://localhost:4000/api/parent/schedule', {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/parent/schedule`, {
                     withCredentials: true,
                 });
                 setData(response.data.schedule);

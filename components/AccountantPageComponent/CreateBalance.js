@@ -79,7 +79,7 @@ function CreateBalance(props) {
             };
             const postData = async () => {
                 try {
-                    const response = await axios.post(`http://localhost:4000/api/accountant/students/${props.id}/newbalance`, balanceData, { withCredentials: true });
+                    const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/accountant/students/${props.id}/newbalance`, balanceData, { withCredentials: true });
                     console.log(response.data);
                     if (response.data.success) {
                         setValid(true);

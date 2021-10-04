@@ -11,7 +11,7 @@ function EditUser(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/api/admin/users/${id}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/admin/users/${id}`, {
                     withCredentials: true,
                 });
                 const data = await response.data.user;

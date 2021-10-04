@@ -36,7 +36,7 @@ function CreatePaymentInfo() {
 
         const postData = async () => {
             try {
-                const response = await axios.post('http://localhost:4000/api/accountant/createpayinfo', paymentInfoData, { withCredentials: true });
+                const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/accountant/createpayinfo`, paymentInfoData, { withCredentials: true });
                 const data = response.data;
                 if (data.success) {
                     setValid(true);

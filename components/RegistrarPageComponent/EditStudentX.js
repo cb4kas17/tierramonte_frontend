@@ -118,7 +118,7 @@ function PreRegFormEdit(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/api/registrar/students/${id}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/registrar/students/${id}`, {
                     withCredentials: true,
                 });
                 const data = await response.data.user;
@@ -306,7 +306,7 @@ function PreRegFormEdit(props) {
 
         const postData = async () => {
             try {
-                const response = await axios.put(`http://localhost:4000/api/registrar/students/${props.id}`, updatedStudentData, {
+                const response = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/registrar/students/${props.id}`, updatedStudentData, {
                     withCredentials: true,
                     credentials: 'include',
                 });
@@ -327,7 +327,7 @@ function PreRegFormEdit(props) {
     };
     const archiveStudent = async () => {
         try {
-            const response = await axios.delete(`http://localhost:4000/api/registrar/students/${props.id}`, {
+            const response = await axios.delete(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/registrar/students/${props.id}`, {
                 withCredentials: true,
                 credentials: 'include',
             });

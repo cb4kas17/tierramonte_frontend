@@ -8,7 +8,7 @@ function AnnouncementPage(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://localhost:4000/api/principal/annc', { withCredentials: true });
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/principal/annc`, { withCredentials: true });
                 setAnnouncements(response.data.anncs);
             } catch (error) {
                 console.log(error);

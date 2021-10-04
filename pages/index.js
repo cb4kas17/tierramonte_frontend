@@ -6,7 +6,7 @@ const HomePage = (props) => {
 
     const getAnnouncements = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/api/');
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api`);
             setAnnouncements(response.data.anncs);
         } catch (error) {
             console.log(error);
@@ -23,14 +23,5 @@ const HomePage = (props) => {
         </>
     );
 };
-
-// export async function getStaticProps() {
-//       let anncs = [];
-//       const response = await axios.get('http://localhost:4000/api/');
-
-//       anncs = response.data.anncs;
-
-//       return { props: { anncs }, revalidate: 10 };
-// }
 
 export default HomePage;

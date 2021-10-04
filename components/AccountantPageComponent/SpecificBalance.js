@@ -61,7 +61,7 @@ function SpecificBalance(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:4000/api/accountant/students/${props.studID}/${props.balanceID}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/accountant/students/${props.studID}/${props.balanceID}`, {
                     withCredentials: true,
                 });
                 const data = await response.data.balance;
@@ -111,7 +111,7 @@ function SpecificBalance(props) {
             asSMS: sendSMS,
         };
         try {
-            const response = await axios.post(`http://localhost:4000/api/accountant/students/${props.studID}/${props.balanceID}`, data, { withCredentials: true });
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/accountant/students/${props.studID}/${props.balanceID}`, data, { withCredentials: true });
             console.log(response.data);
             if (response.data.success) {
                 setValid(true);
